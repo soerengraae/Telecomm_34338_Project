@@ -5,7 +5,7 @@
 
 // Denmark: 55.729686000861264, 12.405854498013536
 // Lithuania: 55.97884006934981, 23.49979213930799
-#define weatherURL "http://api.openweathermap.org/data/2.5/weather?lat=55.97884006934981&lon=23.49979213930799&units=metric&appid=3054efa1820ce7f4df282635bd6e5d3c"
+#define weatherURL "http://api.openweathermap.org/data/2.5/weather?lat=55.97884006934981&lon=23.49979213930799&units=metric&appid=IDHERE"
 
 uint8_t rain = 0;
 
