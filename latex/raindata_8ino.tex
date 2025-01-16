@@ -1,0 +1,145 @@
+\doxysection{Fetch Rain Data/raindata/raindata.ino File Reference}
+\hypertarget{raindata_8ino}{}\label{raindata_8ino}\index{Fetch Rain Data/raindata/raindata.ino@{Fetch Rain Data/raindata/raindata.ino}}
+
+
+Code to fetch rain forecast from Open\+Weather\+Map and upload the results to Thing\+Speak.  
+
+
+{\ttfamily \#include $<$Wi\+Fi.\+h$>$}\newline
+{\ttfamily \#include $<$HTTPClient.\+h$>$}\newline
+{\ttfamily \#include $<$Arduino\+Json.\+h$>$}\newline
+{\ttfamily \#include $<$Thing\+Speak.\+h$>$}\newline
+{\ttfamily \#include "{}secrets.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{raindata_8ino_a4a0a4aa5db390e405fce9272877d4704}{forecast\+Weather\+URL}}~"{}http\+://api.\+openweathermap.\+org/\mbox{\hyperlink{_indoor___e_s_p_8ino_a173b91873a3fc4f50a95416a6204d963}{data}}/2.\+5/forecast?lat=5.\+671401156455272\&lon=101.\+41105533517317\&units=metric\&appid=APIKEYHERE"{}
+\begin{DoxyCompactList}\small\item\em Contains SSID and PASS for Wi\+Fi (plus any other private credentials). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{raindata_8ino_a4fc01d736fe50cf5b977f755b675f11d}{setup}} ()
+\begin{DoxyCompactList}\small\item\em Arduino setup function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{raindata_8ino_afe461d27b9c48d5921c00d521181f12f}{loop}} ()
+\begin{DoxyCompactList}\small\item\em Main Arduino loop function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+Wi\+Fi\+Client \mbox{\hyperlink{raindata_8ino_a323dfc205549b3c13f0a25c1b670708a}{client}}
+\begin{DoxyCompactList}\small\item\em Wi\+Fi client object used for both fetching data and communicating with Thing\+Speak. \end{DoxyCompactList}\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{raindata_8ino_a3fe2d87e95035781883990bf38554c9f}{APIKey}} = \mbox{\hyperlink{secrets_8h_a075c854f50f8c824da61dc0a9207374a}{Thing\+Speak\+Write\+Key}}
+\begin{DoxyCompactList}\small\item\em Thing\+Speak Write API Key (fetched from \doxylink{secrets_8h}{secrets.\+h}). \end{DoxyCompactList}\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{raindata_8ino_ab68b888c3d204a4403af6d1b22f6d07c}{server}} = "{}api.\+thingspeak.\+com"{}
+\begin{DoxyCompactList}\small\item\em Thing\+Speak server endpoint. \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{raindata_8ino_ac45cf487b7a438e2176288955a338f25}{channel\+ID}} = \mbox{\hyperlink{secrets_8h_a9245b4c2f5b48265964acfdf5f7c54f9}{Thing\+Speak\+Channel\+ID}}
+\begin{DoxyCompactList}\small\item\em The Thing\+Speak channel ID where data is sent. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{raindata_8ino_a52bddf5133639c3291f9ae21be2788a0}{rain\+Status}} = 0
+\begin{DoxyCompactList}\small\item\em Variable to store the rain status. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Code to fetch rain forecast from Open\+Weather\+Map and upload the results to Thing\+Speak. 
+
+This program connects to Wi\+Fi, fetches a forecast from Open\+Weather\+Map, checks the first two forecast intervals for rain, categorizes the status, and then uploads this info to Thing\+Speak. 
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{raindata_8ino_a4a0a4aa5db390e405fce9272877d4704}\index{raindata.ino@{raindata.ino}!forecastWeatherURL@{forecastWeatherURL}}
+\index{forecastWeatherURL@{forecastWeatherURL}!raindata.ino@{raindata.ino}}
+\doxysubsubsection{\texorpdfstring{forecastWeatherURL}{forecastWeatherURL}}
+{\footnotesize\ttfamily \label{raindata_8ino_a4a0a4aa5db390e405fce9272877d4704} 
+\#define forecast\+Weather\+URL~"{}http\+://api.\+openweathermap.\+org/\mbox{\hyperlink{_indoor___e_s_p_8ino_a173b91873a3fc4f50a95416a6204d963}{data}}/2.\+5/forecast?lat=5.\+671401156455272\&lon=101.\+41105533517317\&units=metric\&appid=APIKEYHERE"{}}
+
+
+
+Contains SSID and PASS for Wi\+Fi (plus any other private credentials). 
+
+\texorpdfstring{$<$}{<}
+
+The Open\+Weather\+Map Forecast API URL. Replace "{}\+APIKEYHERE"{} with your actual Open\+Weather\+Map API key. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{raindata_8ino_afe461d27b9c48d5921c00d521181f12f}\index{raindata.ino@{raindata.ino}!loop@{loop}}
+\index{loop@{loop}!raindata.ino@{raindata.ino}}
+\doxysubsubsection{\texorpdfstring{loop()}{loop()}}
+{\footnotesize\ttfamily \label{raindata_8ino_afe461d27b9c48d5921c00d521181f12f} 
+void loop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Main Arduino loop function. 
+
+
+\begin{DoxyItemize}
+\item If Wi\+Fi is connected, fetch the forecast from the Open\+Weather\+Map API.
+\item Parse the JSON to check for rain in the first two forecast intervals.
+\item Update the Thing\+Speak channel with the determined rain\+Status.
+\item Wait 10 minutes (180,000 ms) before fetching again. 
+\end{DoxyItemize}\Hypertarget{raindata_8ino_a4fc01d736fe50cf5b977f755b675f11d}\index{raindata.ino@{raindata.ino}!setup@{setup}}
+\index{setup@{setup}!raindata.ino@{raindata.ino}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily \label{raindata_8ino_a4fc01d736fe50cf5b977f755b675f11d} 
+void setup (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Arduino setup function. 
+
+Initializes serial communication at 9600 baud, connects to Wi\+Fi, and prints the IP address upon successful connection. 
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{raindata_8ino_a3fe2d87e95035781883990bf38554c9f}\index{raindata.ino@{raindata.ino}!APIKey@{APIKey}}
+\index{APIKey@{APIKey}!raindata.ino@{raindata.ino}}
+\doxysubsubsection{\texorpdfstring{APIKey}{APIKey}}
+{\footnotesize\ttfamily \label{raindata_8ino_a3fe2d87e95035781883990bf38554c9f} 
+const char\texorpdfstring{$\ast$}{*} APIKey = \mbox{\hyperlink{secrets_8h_a075c854f50f8c824da61dc0a9207374a}{Thing\+Speak\+Write\+Key}}}
+
+
+
+Thing\+Speak Write API Key (fetched from \doxylink{secrets_8h}{secrets.\+h}). 
+
+\Hypertarget{raindata_8ino_ac45cf487b7a438e2176288955a338f25}\index{raindata.ino@{raindata.ino}!channelID@{channelID}}
+\index{channelID@{channelID}!raindata.ino@{raindata.ino}}
+\doxysubsubsection{\texorpdfstring{channelID}{channelID}}
+{\footnotesize\ttfamily \label{raindata_8ino_ac45cf487b7a438e2176288955a338f25} 
+unsigned long channel\+ID = \mbox{\hyperlink{secrets_8h_a9245b4c2f5b48265964acfdf5f7c54f9}{Thing\+Speak\+Channel\+ID}}}
+
+
+
+The Thing\+Speak channel ID where data is sent. 
+
+\Hypertarget{raindata_8ino_a323dfc205549b3c13f0a25c1b670708a}\index{raindata.ino@{raindata.ino}!client@{client}}
+\index{client@{client}!raindata.ino@{raindata.ino}}
+\doxysubsubsection{\texorpdfstring{client}{client}}
+{\footnotesize\ttfamily \label{raindata_8ino_a323dfc205549b3c13f0a25c1b670708a} 
+Wi\+Fi\+Client client}
+
+
+
+Wi\+Fi client object used for both fetching data and communicating with Thing\+Speak. 
+
+\Hypertarget{raindata_8ino_a52bddf5133639c3291f9ae21be2788a0}\index{raindata.ino@{raindata.ino}!rainStatus@{rainStatus}}
+\index{rainStatus@{rainStatus}!raindata.ino@{raindata.ino}}
+\doxysubsubsection{\texorpdfstring{rainStatus}{rainStatus}}
+{\footnotesize\ttfamily \label{raindata_8ino_a52bddf5133639c3291f9ae21be2788a0} 
+int rain\+Status = 0}
+
+
+
+Variable to store the rain status. 
+
+Value can be\+:
+\begin{DoxyItemize}
+\item 0\+: No rain in the first 6 hours.
+\item 1\+: Rain in the first interval only.
+\item 2\+: Rain in the second interval only.
+\item 3\+: Rain in both intervals. 
+\end{DoxyItemize}\Hypertarget{raindata_8ino_ab68b888c3d204a4403af6d1b22f6d07c}\index{raindata.ino@{raindata.ino}!server@{server}}
+\index{server@{server}!raindata.ino@{raindata.ino}}
+\doxysubsubsection{\texorpdfstring{server}{server}}
+{\footnotesize\ttfamily \label{raindata_8ino_ab68b888c3d204a4403af6d1b22f6d07c} 
+const char\texorpdfstring{$\ast$}{*} server = "{}api.\+thingspeak.\+com"{}}
+
+
+
+Thing\+Speak server endpoint. 
+
