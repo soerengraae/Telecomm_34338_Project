@@ -9,8 +9,8 @@
 #include <WiFi.h>
 #include <HTTPClient.h>
 #include <ArduinoJson.h>
-#include "secrets.h"         /**< @brief Contains SSID and PASS for WiFi (plus any other private credentials). */
 #include <ThingSpeak.h>
+#include "secrets.h"         /**< @brief Contains SSID and PASS for WiFi (plus any other private credentials). */
 
 /** 
  * @brief The OpenWeatherMap Forecast API URL. 
@@ -24,9 +24,9 @@
 WiFiClient client;
 
 /**
- * @brief ThingSpeak Write API Key (needs to be replaced with your own key).
+ * @brief ThingSpeak Write API Key (fetched from secrets.h).
  */
-const char* APIKey = "APIWRITEKEY";
+const char* APIKey = ThingSpeakWriteKey;
 
 /**
  * @brief ThingSpeak server endpoint.
@@ -36,7 +36,7 @@ const char* server = "api.thingspeak.com";
 /**
  * @brief The ThingSpeak channel ID where data is sent.
  */
-unsigned long channelID = 0;
+unsigned long channelID = ThingSpeakChannelID;
 
 /**
  * @brief Variable to store the rain status.
