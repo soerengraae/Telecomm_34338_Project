@@ -5,7 +5,7 @@
 #include <ThingSpeak.h>
 
 // Replace with the OpenWeatherMap Forecast API URL
-#define forecastWeatherURL "http://api.openweathermap.org/data/2.5/forecast?lat=5.671401156455272&lon=101.41105533517317&units=metric&appid=3054efa1820ce7f4df282635bd6e5d3c"
+#define forecastWeatherURL "http://api.openweathermap.org/data/2.5/forecast?lat=5.671401156455272&lon=101.41105533517317&units=metric&appid=APIKEYHERE"
 
 void setup() {
   Serial.begin(9600);
@@ -24,9 +24,9 @@ void setup() {
 
 WiFiClient client;
 
-const char* APIKey = "MZUH6YO66N4RRRP6";
+const char* APIKey = "APIWRITEKEY";
 const char* server = "api.thingspeak.com";
-unsigned long channelID = 2810374;
+unsigned long channelID = 0;
 
 int rainStatus = 0;
 
