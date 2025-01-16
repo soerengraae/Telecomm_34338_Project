@@ -11,7 +11,7 @@
 /** 
  * @brief Pin number where the DHT11 data line is connected.
  */
-#define dht11Pin  5
+#define dht11Pin 4
 
 /**
  * @brief Instantiate a DHT object on the specified pin, using DHT11 sensor type.
