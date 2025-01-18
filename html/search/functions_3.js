@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['lcd_0',['lcd',['../_indoor___e_s_p_8ino.html#ae084e1bc8ccb35ea289ba0ca4972ea6d',1,'lcd(0x27, 16, 2):&#160;Indoor_ESP.ino'],['../_indoor_station_v1_8ino.html#ae084e1bc8ccb35ea289ba0ca4972ea6d',1,'lcd(0x27, 16, 2):&#160;IndoorStationV1.ino'],['../_indoor_station_v1_8ino_8ino.html#ae084e1bc8ccb35ea289ba0ca4972ea6d',1,'lcd(0x27, 16, 2):&#160;IndoorStationV1.ino.ino']]],
-  ['loop_1',['loop',['../_indoor___e_s_p_8ino.html#afe461d27b9c48d5921c00d521181f12f',1,'loop():&#160;Indoor_ESP.ino'],['../_indoor_station_v1_8ino.html#afe461d27b9c48d5921c00d521181f12f',1,'loop():&#160;IndoorStationV1.ino'],['../_indoor_station_v1_8ino_8ino.html#afe461d27b9c48d5921c00d521181f12f',1,'loop():&#160;IndoorStationV1.ino.ino'],['../dht11_8ino.html#afe461d27b9c48d5921c00d521181f12f',1,'loop():&#160;dht11.ino'],['../raindata_8ino.html#afe461d27b9c48d5921c00d521181f12f',1,'loop():&#160;raindata.ino']]]
+  ['initespnow_0',['initESPNow',['../_indoor_station_v1_8ino.html#ad6c7f2d6e6a2543023f5266fac54bc8c',1,'initESPNow():&#160;IndoorStationV1.ino'],['../_indoor_station_v1_8ino_8ino.html#ad6c7f2d6e6a2543023f5266fac54bc8c',1,'initESPNow():&#160;IndoorStationV1.ino.ino']]],
+  ['initwifi_1',['initWiFi',['../_indoor_station_v1_8ino.html#abf4d12a26fa69fa1dd75d6cac9c0f740',1,'initWiFi():&#160;IndoorStationV1.ino'],['../_indoor_station_v1_8ino_8ino.html#abf4d12a26fa69fa1dd75d6cac9c0f740',1,'initWiFi():&#160;IndoorStationV1.ino.ino']]]
 ];
