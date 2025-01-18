@@ -1,6 +1,6 @@
 /**
- * @file dht11_draft.ino
- * @brief First draft for reading temperature and humidity from the DHT11 sensor using the DHT library.
+ * @file dht11.ino
+ * @brief Reading temperature and humidity from the DHT11 sensor using the DHT library.
  *
  * This program reads temperature and humidity values from a DHT11 sensor and outputs them
  * via the serial monitor. The readings occur every 5 seconds in the main loop.
