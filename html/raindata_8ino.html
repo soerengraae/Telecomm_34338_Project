@@ -116,7 +116,7 @@ $(function(){initNavTree('raindata_8ino.html',''); initResizable(true); });
 <code>#include &lt;HTTPClient.h&gt;</code><br />
 <code>#include &lt;ArduinoJson.h&gt;</code><br />
 <code>#include &lt;ThingSpeak.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="raindata_2secrets_8h_source.html">secrets.h</a>&quot;</code><br />
+<code>#include &quot;secrets.h&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
@@ -138,13 +138,13 @@ Variables</h2></td></tr>
 <tr class="memitem:a323dfc205549b3c13f0a25c1b670708a" id="r_a323dfc205549b3c13f0a25c1b670708a"><td class="memItemLeft" align="right" valign="top">WiFiClient&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a323dfc205549b3c13f0a25c1b670708a">client</a></td></tr>
 <tr class="memdesc:a323dfc205549b3c13f0a25c1b670708a"><td class="mdescLeft">&#160;</td><td class="mdescRight">WiFi client object used for both fetching data and communicating with ThingSpeak.  <br /></td></tr>
 <tr class="separator:a323dfc205549b3c13f0a25c1b670708a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3fe2d87e95035781883990bf38554c9f" id="r_a3fe2d87e95035781883990bf38554c9f"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3fe2d87e95035781883990bf38554c9f">APIKey</a> = <a class="el" href="outdoorunit_2secrets_8h.html#a075c854f50f8c824da61dc0a9207374a">ThingSpeakWriteKey</a></td></tr>
+<tr class="memitem:a3fe2d87e95035781883990bf38554c9f" id="r_a3fe2d87e95035781883990bf38554c9f"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3fe2d87e95035781883990bf38554c9f">APIKey</a> = ThingSpeakWriteKey</td></tr>
 <tr class="memdesc:a3fe2d87e95035781883990bf38554c9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">ThingSpeak Write API Key (fetched from secrets.h).  <br /></td></tr>
 <tr class="separator:a3fe2d87e95035781883990bf38554c9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab68b888c3d204a4403af6d1b22f6d07c" id="r_ab68b888c3d204a4403af6d1b22f6d07c"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab68b888c3d204a4403af6d1b22f6d07c">server</a> = &quot;api.thingspeak.com&quot;</td></tr>
 <tr class="memdesc:ab68b888c3d204a4403af6d1b22f6d07c"><td class="mdescLeft">&#160;</td><td class="mdescRight">ThingSpeak server endpoint.  <br /></td></tr>
 <tr class="separator:ab68b888c3d204a4403af6d1b22f6d07c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac45cf487b7a438e2176288955a338f25" id="r_ac45cf487b7a438e2176288955a338f25"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac45cf487b7a438e2176288955a338f25">channelID</a> = <a class="el" href="outdoorunit_2secrets_8h.html#a9245b4c2f5b48265964acfdf5f7c54f9">ThingSpeakChannelID</a></td></tr>
+<tr class="memitem:ac45cf487b7a438e2176288955a338f25" id="r_ac45cf487b7a438e2176288955a338f25"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac45cf487b7a438e2176288955a338f25">channelID</a> = ThingSpeakChannelID</td></tr>
 <tr class="memdesc:ac45cf487b7a438e2176288955a338f25"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ThingSpeak channel ID where data is sent.  <br /></td></tr>
 <tr class="separator:ac45cf487b7a438e2176288955a338f25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52bddf5133639c3291f9ae21be2788a0" id="r_a52bddf5133639c3291f9ae21be2788a0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a52bddf5133639c3291f9ae21be2788a0">rainStatus</a> = 0</td></tr>
@@ -227,7 +227,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const char* APIKey = <a class="el" href="outdoorunit_2secrets_8h.html#a075c854f50f8c824da61dc0a9207374a">ThingSpeakWriteKey</a></td>
+          <td class="memname">const char* APIKey = ThingSpeakWriteKey</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -243,7 +243,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned long channelID = <a class="el" href="outdoorunit_2secrets_8h.html#a9245b4c2f5b48265964acfdf5f7c54f9">ThingSpeakChannelID</a></td>
+          <td class="memname">unsigned long channelID = ThingSpeakChannelID</td>
         </tr>
       </table>
 </div><div class="memdoc">

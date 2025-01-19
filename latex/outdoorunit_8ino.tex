@@ -39,11 +39,11 @@ uint16\+\_\+t \mbox{\hyperlink{outdoorunit_8ino_a0d97458b76e85fb7222cea3939288ac
 \begin{DoxyCompactList}\small\item\em Holds the most recent wind speed measurement from the analog pin in m/s. \end{DoxyCompactList}\item 
 Wi\+Fi\+Client \mbox{\hyperlink{outdoorunit_8ino_a323dfc205549b3c13f0a25c1b670708a}{client}}
 \begin{DoxyCompactList}\small\item\em Wi\+Fi client object for making HTTP requests and connecting to Thing\+Speak. \end{DoxyCompactList}\item 
-const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{outdoorunit_8ino_a3fe2d87e95035781883990bf38554c9f}{APIKey}} = \mbox{\hyperlink{outdoorunit_2secrets_8h_a075c854f50f8c824da61dc0a9207374a}{Thing\+Speak\+Write\+Key}}
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{outdoorunit_8ino_a3fe2d87e95035781883990bf38554c9f}{APIKey}} = Thing\+Speak\+Write\+Key
 \begin{DoxyCompactList}\small\item\em Thing\+Speak channel write API key. \end{DoxyCompactList}\item 
 const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{outdoorunit_8ino_ab68b888c3d204a4403af6d1b22f6d07c}{server}} = "{}api.\+thingspeak.\+com"{}
 \begin{DoxyCompactList}\small\item\em Hostname for the Thing\+Speak API. \end{DoxyCompactList}\item 
-unsigned long \mbox{\hyperlink{outdoorunit_8ino_ac45cf487b7a438e2176288955a338f25}{channel\+ID}} = \mbox{\hyperlink{outdoorunit_2secrets_8h_a9245b4c2f5b48265964acfdf5f7c54f9}{Thing\+Speak\+Channel\+ID}}
+unsigned long \mbox{\hyperlink{outdoorunit_8ino_ac45cf487b7a438e2176288955a338f25}{channel\+ID}} = Thing\+Speak\+Channel\+ID
 \begin{DoxyCompactList}\small\item\em The unique channel ID for the Thing\+Speak channel. \end{DoxyCompactList}\item 
 int8\+\_\+t \mbox{\hyperlink{outdoorunit_8ino_a58dd369d52256fa12a68256e014a210b}{rain\+Status}} = 0
 \begin{DoxyCompactList}\small\item\em Stores the computed rain status based on the forecast data. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -168,7 +168,7 @@ Sets up a baud rate of 9600 for the serial monitor. Waits until Wi\+Fi is succes
 \index{APIKey@{APIKey}!outdoorunit.ino@{outdoorunit.ino}}
 \doxysubsubsection{\texorpdfstring{APIKey}{APIKey}}
 {\footnotesize\ttfamily \label{outdoorunit_8ino_a3fe2d87e95035781883990bf38554c9f} 
-const char\texorpdfstring{$\ast$}{*} APIKey = \mbox{\hyperlink{outdoorunit_2secrets_8h_a075c854f50f8c824da61dc0a9207374a}{Thing\+Speak\+Write\+Key}}}
+const char\texorpdfstring{$\ast$}{*} APIKey = Thing\+Speak\+Write\+Key}
 
 
 
@@ -178,7 +178,7 @@ Thing\+Speak channel write API key.
 \index{channelID@{channelID}!outdoorunit.ino@{outdoorunit.ino}}
 \doxysubsubsection{\texorpdfstring{channelID}{channelID}}
 {\footnotesize\ttfamily \label{outdoorunit_8ino_ac45cf487b7a438e2176288955a338f25} 
-unsigned long channel\+ID = \mbox{\hyperlink{outdoorunit_2secrets_8h_a9245b4c2f5b48265964acfdf5f7c54f9}{Thing\+Speak\+Channel\+ID}}}
+unsigned long channel\+ID = Thing\+Speak\+Channel\+ID}
 
 
 
