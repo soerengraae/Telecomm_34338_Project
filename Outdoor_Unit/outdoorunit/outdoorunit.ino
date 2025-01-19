@@ -1,12 +1,13 @@
 /**
  * @file main.ino
- * @brief Reads temperature and humidity from a DHT11 sensor, fetches weather forecasts from the OpenWeatherMap API,
- *        determines rain status for the next few hours, and sends data to ThingSpeak.
+ * @brief Reads temperature and humidity from a DHT11 sensor, measures wind speed via analog input,
+ *        fetches weather forecasts from the OpenWeatherMap API, determines rain status,
+ *        and sends data to ThingSpeak.
  *
- * This program interfaces with a DHT11 sensor to measure temperature and humidity, then periodically calls the OpenWeatherMap
- * API to get forecast information. It interprets the JSON response to decide whether it will rain in the next two intervals
- * (6 hours). The rain status is posted to a ThingSpeak channel along with the sensor readings. A 10-minute delay is used
- * before the next cycle.
+ * This program interfaces with a DHT11 sensor to measure temperature (in °C) and humidity (%), and uses an analog pin
+ * to read wind speed. It periodically calls the OpenWeatherMap API to get forecast information and determine whether
+ * it will rain in the next two forecast intervals (6 hours). The data are posted to a ThingSpeak channel. After each
+ * cycle, the program waits 10 minutes before repeating.
  */
 
 #include "DHT.h"
@@ -28,6 +29,19 @@ uint8_t temp = 0;
  * @brief Holds the most recent humidity reading from the DHT11 sensor (%).
  */
 uint8_t humidity = 0;
+
+/**
+ * @brief Pin used for reading wind speed via analog input.
+ */
+#define windPin 36
+
+/**
+ * @brief Holds the most recent wind speed measurement from the analog pin in m/s.
+ *
+ * @note Currently just stores the raw analog reading. A user-defined conversion
+ *       to an actual speed in m/s may be implemented in @ref collectRealWeather().
+ */
+uint16_t windSpeed = 0;
 
 #include "WiFi.h"
 #include "HTTPClient.h"
@@ -61,7 +75,7 @@ unsigned long channelID = ThingSpeakChannelID;
 
 /**
  * @brief Stores the computed rain status based on the forecast data.
- * 
+ *
  * The mapping used is:
  *  - 0: No rain expected in the next two intervals (6 hours).
  *  - 1: Rain expected in the first interval (first 3 hours).
@@ -73,6 +87,9 @@ int8_t rainStatus = 0;
 
 /**
  * @brief Arduino setup function. Initializes serial communication, DHT sensor, and connects to WiFi.
+ *
+ * Sets up a baud rate of 9600 for the serial monitor. Waits until WiFi is successfully connected
+ * before proceeding.
  */
 void setup() {
   Serial.begin(9600);
@@ -106,8 +123,10 @@ int8_t fetchRainStatus() {
   http.begin(forecastWeatherURL);
 
   int httpCode = http.GET();
-  if (httpCode <= 0)
+  if (httpCode <= 0) {
+    http.end();
     return -2;
+  }
 
   String JSON_Data = http.getString();
 
@@ -158,24 +177,32 @@ int8_t fetchRainStatus() {
 }
 
 /**
- * @brief Reads temperature and humidity values from the DHT11 sensor and updates global variables.
+ * @brief Reads temperature, humidity, and wind speed values, storing them in global variables.
  *
- * Temperature is stored in @ref temp, and humidity is stored in @ref humidity.
+ * - Temperature is stored in @ref temp (°C).
+ * - Humidity is stored in @ref humidity (%).
+ * - Wind speed is stored in @ref windSpeed, based on an analog read from @ref windPin.
+ *
+ * @note The current implementation only stores the raw analog reading as the wind speed.
+ *       A user-defined formula should be applied to convert this to a real speed in m/s.
  */
 void collectRealWeather() {
   temp = dht11.readTemperature();
   humidity = dht11.readHumidity();
+
+  windSpeed = analogRead(windPin);
+  // Convert analog reading to a wind speed in m/s (placeholder for user-defined calculation).
 }
 
 /**
  * @brief Arduino main loop function. Reads sensor data, retrieves forecast, sends data to ThingSpeak, and waits 10 minutes.
  *
  * The cycle is:
- *  - Delay 3 seconds to ensure the DHT sensor refreshes data.
- *  - Collect real-world weather data using collectRealWeather().
- *  - Retrieve rain status from fetchRainStatus().
- *  - Initialize ThingSpeak, connect, update fields, and disconnect.
- *  - Delay 10 minutes before the next cycle.
+ *  1. Delay 3 seconds to ensure the DHT sensor refreshes data.
+ *  2. Collect real-world weather data using collectRealWeather().
+ *  3. Retrieve rain status from fetchRainStatus().
+ *  4. Initialize ThingSpeak, connect, update fields, and disconnect.
+ *  5. Delay 10 minutes before the next cycle.
  */
 void loop() {
   delay(3000);  // 3 seconds for the DHT to collect data
