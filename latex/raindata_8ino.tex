@@ -27,11 +27,11 @@ void \mbox{\hyperlink{raindata_8ino_afe461d27b9c48d5921c00d521181f12f}{loop}} ()
 \item 
 Wi\+Fi\+Client \mbox{\hyperlink{raindata_8ino_a323dfc205549b3c13f0a25c1b670708a}{client}}
 \begin{DoxyCompactList}\small\item\em Wi\+Fi client object used for both fetching data and communicating with Thing\+Speak. \end{DoxyCompactList}\item 
-const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{raindata_8ino_a3fe2d87e95035781883990bf38554c9f}{APIKey}} = \mbox{\hyperlink{secrets_8h_a075c854f50f8c824da61dc0a9207374a}{Thing\+Speak\+Write\+Key}}
-\begin{DoxyCompactList}\small\item\em Thing\+Speak Write API Key (fetched from \doxylink{secrets_8h}{secrets.\+h}). \end{DoxyCompactList}\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{raindata_8ino_a3fe2d87e95035781883990bf38554c9f}{APIKey}} = \mbox{\hyperlink{outdoorunit_2secrets_8h_a075c854f50f8c824da61dc0a9207374a}{Thing\+Speak\+Write\+Key}}
+\begin{DoxyCompactList}\small\item\em Thing\+Speak Write API Key (fetched from secrets.\+h). \end{DoxyCompactList}\item 
 const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{raindata_8ino_ab68b888c3d204a4403af6d1b22f6d07c}{server}} = "{}api.\+thingspeak.\+com"{}
 \begin{DoxyCompactList}\small\item\em Thing\+Speak server endpoint. \end{DoxyCompactList}\item 
-unsigned long \mbox{\hyperlink{raindata_8ino_ac45cf487b7a438e2176288955a338f25}{channel\+ID}} = \mbox{\hyperlink{secrets_8h_a9245b4c2f5b48265964acfdf5f7c54f9}{Thing\+Speak\+Channel\+ID}}
+unsigned long \mbox{\hyperlink{raindata_8ino_ac45cf487b7a438e2176288955a338f25}{channel\+ID}} = \mbox{\hyperlink{outdoorunit_2secrets_8h_a9245b4c2f5b48265964acfdf5f7c54f9}{Thing\+Speak\+Channel\+ID}}
 \begin{DoxyCompactList}\small\item\em The Thing\+Speak channel ID where data is sent. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{raindata_8ino_a52bddf5133639c3291f9ae21be2788a0}{rain\+Status}} = 0
 \begin{DoxyCompactList}\small\item\em Variable to store the rain status. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -91,17 +91,17 @@ Initializes serial communication at 9600 baud, connects to Wi\+Fi, and prints th
 \index{APIKey@{APIKey}!raindata.ino@{raindata.ino}}
 \doxysubsubsection{\texorpdfstring{APIKey}{APIKey}}
 {\footnotesize\ttfamily \label{raindata_8ino_a3fe2d87e95035781883990bf38554c9f} 
-const char\texorpdfstring{$\ast$}{*} APIKey = \mbox{\hyperlink{secrets_8h_a075c854f50f8c824da61dc0a9207374a}{Thing\+Speak\+Write\+Key}}}
+const char\texorpdfstring{$\ast$}{*} APIKey = \mbox{\hyperlink{outdoorunit_2secrets_8h_a075c854f50f8c824da61dc0a9207374a}{Thing\+Speak\+Write\+Key}}}
 
 
 
-Thing\+Speak Write API Key (fetched from \doxylink{secrets_8h}{secrets.\+h}). 
+Thing\+Speak Write API Key (fetched from secrets.\+h). 
 
 \Hypertarget{raindata_8ino_ac45cf487b7a438e2176288955a338f25}\index{raindata.ino@{raindata.ino}!channelID@{channelID}}
 \index{channelID@{channelID}!raindata.ino@{raindata.ino}}
 \doxysubsubsection{\texorpdfstring{channelID}{channelID}}
 {\footnotesize\ttfamily \label{raindata_8ino_ac45cf487b7a438e2176288955a338f25} 
-unsigned long channel\+ID = \mbox{\hyperlink{secrets_8h_a9245b4c2f5b48265964acfdf5f7c54f9}{Thing\+Speak\+Channel\+ID}}}
+unsigned long channel\+ID = \mbox{\hyperlink{outdoorunit_2secrets_8h_a9245b4c2f5b48265964acfdf5f7c54f9}{Thing\+Speak\+Channel\+ID}}}
 
 
 

@@ -11,6 +11,8 @@
 \item 
 \#define \mbox{\hyperlink{outdoorunit_8ino_a1481e2e73ead95154830a58de486cb2e}{DHT11\+Pin}}~5
 \begin{DoxyCompactList}\small\item\em Pin to which the DHT11 sensor data line is connected. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{outdoorunit_8ino_a710340e2388b9f9ad3eb87b6f979af42}{wind\+Pin}}~36
+\begin{DoxyCompactList}\small\item\em Pin used for reading wind speed via analog input. \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{outdoorunit_8ino_a4a0a4aa5db390e405fce9272877d4704}{forecast\+Weather\+URL}}~"{}http\+://api.\+openweathermap.\+org/\mbox{\hyperlink{_indoor___e_s_p_8ino_a173b91873a3fc4f50a95416a6204d963}{data}}/2.\+5/forecast?lat=5.\+671401156455272\&lon=101.\+41105533517317\&units=metric\&appid=APIKEYHERE"{}
 \begin{DoxyCompactList}\small\item\em URL for obtaining the 5-\/day/3-\/hour weather forecast from Open\+Weather\+Map. Replace "{}\+APIKEYHERE"{} with your actual API key. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
@@ -23,7 +25,7 @@ void \mbox{\hyperlink{outdoorunit_8ino_a4fc01d736fe50cf5b977f755b675f11d}{setup}
 int8\+\_\+t \mbox{\hyperlink{outdoorunit_8ino_acb4dc83e53bfebae6d753102470d94cc}{fetch\+Rain\+Status}} ()
 \begin{DoxyCompactList}\small\item\em Fetches and interprets the weather forecast to determine the rain status. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{outdoorunit_8ino_a66e3fe8bc97521ff09c211001a38a488}{collect\+Real\+Weather}} ()
-\begin{DoxyCompactList}\small\item\em Reads temperature and humidity values from the DHT11 sensor and updates global variables. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Reads temperature, humidity, and wind speed values, storing them in global variables. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{outdoorunit_8ino_afe461d27b9c48d5921c00d521181f12f}{loop}} ()
 \begin{DoxyCompactList}\small\item\em Arduino main loop function. Reads sensor data, retrieves forecast, sends data to Thing\+Speak, and waits 10 minutes. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Variables}
@@ -33,13 +35,15 @@ uint8\+\_\+t \mbox{\hyperlink{outdoorunit_8ino_a3cc119cb1a4beab046568bd21fcac3e5
 \begin{DoxyCompactList}\small\item\em Holds the most recent temperature reading from the DHT11 sensor (in °C). \end{DoxyCompactList}\item 
 uint8\+\_\+t \mbox{\hyperlink{outdoorunit_8ino_a3cb62182097ceb535c2f31919c98a0b6}{humidity}} = 0
 \begin{DoxyCompactList}\small\item\em Holds the most recent humidity reading from the DHT11 sensor (\%). \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{outdoorunit_8ino_a0d97458b76e85fb7222cea3939288ac0}{wind\+Speed}} = 0
+\begin{DoxyCompactList}\small\item\em Holds the most recent wind speed measurement from the analog pin in m/s. \end{DoxyCompactList}\item 
 Wi\+Fi\+Client \mbox{\hyperlink{outdoorunit_8ino_a323dfc205549b3c13f0a25c1b670708a}{client}}
 \begin{DoxyCompactList}\small\item\em Wi\+Fi client object for making HTTP requests and connecting to Thing\+Speak. \end{DoxyCompactList}\item 
-const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{outdoorunit_8ino_a3fe2d87e95035781883990bf38554c9f}{APIKey}} = \mbox{\hyperlink{secrets_8h_a075c854f50f8c824da61dc0a9207374a}{Thing\+Speak\+Write\+Key}}
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{outdoorunit_8ino_a3fe2d87e95035781883990bf38554c9f}{APIKey}} = \mbox{\hyperlink{outdoorunit_2secrets_8h_a075c854f50f8c824da61dc0a9207374a}{Thing\+Speak\+Write\+Key}}
 \begin{DoxyCompactList}\small\item\em Thing\+Speak channel write API key. \end{DoxyCompactList}\item 
 const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{outdoorunit_8ino_ab68b888c3d204a4403af6d1b22f6d07c}{server}} = "{}api.\+thingspeak.\+com"{}
 \begin{DoxyCompactList}\small\item\em Hostname for the Thing\+Speak API. \end{DoxyCompactList}\item 
-unsigned long \mbox{\hyperlink{outdoorunit_8ino_ac45cf487b7a438e2176288955a338f25}{channel\+ID}} = \mbox{\hyperlink{secrets_8h_a9245b4c2f5b48265964acfdf5f7c54f9}{Thing\+Speak\+Channel\+ID}}
+unsigned long \mbox{\hyperlink{outdoorunit_8ino_ac45cf487b7a438e2176288955a338f25}{channel\+ID}} = \mbox{\hyperlink{outdoorunit_2secrets_8h_a9245b4c2f5b48265964acfdf5f7c54f9}{Thing\+Speak\+Channel\+ID}}
 \begin{DoxyCompactList}\small\item\em The unique channel ID for the Thing\+Speak channel. \end{DoxyCompactList}\item 
 int8\+\_\+t \mbox{\hyperlink{outdoorunit_8ino_a58dd369d52256fa12a68256e014a210b}{rain\+Status}} = 0
 \begin{DoxyCompactList}\small\item\em Stores the computed rain status based on the forecast data. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -66,6 +70,16 @@ Pin to which the DHT11 sensor data line is connected.
 
 URL for obtaining the 5-\/day/3-\/hour weather forecast from Open\+Weather\+Map. Replace "{}\+APIKEYHERE"{} with your actual API key. 
 
+\Hypertarget{outdoorunit_8ino_a710340e2388b9f9ad3eb87b6f979af42}\index{outdoorunit.ino@{outdoorunit.ino}!windPin@{windPin}}
+\index{windPin@{windPin}!outdoorunit.ino@{outdoorunit.ino}}
+\doxysubsubsection{\texorpdfstring{windPin}{windPin}}
+{\footnotesize\ttfamily \label{outdoorunit_8ino_a710340e2388b9f9ad3eb87b6f979af42} 
+\#define wind\+Pin~36}
+
+
+
+Pin used for reading wind speed via analog input. 
+
 
 
 \doxysubsection{Function Documentation}
@@ -77,9 +91,19 @@ void collect\+Real\+Weather (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})
 
 
 
-Reads temperature and humidity values from the DHT11 sensor and updates global variables. 
+Reads temperature, humidity, and wind speed values, storing them in global variables. 
 
-Temperature is stored in \doxylink{outdoorunit_8ino_a3cc119cb1a4beab046568bd21fcac3e5}{temp}, and humidity is stored in \doxylink{_indoor___e_s_p_8ino_a405f237eaa8a513a9682fbb6e44c4860}{humidity}. \Hypertarget{outdoorunit_8ino_ae020b4c28bfae6d1b1550584075c7213}\index{outdoorunit.ino@{outdoorunit.ino}!dht11@{dht11}}
+
+\begin{DoxyItemize}
+\item Temperature is stored in \doxylink{outdoorunit_8ino_a3cc119cb1a4beab046568bd21fcac3e5}{temp} (°C).
+\item Humidity is stored in \doxylink{_indoor___e_s_p_8ino_a405f237eaa8a513a9682fbb6e44c4860}{humidity} (\%).
+\item Wind speed is stored in \doxylink{outdoorunit_8ino_a0d97458b76e85fb7222cea3939288ac0}{wind\+Speed}, based on an analog read from \doxylink{outdoorunit_8ino_a710340e2388b9f9ad3eb87b6f979af42}{wind\+Pin}.
+\end{DoxyItemize}
+
+\begin{DoxyNote}{Note}
+The current implementation only stores the raw analog reading as the wind speed. A user-\/defined formula should be applied to convert this to a real speed in m/s. 
+\end{DoxyNote}
+\Hypertarget{outdoorunit_8ino_ae020b4c28bfae6d1b1550584075c7213}\index{outdoorunit.ino@{outdoorunit.ino}!dht11@{dht11}}
 \index{dht11@{dht11}!outdoorunit.ino@{outdoorunit.ino}}
 \doxysubsubsection{\texorpdfstring{dht11()}{dht11()}}
 {\footnotesize\ttfamily \label{outdoorunit_8ino_ae020b4c28bfae6d1b1550584075c7213} 
@@ -121,13 +145,13 @@ void loop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 Arduino main loop function. Reads sensor data, retrieves forecast, sends data to Thing\+Speak, and waits 10 minutes. 
 
 The cycle is\+:
-\begin{DoxyItemize}
+\begin{DoxyEnumerate}
 \item Delay 3 seconds to ensure the DHT sensor refreshes data.
 \item Collect real-\/world weather data using \doxylink{outdoorunit_8ino_a66e3fe8bc97521ff09c211001a38a488}{collect\+Real\+Weather()}.
 \item Retrieve rain status from \doxylink{outdoorunit_8ino_acb4dc83e53bfebae6d753102470d94cc}{fetch\+Rain\+Status()}.
 \item Initialize Thing\+Speak, connect, update fields, and disconnect.
 \item Delay 10 minutes before the next cycle. 
-\end{DoxyItemize}\Hypertarget{outdoorunit_8ino_a4fc01d736fe50cf5b977f755b675f11d}\index{outdoorunit.ino@{outdoorunit.ino}!setup@{setup}}
+\end{DoxyEnumerate}\Hypertarget{outdoorunit_8ino_a4fc01d736fe50cf5b977f755b675f11d}\index{outdoorunit.ino@{outdoorunit.ino}!setup@{setup}}
 \index{setup@{setup}!outdoorunit.ino@{outdoorunit.ino}}
 \doxysubsubsection{\texorpdfstring{setup()}{setup()}}
 {\footnotesize\ttfamily \label{outdoorunit_8ino_a4fc01d736fe50cf5b977f755b675f11d} 
@@ -137,14 +161,14 @@ void setup (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
 Arduino setup function. Initializes serial communication, DHT sensor, and connects to Wi\+Fi. 
 
-
+Sets up a baud rate of 9600 for the serial monitor. Waits until Wi\+Fi is successfully connected before proceeding. 
 
 \doxysubsection{Variable Documentation}
 \Hypertarget{outdoorunit_8ino_a3fe2d87e95035781883990bf38554c9f}\index{outdoorunit.ino@{outdoorunit.ino}!APIKey@{APIKey}}
 \index{APIKey@{APIKey}!outdoorunit.ino@{outdoorunit.ino}}
 \doxysubsubsection{\texorpdfstring{APIKey}{APIKey}}
 {\footnotesize\ttfamily \label{outdoorunit_8ino_a3fe2d87e95035781883990bf38554c9f} 
-const char\texorpdfstring{$\ast$}{*} APIKey = \mbox{\hyperlink{secrets_8h_a075c854f50f8c824da61dc0a9207374a}{Thing\+Speak\+Write\+Key}}}
+const char\texorpdfstring{$\ast$}{*} APIKey = \mbox{\hyperlink{outdoorunit_2secrets_8h_a075c854f50f8c824da61dc0a9207374a}{Thing\+Speak\+Write\+Key}}}
 
 
 
@@ -154,7 +178,7 @@ Thing\+Speak channel write API key.
 \index{channelID@{channelID}!outdoorunit.ino@{outdoorunit.ino}}
 \doxysubsubsection{\texorpdfstring{channelID}{channelID}}
 {\footnotesize\ttfamily \label{outdoorunit_8ino_ac45cf487b7a438e2176288955a338f25} 
-unsigned long channel\+ID = \mbox{\hyperlink{secrets_8h_a9245b4c2f5b48265964acfdf5f7c54f9}{Thing\+Speak\+Channel\+ID}}}
+unsigned long channel\+ID = \mbox{\hyperlink{outdoorunit_2secrets_8h_a9245b4c2f5b48265964acfdf5f7c54f9}{Thing\+Speak\+Channel\+ID}}}
 
 
 
@@ -217,3 +241,16 @@ uint8\+\_\+t temp = 0}
 
 Holds the most recent temperature reading from the DHT11 sensor (in °C). 
 
+\Hypertarget{outdoorunit_8ino_a0d97458b76e85fb7222cea3939288ac0}\index{outdoorunit.ino@{outdoorunit.ino}!windSpeed@{windSpeed}}
+\index{windSpeed@{windSpeed}!outdoorunit.ino@{outdoorunit.ino}}
+\doxysubsubsection{\texorpdfstring{windSpeed}{windSpeed}}
+{\footnotesize\ttfamily \label{outdoorunit_8ino_a0d97458b76e85fb7222cea3939288ac0} 
+uint16\+\_\+t wind\+Speed = 0}
+
+
+
+Holds the most recent wind speed measurement from the analog pin in m/s. 
+
+\begin{DoxyNote}{Note}
+Currently just stores the raw analog reading. A user-\/defined conversion to an actual speed in m/s may be implemented in \doxylink{outdoorunit_8ino_a66e3fe8bc97521ff09c211001a38a488}{collect\+Real\+Weather()}. 
+\end{DoxyNote}

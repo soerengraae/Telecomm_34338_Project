@@ -6,7 +6,7 @@ var indexSectionsWithContent =
   3: "cdfilors",
   4: "abcdfhilmprstuw",
   5: "s",
-  6: "dfopst",
+  6: "dfopstw",
   7: "t"
 };
 

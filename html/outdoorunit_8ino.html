@@ -114,13 +114,16 @@ $(function(){initNavTree('outdoorunit_8ino.html',''); initResizable(true); });
 <code>#include &quot;HTTPClient.h&quot;</code><br />
 <code>#include &quot;ArduinoJson.h&quot;</code><br />
 <code>#include &quot;ThingSpeak.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="secrets_8h_source.html">secrets.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="outdoorunit_2secrets_8h_source.html">secrets.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a1481e2e73ead95154830a58de486cb2e" id="r_a1481e2e73ead95154830a58de486cb2e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1481e2e73ead95154830a58de486cb2e">DHT11Pin</a>&#160;&#160;&#160;5</td></tr>
 <tr class="memdesc:a1481e2e73ead95154830a58de486cb2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pin to which the DHT11 sensor data line is connected.  <br /></td></tr>
 <tr class="separator:a1481e2e73ead95154830a58de486cb2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a710340e2388b9f9ad3eb87b6f979af42" id="r_a710340e2388b9f9ad3eb87b6f979af42"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a710340e2388b9f9ad3eb87b6f979af42">windPin</a>&#160;&#160;&#160;36</td></tr>
+<tr class="memdesc:a710340e2388b9f9ad3eb87b6f979af42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pin used for reading wind speed via analog input.  <br /></td></tr>
+<tr class="separator:a710340e2388b9f9ad3eb87b6f979af42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a0a4aa5db390e405fce9272877d4704" id="r_a4a0a4aa5db390e405fce9272877d4704"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4a0a4aa5db390e405fce9272877d4704">forecastWeatherURL</a>&#160;&#160;&#160;&quot;http://api.openweathermap.org/<a class="el" href="_indoor___e_s_p_8ino.html#a173b91873a3fc4f50a95416a6204d963">data</a>/2.5/forecast?lat=5.671401156455272&amp;lon=101.41105533517317&amp;units=metric&amp;appid=APIKEYHERE&quot;</td></tr>
 <tr class="memdesc:a4a0a4aa5db390e405fce9272877d4704"><td class="mdescLeft">&#160;</td><td class="mdescRight">URL for obtaining the 5-day/3-hour weather forecast from OpenWeatherMap. Replace "APIKEYHERE" with your actual API key.  <br /></td></tr>
 <tr class="separator:a4a0a4aa5db390e405fce9272877d4704"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -137,7 +140,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:acb4dc83e53bfebae6d753102470d94cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fetches and interprets the weather forecast to determine the rain status.  <br /></td></tr>
 <tr class="separator:acb4dc83e53bfebae6d753102470d94cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a66e3fe8bc97521ff09c211001a38a488" id="r_a66e3fe8bc97521ff09c211001a38a488"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a66e3fe8bc97521ff09c211001a38a488">collectRealWeather</a> ()</td></tr>
-<tr class="memdesc:a66e3fe8bc97521ff09c211001a38a488"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads temperature and humidity values from the DHT11 sensor and updates global variables.  <br /></td></tr>
+<tr class="memdesc:a66e3fe8bc97521ff09c211001a38a488"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads temperature, humidity, and wind speed values, storing them in global variables.  <br /></td></tr>
 <tr class="separator:a66e3fe8bc97521ff09c211001a38a488"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe461d27b9c48d5921c00d521181f12f" id="r_afe461d27b9c48d5921c00d521181f12f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afe461d27b9c48d5921c00d521181f12f">loop</a> ()</td></tr>
 <tr class="memdesc:afe461d27b9c48d5921c00d521181f12f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Arduino main loop function. Reads sensor data, retrieves forecast, sends data to ThingSpeak, and waits 10 minutes.  <br /></td></tr>
@@ -151,16 +154,19 @@ Variables</h2></td></tr>
 <tr class="memitem:a3cb62182097ceb535c2f31919c98a0b6" id="r_a3cb62182097ceb535c2f31919c98a0b6"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3cb62182097ceb535c2f31919c98a0b6">humidity</a> = 0</td></tr>
 <tr class="memdesc:a3cb62182097ceb535c2f31919c98a0b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Holds the most recent humidity reading from the DHT11 sensor (%).  <br /></td></tr>
 <tr class="separator:a3cb62182097ceb535c2f31919c98a0b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d97458b76e85fb7222cea3939288ac0" id="r_a0d97458b76e85fb7222cea3939288ac0"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0d97458b76e85fb7222cea3939288ac0">windSpeed</a> = 0</td></tr>
+<tr class="memdesc:a0d97458b76e85fb7222cea3939288ac0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Holds the most recent wind speed measurement from the analog pin in m/s.  <br /></td></tr>
+<tr class="separator:a0d97458b76e85fb7222cea3939288ac0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a323dfc205549b3c13f0a25c1b670708a" id="r_a323dfc205549b3c13f0a25c1b670708a"><td class="memItemLeft" align="right" valign="top">WiFiClient&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a323dfc205549b3c13f0a25c1b670708a">client</a></td></tr>
 <tr class="memdesc:a323dfc205549b3c13f0a25c1b670708a"><td class="mdescLeft">&#160;</td><td class="mdescRight">WiFi client object for making HTTP requests and connecting to ThingSpeak.  <br /></td></tr>
 <tr class="separator:a323dfc205549b3c13f0a25c1b670708a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3fe2d87e95035781883990bf38554c9f" id="r_a3fe2d87e95035781883990bf38554c9f"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3fe2d87e95035781883990bf38554c9f">APIKey</a> = <a class="el" href="secrets_8h.html#a075c854f50f8c824da61dc0a9207374a">ThingSpeakWriteKey</a></td></tr>
+<tr class="memitem:a3fe2d87e95035781883990bf38554c9f" id="r_a3fe2d87e95035781883990bf38554c9f"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3fe2d87e95035781883990bf38554c9f">APIKey</a> = <a class="el" href="outdoorunit_2secrets_8h.html#a075c854f50f8c824da61dc0a9207374a">ThingSpeakWriteKey</a></td></tr>
 <tr class="memdesc:a3fe2d87e95035781883990bf38554c9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">ThingSpeak channel write API key.  <br /></td></tr>
 <tr class="separator:a3fe2d87e95035781883990bf38554c9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab68b888c3d204a4403af6d1b22f6d07c" id="r_ab68b888c3d204a4403af6d1b22f6d07c"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab68b888c3d204a4403af6d1b22f6d07c">server</a> = &quot;api.thingspeak.com&quot;</td></tr>
 <tr class="memdesc:ab68b888c3d204a4403af6d1b22f6d07c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hostname for the ThingSpeak API.  <br /></td></tr>
 <tr class="separator:ab68b888c3d204a4403af6d1b22f6d07c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac45cf487b7a438e2176288955a338f25" id="r_ac45cf487b7a438e2176288955a338f25"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac45cf487b7a438e2176288955a338f25">channelID</a> = <a class="el" href="secrets_8h.html#a9245b4c2f5b48265964acfdf5f7c54f9">ThingSpeakChannelID</a></td></tr>
+<tr class="memitem:ac45cf487b7a438e2176288955a338f25" id="r_ac45cf487b7a438e2176288955a338f25"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac45cf487b7a438e2176288955a338f25">channelID</a> = <a class="el" href="outdoorunit_2secrets_8h.html#a9245b4c2f5b48265964acfdf5f7c54f9">ThingSpeakChannelID</a></td></tr>
 <tr class="memdesc:ac45cf487b7a438e2176288955a338f25"><td class="mdescLeft">&#160;</td><td class="mdescRight">The unique channel ID for the ThingSpeak channel.  <br /></td></tr>
 <tr class="separator:ac45cf487b7a438e2176288955a338f25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a58dd369d52256fa12a68256e014a210b" id="r_a58dd369d52256fa12a68256e014a210b"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a58dd369d52256fa12a68256e014a210b">rainStatus</a> = 0</td></tr>
@@ -200,6 +206,22 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a710340e2388b9f9ad3eb87b6f979af42" name="a710340e2388b9f9ad3eb87b6f979af42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a710340e2388b9f9ad3eb87b6f979af42">&#9670;&#160;</a></span>windPin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define windPin&#160;&#160;&#160;36</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pin used for reading wind speed via analog input. </p>
+
+</div>
+</div>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a66e3fe8bc97521ff09c211001a38a488" name="a66e3fe8bc97521ff09c211001a38a488"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a66e3fe8bc97521ff09c211001a38a488">&#9670;&#160;</a></span>collectRealWeather()</h2>
@@ -216,8 +238,13 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Reads temperature and humidity values from the DHT11 sensor and updates global variables. </p>
-<p>Temperature is stored in <a class="el" href="#a3cc119cb1a4beab046568bd21fcac3e5">temp</a>, and humidity is stored in <a class="el" href="_indoor___e_s_p_8ino.html#a405f237eaa8a513a9682fbb6e44c4860">humidity</a>. </p>
+<p>Reads temperature, humidity, and wind speed values, storing them in global variables. </p>
+<ul>
+<li>Temperature is stored in <a class="el" href="#a3cc119cb1a4beab046568bd21fcac3e5">temp</a> (°C).</li>
+<li>Humidity is stored in <a class="el" href="_indoor___e_s_p_8ino.html#a405f237eaa8a513a9682fbb6e44c4860">humidity</a> (%).</li>
+<li>Wind speed is stored in <a class="el" href="#a0d97458b76e85fb7222cea3939288ac0">windSpeed</a>, based on an analog read from <a class="el" href="#a710340e2388b9f9ad3eb87b6f979af42">windPin</a>.</li>
+</ul>
+<dl class="section note"><dt>Note</dt><dd>The current implementation only stores the raw analog reading as the wind speed. A user-defined formula should be applied to convert this to a real speed in m/s. </dd></dl>
 
 </div>
 </div>
@@ -287,13 +314,13 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Arduino main loop function. Reads sensor data, retrieves forecast, sends data to ThingSpeak, and waits 10 minutes. </p>
-<p>The cycle is:</p><ul>
+<p>The cycle is:</p><ol type="1">
 <li>Delay 3 seconds to ensure the DHT sensor refreshes data.</li>
-<li>Collect real-world weather data using <a class="el" href="#a66e3fe8bc97521ff09c211001a38a488" title="Reads temperature and humidity values from the DHT11 sensor and updates global variables.">collectRealWeather()</a>.</li>
+<li>Collect real-world weather data using <a class="el" href="#a66e3fe8bc97521ff09c211001a38a488" title="Reads temperature, humidity, and wind speed values, storing them in global variables.">collectRealWeather()</a>.</li>
 <li>Retrieve rain status from <a class="el" href="#acb4dc83e53bfebae6d753102470d94cc" title="Fetches and interprets the weather forecast to determine the rain status.">fetchRainStatus()</a>.</li>
 <li>Initialize ThingSpeak, connect, update fields, and disconnect.</li>
 <li>Delay 10 minutes before the next cycle. </li>
-</ul>
+</ol>
 
 </div>
 </div>
@@ -313,6 +340,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Arduino setup function. Initializes serial communication, DHT sensor, and connects to WiFi. </p>
+<p>Sets up a baud rate of 9600 for the serial monitor. Waits until WiFi is successfully connected before proceeding. </p>
 
 </div>
 </div>
@@ -324,7 +352,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const char* APIKey = <a class="el" href="secrets_8h.html#a075c854f50f8c824da61dc0a9207374a">ThingSpeakWriteKey</a></td>
+          <td class="memname">const char* APIKey = <a class="el" href="outdoorunit_2secrets_8h.html#a075c854f50f8c824da61dc0a9207374a">ThingSpeakWriteKey</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -340,7 +368,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned long channelID = <a class="el" href="secrets_8h.html#a9245b4c2f5b48265964acfdf5f7c54f9">ThingSpeakChannelID</a></td>
+          <td class="memname">unsigned long channelID = <a class="el" href="outdoorunit_2secrets_8h.html#a9245b4c2f5b48265964acfdf5f7c54f9">ThingSpeakChannelID</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -433,6 +461,23 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Holds the most recent temperature reading from the DHT11 sensor (in °C). </p>
+
+</div>
+</div>
+<a id="a0d97458b76e85fb7222cea3939288ac0" name="a0d97458b76e85fb7222cea3939288ac0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d97458b76e85fb7222cea3939288ac0">&#9670;&#160;</a></span>windSpeed</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t windSpeed = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Holds the most recent wind speed measurement from the analog pin in m/s. </p>
+<dl class="section note"><dt>Note</dt><dd>Currently just stores the raw analog reading. A user-defined conversion to an actual speed in m/s may be implemented in <a class="el" href="#a66e3fe8bc97521ff09c211001a38a488">collectRealWeather()</a>. </dd></dl>
 
 </div>
 </div>
