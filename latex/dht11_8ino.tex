@@ -1,0 +1,76 @@
+\doxysection{Outdoor\+\_\+\+Unit/dht11/dht11.ino File Reference}
+\hypertarget{dht11_8ino}{}\label{dht11_8ino}\index{Outdoor\_Unit/dht11/dht11.ino@{Outdoor\_Unit/dht11/dht11.ino}}
+
+
+Reading temperature and humidity from the DHT11 sensor using the DHT library.  
+
+
+{\ttfamily \#include $<$DHT.\+h$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{dht11_8ino_a16e41e39112608c58009a1b28a8726f1}{dht11\+Pin}}~4
+\begin{DoxyCompactList}\small\item\em Pin number where the DHT11 data line is connected. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+DHT \mbox{\hyperlink{dht11_8ino_add824cf04816a074fb53db76c5defd36}{dht11}} (\mbox{\hyperlink{dht11_8ino_a16e41e39112608c58009a1b28a8726f1}{dht11\+Pin}}, DHT11)
+\begin{DoxyCompactList}\small\item\em Instantiate a DHT object on the specified pin, using DHT11 sensor type. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{dht11_8ino_a4fc01d736fe50cf5b977f755b675f11d}{setup}} ()
+\begin{DoxyCompactList}\small\item\em Arduino setup function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{dht11_8ino_afe461d27b9c48d5921c00d521181f12f}{loop}} ()
+\begin{DoxyCompactList}\small\item\em Main Arduino loop function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Reading temperature and humidity from the DHT11 sensor using the DHT library. 
+
+This program reads temperature and humidity values from a DHT11 sensor and outputs them via the serial monitor. The readings occur every 5 seconds in the main loop. 
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{dht11_8ino_a16e41e39112608c58009a1b28a8726f1}\index{dht11.ino@{dht11.ino}!dht11Pin@{dht11Pin}}
+\index{dht11Pin@{dht11Pin}!dht11.ino@{dht11.ino}}
+\doxysubsubsection{\texorpdfstring{dht11Pin}{dht11Pin}}
+{\footnotesize\ttfamily \label{dht11_8ino_a16e41e39112608c58009a1b28a8726f1} 
+\#define dht11\+Pin~4}
+
+
+
+Pin number where the DHT11 data line is connected. 
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{dht11_8ino_add824cf04816a074fb53db76c5defd36}\index{dht11.ino@{dht11.ino}!dht11@{dht11}}
+\index{dht11@{dht11}!dht11.ino@{dht11.ino}}
+\doxysubsubsection{\texorpdfstring{dht11()}{dht11()}}
+{\footnotesize\ttfamily \label{dht11_8ino_add824cf04816a074fb53db76c5defd36} 
+DHT dht11 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{dht11_8ino_a16e41e39112608c58009a1b28a8726f1}{dht11\+Pin}}}]{}{, }\item[{DHT11}]{}{}\end{DoxyParamCaption})}
+
+
+
+Instantiate a DHT object on the specified pin, using DHT11 sensor type. 
+
+\Hypertarget{dht11_8ino_afe461d27b9c48d5921c00d521181f12f}\index{dht11.ino@{dht11.ino}!loop@{loop}}
+\index{loop@{loop}!dht11.ino@{dht11.ino}}
+\doxysubsubsection{\texorpdfstring{loop()}{loop()}}
+{\footnotesize\ttfamily \label{dht11_8ino_afe461d27b9c48d5921c00d521181f12f} 
+void loop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Main Arduino loop function. 
+
+Reads humidity and temperature from the DHT11 sensor, then prints those values to the Serial Monitor. A 5-\/second delay is used between readings. \texorpdfstring{$<$}{<}Stores the humidity value read from the DHT11 sensor.
+
+\texorpdfstring{$<$}{<}Stores the temperature value read from the DHT11 sensor.\Hypertarget{dht11_8ino_a4fc01d736fe50cf5b977f755b675f11d}\index{dht11.ino@{dht11.ino}!setup@{setup}}
+\index{setup@{setup}!dht11.ino@{dht11.ino}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily \label{dht11_8ino_a4fc01d736fe50cf5b977f755b675f11d} 
+void setup (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Arduino setup function. 
+
+Initializes the serial communication at 9600 baud and begins communication with the DHT11 sensor. 
