@@ -73,6 +73,24 @@ const char* server = "api.thingspeak.com";
  */
 unsigned long channelID = ThingSpeakChannelID;
 
+#include "esp_now.h"
+uint8_t broadcastAddress[] = { 0x08, 0x3A, 0xF2, 0x8E, 0xEC, 0x58 };
+
+// Structure example to send data
+// Must match the receiver structure
+typedef struct packet {
+
+  int humidity;
+  int temperature;
+  int wind_speed;
+
+};
+
+// Create a packet called dataTransmit
+packet dataTransmit;
+
+esp_now_peer_info_t peerInfo;
+
 /**
  * @brief Stores the computed rain status based on the forecast data.
  *
@@ -85,6 +103,11 @@ unsigned long channelID = ThingSpeakChannelID;
  */
 int8_t rainStatus = 0;
 
+void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
+  Serial.print("\r\nLast Packet Send Status:\t");
+  Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
+}
+
 /**
  * @brief Arduino setup function. Initializes serial communication, DHT sensor, and connects to WiFi.
  *
@@ -95,12 +118,27 @@ void setup() {
   Serial.begin(9600);
   dht11.begin();
 
-  WiFi.begin(SSID, PASS);
-  while (WiFi.status() != WL_CONNECTED) {
+  WiFi.mode(WIFI_STA);
+  while (esp_now_init() != ESP_OK) {
+    Serial.println("Error initializing ESP-NOW");
     delay(500);
-    Serial.print(".");
   }
-  Serial.println("\nWiFi connected.");
+
+  // Once ESPNow is successfully Init, we will register for Send CB to
+  // get the status of Trasnmitted packet
+  esp_now_register_send_cb(OnDataSent);
+
+    // Register peer
+  memcpy(peerInfo.peer_addr, broadcastAddress, 6);
+  peerInfo.channel = 0;
+  peerInfo.encrypt = false;
+
+  // Add peer
+  while (esp_now_add_peer(&peerInfo) != ESP_OK) {
+    Serial.println("Failed to add peer");
+    delay(500);
+  }
+
 }
 
 /**
@@ -176,6 +214,19 @@ int8_t fetchRainStatus() {
   return rainStatus;
 }
 
+void transmitThingspeak() {
+  // Initialize and connect to ThingSpeak
+  ThingSpeak.begin(client);
+  client.connect(server, 80);
+
+  // Send the rain status to ThingSpeak (for example, using field 6)
+  ThingSpeak.setField(6, rainStatus);
+  Serial.println("Writing to ThingSpeak");
+  ThingSpeak.writeFields(channelID, APIKey);
+
+  client.stop();
+}
+
 /**
  * @brief Reads temperature, humidity, and wind speed values, storing them in global variables.
  *
@@ -215,16 +266,14 @@ void loop() {
   // Print the rain status
   Serial.println(rainStatus);
 
-  // Initialize and connect to ThingSpeak
-  ThingSpeak.begin(client);
-  client.connect(server, 80);
+  // Send message via ESP-NOW
+  esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *)&dataTransmit, sizeof(dataTransmit));
 
-  // Send the rain status to ThingSpeak (for example, using field 6)
-  ThingSpeak.setField(6, rainStatus);
-  Serial.println("Writing to ThingSpeak");
-  ThingSpeak.writeFields(channelID, APIKey);
-
-  client.stop();
+  if (result == ESP_OK) {
+    Serial.println("Sent with success");
+  } else {
+    Serial.println("Error sending the data");
+  }
 
   // Wait 10 minutes
   delay(600000);
