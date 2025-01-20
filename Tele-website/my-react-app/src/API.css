@@ -1,0 +1,58 @@
+.api-container {
+    text-align: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    max-width: 400px;
+    margin: 20px auto;
+  }
+  
+  .api-header {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .api-data {
+    font-size: 18px;
+    color: #555;
+  }
+  
+  .api-loading {
+    font-style: italic;
+    color: gray;
+  }
+  .page-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Full viewport height */
+    width: 100%; /* Full width */
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .gauge-container {
+    display: flex;
+    justify-content: center; /* Center boxes horizontally */
+    align-items: center;
+    gap: 30px; /* Space between the boxes */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    width: 100%;
+    max-width: 1300px; /* Limit max width for better layout */
+  }
+
+  .box {
+    width: 250px;
+    height: 250px; /* Ensure all boxes have the same height */
+    padding: 20px;
+    border-radius: 15px;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin: 20px auto;
+    text-align: center;
+  }
+  
+  
