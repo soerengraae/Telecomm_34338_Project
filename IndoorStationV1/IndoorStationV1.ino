@@ -11,11 +11,11 @@
 LiquidCrystal_I2C lcd(0x27, 16, 2); // LCD I2C address 0x27, 16 columns and 2 rows
 
 // Wi-Fi credentials
-const char* ssid = "YOUR_WIFI_SSID";
-const char* password = "YOUR_WIFI_PASSWORD";
+const char* ssid = "iPhone (5)";
+const char* password = "carl1234";
 
 // ThingSpeak API Key
-const char* thingspeakApiKey = "YOUR_THINGSPEAK_API_KEY";
+const char* thingspeakApiKey = "MZUH6YO66N4RRRP6";
 
 // Structure for incoming data
 typedef struct struct_message {
@@ -87,7 +87,7 @@ void initESPNow() {
   if (esp_now_init() != ESP_OK) {
     ESP.restart();
   }
-  esp_now_register_recv_cb(onDataReceive);
+  esp_now_register_recv_cb(OnDataReceive);
 }
 
 void setup() {
@@ -98,8 +98,8 @@ void setup() {
   lcd.backlight();
   pinMode(FAN_PIN, OUTPUT);
   pinMode(PIR_SENSOR_PIN, INPUT);
-  ledcSetup(0, 5000, 8);
-  ledcAttachPin(FAN_PIN, 0);
+  //ledcSetup(0, 5000, 8);
+  //ledcAttachPin(FAN_PIN, 0);
 }
 
 void loop() {
