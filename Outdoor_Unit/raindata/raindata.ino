@@ -3,7 +3,7 @@
  * @brief Code to fetch rain forecast from OpenWeatherMap and upload the results to ThingSpeak.
  *
  * This program connects to WiFi, fetches a forecast from OpenWeatherMap, checks the first two
- * forecast intervals for rain, categorizes the status, and then uploads this info to ThingSpeak.
+ * forecast intervals for rain, categorizes the status, and then uploads this info to thingSpeak.
  */
 
 #include <WiFi.h>
