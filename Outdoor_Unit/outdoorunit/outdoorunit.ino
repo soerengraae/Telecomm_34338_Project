@@ -1,163 +1,98 @@
 /**
- * @file main.ino
- * @brief Reads temperature and humidity from a DHT11 sensor, measures wind speed via analog input,
- *        fetches weather forecasts from the OpenWeatherMap API, determines rain status,
- *        and sends data to ThingSpeak.
- *
- * This program interfaces with a DHT11 sensor to measure temperature (in °C) and humidity (%), and uses an analog pin
- * to read wind speed. It periodically calls the OpenWeatherMap API to get forecast information and determine whether
- * it will rain in the next two forecast intervals (6 hours). The data are posted to a ThingSpeak channel. After each
- * cycle, the program waits 10 minutes before repeating.
+ * @file outdoorunit.ino
+ * @brief Outdoor unit for weather monitoring and data transmission.
+ * 
+ * This file collects real-time weather data using sensors and fetches forecast data from
+ * OpenWeatherMap API. The collected data is then sent via ESP-NOW to a designated peer.
  */
 
 #include "DHT.h"
-// Trying another library
-// #include <DHT11.h>
 
-/**
- * @brief Pin to which the DHT11 sensor data line is connected.
- */
-#define DHT11Pin 5
+#define DHT11Pin 5 /**< GPIO pin connected to DHT11 sensor */
 
-/// Instance of DHT sensor, configured for DHT11 type.
-DHT11 dht11(DHT11Pin, DHT11);
+DHT dht11(DHT11Pin, DHT11); /**< DHT11 sensor instance */
 
-/**
- * @brief Holds the most recent temperature reading from the DHT11 sensor (in °C).
- */
-uint8_t temp = 0;
+uint8_t temp = 0; /**< Current temperature reading */
+uint8_t humidity = 0; /**< Current humidity reading */
 
-/**
- * @brief Holds the most recent humidity reading from the DHT11 sensor (%).
- */
-uint8_t humidity = 0;
+#define windPin 35 /**< GPIO pin connected to wind speed sensor */
 
-/**
- * @brief Pin used for reading wind speed via analog input.
- */
-#define windPin 36
+uint16_t windSpeed = 0; /**< Current wind speed reading */
 
-/**
- * @brief Holds the most recent wind speed measurement from the analog pin in m/s.
- *
- * @note Currently just stores the raw analog reading. A user-defined conversion
- *       to an actual speed in m/s may be implemented in @ref collectRealWeather().
- */
-uint16_t windSpeed = 0;
+#define lightPin 26 /**< GPIO pin connected to light sensor */
+uint8_t lightStatus = 0; /**< Current light status */
 
 #include "WiFi.h"
-#include "HttpClient.h"
+#include "HTTPClient.h"
 #include "ArduinoJson.h"
 #include "ThingSpeak.h"
 #include "secrets.h"
 
-/**
- * @brief URL for obtaining the 5-day/3-hour weather forecast from OpenWeatherMap.
- * Replace "APIKEYHERE" with your actual API key.
- */
-#define forecastWeatherURL "http://api.openweathermap.org/data/2.5/forecast?lat=5.671401156455272&lon=101.41105533517317&units=metric&appid=APIKEYHERE"
+#define forecastWeatherURL "http://api.openweathermap.org/data/2.5/forecast?lat=55.78598981728918&lon=12.522723007973173&units=metric&appid=3054efa1820ce7f4df282635bd6e5d3c" /**< URL for fetching weather forecast */
 
-/// WiFi client object for making HTTP requests and connecting to ThingSpeak.
-WiFiClient client;
-
-/**
- * @brief ThingSpeak channel write API key.
- */
-const char* APIKey = ThingSpeakWriteKey;
-
-/**
- * @brief Hostname for the ThingSpeak API.
- */
-const char* server = "api.thingspeak.com";
-
-/**
- * @brief The unique channel ID for the ThingSpeak channel.
- */
-unsigned long channelID = ThingSpeakChannelID;
+WiFiClient client; /**< WiFi client for HTTP requests */
 
 #include "esp_now.h"
-uint8_t broadcastAddress[] = { 0x08, 0x3A, 0xF2, 0x8E, 0xEC, 0x58 };
-
-// Structure example to send data
-// Must match the receiver structure
-typedef struct packet {
-
-  int humidity;
-  int temperature;
-  int wind_speed;
-
-};
-
-// Create a packet called dataTransmit
-packet dataTransmit;
-
-esp_now_peer_info_t peerInfo;
+uint8_t broadcastAddress[] = { 0x08, 0x3A, 0xF2, 0x8E, 0xEC, 0x58 }; /**< Broadcast address for ESP-NOW communication */
 
 /**
- * @brief Stores the computed rain status based on the forecast data.
- *
- * The mapping used is:
- *  - 0: No rain expected in the next two intervals (6 hours).
- *  - 1: Rain expected in the first interval (first 3 hours).
- *  - 2: Rain expected in the second interval (next 3 hours).
- *  - 3: Rain expected in both intervals (first and second).
- *  - Negative values returned by fetchRainStatus() indicate errors connecting or parsing data.
+ * @struct packet
+ * @brief Structure to hold weather data for transmission.
  */
-int8_t rainStatus = 0;
+typedef struct {
+  uint8_t humidity; /**< Humidity percentage */
+  uint8_t temperature; /**< Temperature in Celsius */
+  uint8_t wind_speed; /**< Wind speed in m/s */
+  uint8_t light; /**< Light status (e.g., on/off) */
+  uint8_t rain; /**< Rain status */
+} packet;
 
+esp_now_peer_info_t peerInfo; /**< ESP-NOW peer information */
+
+int8_t rainStatus = 0; /**< Current rain status */
+
+/**
+ * @brief Callback function called when data is sent via ESP-NOW.
+ * 
+ * @param mac_addr MAC address of the receiver.
+ * @param status Status of the send operation.
+ */
 void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
   Serial.print("\r\nLast Packet Send Status:\t");
   Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
 }
 
 /**
- * @brief Arduino setup function. Initializes serial communication, DHT sensor, and connects to WiFi.
- *
- * Sets up a baud rate of 9600 for the serial monitor. Waits until WiFi is successfully connected
- * before proceeding.
+ * @brief Setup function initializes serial communication, DHT11 sensor, and light sensor pin.
  */
 void setup() {
   Serial.begin(9600);
   dht11.begin();
 
-  WiFi.mode(WIFI_STA);
-  while (esp_now_init() != ESP_OK) {
-    Serial.println("Error initializing ESP-NOW");
-    delay(500);
-  }
-
-  // Once ESPNow is successfully Init, we will register for Send CB to
-  // get the status of Trasnmitted packet
-  esp_now_register_send_cb(OnDataSent);
-
-    // Register peer
-  memcpy(peerInfo.peer_addr, broadcastAddress, 6);
-  peerInfo.channel = 0;
-  peerInfo.encrypt = false;
-
-  // Add peer
-  while (esp_now_add_peer(&peerInfo) != ESP_OK) {
-    Serial.println("Failed to add peer");
-    delay(500);
-  }
-
+  pinMode(lightPin, INPUT);
 }
 
 /**
- * @brief Fetches and interprets the weather forecast to determine the rain status.
- *
- * Uses the OpenWeatherMap API forecast data for the next two intervals (3-hour blocks). Checks if
- * "Rain" or "Drizzle" is mentioned in the first or second forecast blocks, and assigns a status code accordingly.
- *
- * @return An integer representing the success or failure of the operation.
- *         - 0,1,2,3: Valid status for expected rain (see @ref rainStatus).
- *         - -1: WiFi not connected.
- *         - -2: HTTP GET request failed.
- *         - -3: JSON deserialization failed.
+ * @brief Fetches the rain status from the OpenWeatherMap forecast API.
+ * 
+ * Connects to WiFi, retrieves forecast data, parses JSON response, and determines rain status.
+ * 
+ * @return int8_t Rain status:
+ *               - 0: No rain
+ *               - 1: Rain in the first interval
+ *               - 2: Rain in the second interval
+ *               - 3: Rain in both intervals
  */
 int8_t fetchRainStatus() {
-  if (WiFi.status() != WL_CONNECTED)
-    return -1;
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(SSID, PASS);
+
+  // Wait for WiFi connection
+  while (WiFi.status() != WL_CONNECTED) {
+    Serial.print(".");
+    delay(500);
+  }
+  Serial.println("");
 
   HTTPClient http;
   http.begin(forecastWeatherURL);
@@ -165,19 +100,18 @@ int8_t fetchRainStatus() {
   int httpCode = http.GET();
   if (httpCode <= 0) {
     http.end();
-    return -2;
+    return 0;
   }
 
   String JSON_Data = http.getString();
 
-  // JSON deserialization
-  DynamicJsonDocument doc(16384); // Sizing can be optimized if needed
+  DynamicJsonDocument doc(16384);
   DeserializationError error = deserializeJson(doc, JSON_Data);
   if (error) {
     Serial.print("JSON deserialization failed: ");
     Serial.println(error.c_str());
     http.end();
-    return -3;
+    return 0;
   }
 
   JsonArray forecastArray = doc["list"];
@@ -185,7 +119,7 @@ int8_t fetchRainStatus() {
   bool rainFirstInterval = false;
   bool rainSecondInterval = false;
 
-  // Process first two forecast entries (6 hours)
+  // Check rain status for the first two forecast intervals
   for (JsonObject forecast : forecastArray) {
     if (count >= 2) break;
 
@@ -201,7 +135,7 @@ int8_t fetchRainStatus() {
     count++;
   }
 
-  // Determine the rain status
+  // Determine overall rain status based on intervals
   if (rainFirstInterval && rainSecondInterval) {
     rainStatus = 3;
   } else if (rainFirstInterval) {
@@ -213,97 +147,129 @@ int8_t fetchRainStatus() {
   }
 
   http.end();
+  WiFi.disconnect(1);
+  WiFi.mode(WIFI_OFF);
   return rainStatus;
 }
 
-void transmitThingspeak() {
-  // Initialize and connect to ThingSpeak
-  ThingSpeak.begin(client);
-  client.connect(server, 80);
-
-  // Send the rain status to ThingSpeak (for example, using field 6)
-  ThingSpeak.setField(6, rainStatus);
-  Serial.println("Writing to ThingSpeak");
-  ThingSpeak.writeFields(channelID, APIKey);
-
-  client.stop();
-}
-
 /**
- * @brief Reads temperature, humidity, and wind speed values, storing them in global variables.
- *
- * - Temperature is stored in @ref temp (°C).
- * - Humidity is stored in @ref humidity (%).
- * - Wind speed is stored in @ref windSpeed, based on an analog read from @ref windPin.
- *
+ * @brief Collects real-time weather data from sensors.
+ * 
+ * Reads temperature, humidity, and wind speed from respective sensors.
  */
 void collectRealWeather() {
   temp = dht11.readTemperature();
   humidity = dht11.readHumidity();
-  int array[loopLength];
-  int sum = 0;
-  int i = 0;
-  int voltage = analogRead(windPin);
-  // Getting an average of the wind speed over a period of time.
-  // Here defined to be the average of a 2 second interval.
-  
-  windSpeed = analogRead(windPin);
-  // Convert analog reading to a wind speed in m/s (placeholder for user-defined calculation).
+  windSpeed = averageWindSpeed();
+  lightStatus = digitalRead(lightPin);
 }
 
 /**
- * @brief averageWindSpeed takes the 5 second average of the windspeed measured from the DC motor
- * @return returning a single integer value. 
+ * @brief Calculates the average wind speed over a sampling period.
+ * 
+ * Samples the wind speed sensor at regular intervals and computes the average.
+ * 
+ * @return int Average wind speed.
  */
 int averageWindSpeed() {
   int sum = 0;
-  int samplingInterval = 100;
-  int loopLength = 5000 / samplingInterval;
+  int samplingInterval = 100; /**< Sampling interval in milliseconds */
+  int loopLength = 5000 / samplingInterval; /**< Number of samples */
 
-  // Collect data for 5 seconds
   for (int i = 0; i < loopLength; i++) {
     int voltage = analogRead(windPin);
     sum += voltage;
-    delay(samplingInterval);  // Wait for the next sample
+    delay(samplingInterval);
   }
 
-  // Calculate and return the average wind speed
-  int windSpeed = sum / loopLength;
-  // calibration factor to m/s, with convertion from 10- to 12-bit ADC. Fudge it.
-  windspeed = 0.2306*0.25*windspeed+3.3923 
+  windSpeed = sum / loopLength;
+  windSpeed = 0.2306 * 0.25 * windSpeed; /**< Convert voltage to wind speed */
   return windSpeed;
 }
 
 /**
- * @brief Arduino main loop function. Reads sensor data, retrieves forecast, sends data to ThingSpeak, and waits 10 minutes.
- *
- * The cycle is:
- *  1. Delay 3 seconds to ensure the DHT sensor refreshes data.
- *  2. Collect real-world weather data using collectRealWeather().
- *  3. Retrieve rain status from fetchRainStatus().
- *  4. Initialize ThingSpeak, connect, update fields, and disconnect.
- *  5. Delay 10 minutes before the next cycle.
+ * @brief Fills the packet structure with current weather data.
+ * 
+ * @param pck Pointer to the packet structure to be filled.
  */
-void loop() {
-  delay(3000);  // 3 seconds for the DHT to collect data
-  collectRealWeather();
-  Serial.println(humidity);
-  Serial.println(temp);
-  Serial.println(); // New line
+void fillPacket(packet *pck) {
+  pck->humidity = humidity;
+  pck->temperature = temp;
+  pck->wind_speed = windSpeed;
+  pck->light = lightStatus;
+  pck->rain = rainStatus;
+}
 
-  rainStatus = fetchRainStatus();
-  // Print the rain status
-  Serial.println(rainStatus);
+/**
+ * @brief Sends the weather data packet via ESP-NOW.
+ * 
+ * Initializes ESP-NOW, registers the send callback, adds the peer, and sends the packet.
+ * 
+ * @param pck The packet structure containing weather data to be sent.
+ */
+void sendPacket(packet pck) {
+  WiFi.mode(WIFI_STA);
 
-  // Send message via ESP-NOW
-  esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *)&dataTransmit, sizeof(dataTransmit));
+  esp_now_deinit();
+  // Initialize ESP-NOW
+  while (esp_now_init() != ESP_OK) {
+    Serial.println("Error initializing ESP-NOW");
+    delay(500);
+  }
+
+  esp_now_register_send_cb(OnDataSent);
+
+  // Configure peer information
+  memcpy(peerInfo.peer_addr, broadcastAddress, 6);
+  peerInfo.channel = 0;
+  peerInfo.encrypt = false;
+
+  // Add peer
+  while (esp_now_add_peer(&peerInfo) != ESP_OK) {
+    Serial.println("Failed to add peer");
+    delay(500);
+  }
+
+  // Send packet
+  esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *)&pck, sizeof(pck));
 
   if (result == ESP_OK) {
     Serial.println("Sent with success");
   } else {
     Serial.println("Error sending the data");
   }
+}
 
-  // Wait 10 minutes
-  delay(600000);
+/**
+ * @brief Main loop function.
+ * 
+ * Periodically collects weather data, fetches rain status, fills the packet, and sends it.
+ */
+void loop() {
+  delay(3000); /**< Wait before starting data collection */
+
+  collectRealWeather();
+  rainStatus = fetchRainStatus();
+
+  packet dataTransmit;
+  fillPacket(&dataTransmit);
+
+  // Print collected data to Serial Monitor
+  Serial.print(dataTransmit.humidity);
+  Serial.print(", ");
+  Serial.print(dataTransmit.temperature);
+  Serial.print(", ");
+  Serial.print(dataTransmit.wind_speed);
+  Serial.print(", ");
+  Serial.print(dataTransmit.rain);
+  Serial.print(", ");
+  Serial.println(dataTransmit.light);
+  Serial.println("Wait...");
+
+  delay(2000); /**< Wait before sending data */
+
+  sendPacket(dataTransmit);
+  Serial.println("-------------");
+
+  delay(3000); /**< Wait before next loop iteration */
 }
