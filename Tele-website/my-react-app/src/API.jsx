@@ -25,9 +25,9 @@ function API() {
   }, []);
 
   // Extract temperature, humidity, rain status, and wind speed
-  const temperature = latestData ? parseFloat(latestData.field1) : null;
-  const humidity = latestData ? parseFloat(latestData.field2) : null;
-  const isRaining = latestData ? parseInt(latestData.field3) === 1 : false; // Assume 1 means rain, 0 means no rain
+  const temperature = latestData ? parseFloat(latestData.field2) : null;
+  const humidity = latestData ? parseFloat(latestData.field3) : null;
+  const isRaining = latestData ? parseInt(latestData.field6) === 1 : false; // Assume 1 means rain, 0 means no rain
   const windSpeed = latestData ? parseFloat(latestData.field4) : null;
 
   return (
