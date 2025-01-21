@@ -11,6 +11,8 @@
  */
 
 #include "DHT.h"
+// Trying another library
+// #include <DHT11.h>
 
 /**
  * @brief Pin to which the DHT11 sensor data line is connected.
@@ -18,7 +20,7 @@
 #define DHT11Pin 5
 
 /// Instance of DHT sensor, configured for DHT11 type.
-DHT dht11(DHT11Pin, DHT11);
+DHT11 dht11(DHT11Pin, DHT11);
 
 /**
  * @brief Holds the most recent temperature reading from the DHT11 sensor (in °C).
@@ -44,7 +46,7 @@ uint8_t humidity = 0;
 uint16_t windSpeed = 0;
 
 #include "WiFi.h"
-#include "HTTPClient.h"
+#include "HttpClient.h"
 #include "ArduinoJson.h"
 #include "ThingSpeak.h"
 #include "secrets.h"
@@ -234,15 +236,42 @@ void transmitThingspeak() {
  * - Humidity is stored in @ref humidity (%).
  * - Wind speed is stored in @ref windSpeed, based on an analog read from @ref windPin.
  *
- * @note The current implementation only stores the raw analog reading as the wind speed.
- *       A user-defined formula should be applied to convert this to a real speed in m/s.
  */
 void collectRealWeather() {
   temp = dht11.readTemperature();
   humidity = dht11.readHumidity();
-
+  int array[loopLength];
+  int sum = 0;
+  int i = 0;
+  int voltage = analogRead(windPin);
+  // Getting an average of the wind speed over a period of time.
+  // Here defined to be the average of a 2 second interval.
+  
   windSpeed = analogRead(windPin);
   // Convert analog reading to a wind speed in m/s (placeholder for user-defined calculation).
+}
+
+/**
+ * @brief averageWindSpeed takes the 5 second average of the windspeed measured from the DC motor
+ * @return returning a single integer value. 
+ */
+int averageWindSpeed() {
+  int sum = 0;
+  int samplingInterval = 100;
+  int loopLength = 5000 / samplingInterval;
+
+  // Collect data for 5 seconds
+  for (int i = 0; i < loopLength; i++) {
+    int voltage = analogRead(windPin);
+    sum += voltage;
+    delay(samplingInterval);  // Wait for the next sample
+  }
+
+  // Calculate and return the average wind speed
+  int windSpeed = sum / loopLength;
+  // calibration factor to m/s, with convertion from 10- to 12-bit ADC. Fudge it.
+  windspeed = 0.2306*0.25*windspeed+3.3923 
+  return windSpeed;
 }
 
 /**
