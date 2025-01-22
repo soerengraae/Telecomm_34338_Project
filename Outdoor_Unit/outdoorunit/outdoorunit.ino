@@ -190,7 +190,11 @@ int averageWindSpeed() {
   }
 
   windSpeed = sum / loopLength;
-  windSpeed = 0.2306 * 0.25 * windSpeed; /**< Convert voltage to wind speed */
+  if (windSpeed * 0.25 > 7)
+    windSpeed = 0.2306 * 0.25 * windSpeed; /**< Convert voltage to wind speed */
+  else
+    windSpeed *= 0.5;
+
   return windSpeed;
 }
 
