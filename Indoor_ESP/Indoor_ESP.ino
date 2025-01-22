@@ -1,3 +1,11 @@
+/**
+ * @file Indoor_ESP.ino
+ * @brief Handles Bluetooth communication between ESP32 devices, receiving JSON commands to control GPIO pins.
+ *
+ * This program sets up the ESP32 as a slave device, waiting for a master ESP32 device to connect via Bluetooth. 
+ * Once connected, it receives JSON data to control specific GPIO pins and sends back acknowledgments.
+ */
+
 #include <Arduino.h>
 #include <ArduinoJson.h>
 #include <BluetoothSerial.h>
@@ -5,6 +13,12 @@
 // Create a BluetoothSerial object to handle Bluetooth communication
 BluetoothSerial SerialBT;
 
+/**
+ * @brief Setup function to initialize serial communication, Bluetooth, and onboard LED.
+ *
+ * This function sets up the serial communication for debugging, initializes Bluetooth communication with 
+ * the name "ESP32_Slave", and sets up the onboard LED to indicate connection status.
+ */
 void setup()
 {
   // Initialize serial communication at 115200 baud rate for debugging
@@ -30,7 +44,12 @@ void setup()
   // Turn on the built-in LED to indicate a successful connection
   digitalWrite(BUILTIN_LED, HIGH);
 }
-
+/**
+ * @brief Main loop function to handle incoming JSON commands via Bluetooth.
+ *
+ * This function checks for incoming Bluetooth data, parses it as JSON, extracts GPIO pin and status information, 
+ * and executes the specified command. It also sends an acknowledgment back to the master device.
+ */
 void loop()
 {
   // Check if data is received from the master device via Bluetooth

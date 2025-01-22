@@ -1,3 +1,10 @@
+/**
+ * @file Indoor_UART_ESP8266.ino
+ * @brief Code for receiving weather data from outdoor for monitoring and displaying on the indoor unit.
+ *
+ * This program reads transmitted weather data (humidity, temperature, wind speed, and rain level) via serial input,
+ * sends the data to ThingSpeak, and displays it on an LCD. It also controls a motor based on temperature.
+ */
 #include <ESP8266WiFi.h>
 #include <ThingSpeak.h>
 #include <Wire.h> 
@@ -13,6 +20,11 @@ const int readDataDelay = 10 * 1000;
 
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
+/**
+ * @brief Initializes the weather station components.
+ *
+ * This function sets up the Serial communication, Wi-Fi connection, motor pin, and LCD display.
+ */
 void setup() {
   Serial.begin(115200);
   WiFi.begin(ssid, pass);
@@ -33,6 +45,12 @@ int rain_level = 0;
 int sun_up = 0;
 int lcd_controller = 0;
 
+/**
+ * @brief Main loop for processing weather data.
+ *
+ * This function reads weather data via Serial, updates ThingSpeak, controls the motor, 
+ * and updates the LCD display based on the received data.
+ */
 void loop() {
   if (Serial.available()) {
     String data = Serial.readStringUntil('\n');  // Read incoming data
@@ -69,6 +87,12 @@ void loop() {
 
 }
 
+/**
+ * @brief Sends weather data to ThingSpeak.
+ *
+ * This function initializes ThingSpeak communication and updates its fields with 
+ * humidity, temperature, wind speed, and rain level.
+ */
 void write_ThingSpeak(){
   ThingSpeak.begin(client);
   client.connect(server, 80);
@@ -85,6 +109,12 @@ void write_ThingSpeak(){
 
 }
 
+/**
+ * @brief Updates the LCD display with weather data.
+ *
+ * This function switches between different screens on the LCD to display 
+ * temperature, humidity, wind speed, and rain level predictions.
+ */
 void write_lcd(){
   lcd_controller++;
     switch(lcd_controller % 4){

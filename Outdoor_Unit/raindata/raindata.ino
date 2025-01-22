@@ -3,7 +3,7 @@
  * @brief Code to fetch rain forecast from OpenWeatherMap and upload the results to ThingSpeak.
  *
  * This program connects to WiFi, fetches a forecast from OpenWeatherMap, checks the first two
- * forecast intervals for rain, categorizes the status, and then uploads this info to ThingSpeak.
+ * forecast intervals for rain, categorizes the status, and then uploads this info to thingSpeak.
  */
 
 #include <WiFi.h>
@@ -75,7 +75,7 @@ void setup() {
  * - If WiFi is connected, fetch the forecast from the OpenWeatherMap API.
  * - Parse the JSON to check for rain in the first two forecast intervals.
  * - Update the ThingSpeak channel with the determined rainStatus.
- * - Wait 10 minutes (180,000 ms) before fetching again.
+ * - Wait 3 minutes (180,000 ms) before fetching again.
  */
 void loop() {
   if (WiFi.status() == WL_CONNECTED) {
@@ -145,6 +145,6 @@ void loop() {
   Serial.println("Writing to ThingSpeak");
   ThingSpeak.writeFields(channelID, APIKey);
 
-  // Wait 10 minutes before refreshing the data again
+  // Wait 3 minutes before refreshing the data again
   delay(180000);
 }

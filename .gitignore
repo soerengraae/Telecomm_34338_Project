@@ -1,2 +1,4 @@
 # ignore all .ino files
 *.txt
+.DS_Store
+secrets.h
