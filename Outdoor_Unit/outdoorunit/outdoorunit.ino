@@ -190,10 +190,11 @@ int averageWindSpeed() {
   }
 
   windSpeed = sum / loopLength;
-  if (windSpeed * 0.25 > 7)
-    windSpeed = 0.2306 * 0.25 * windSpeed; /**< Convert voltage to wind speed */
+  /** Values calibrated from Arduino changed from 10 to 12 bit, equations updated accordingly*/
+  if (windSpeed  > 28)
+    windSpeed = 0.0576 * windSpeed + 3.3923; /**< Convert voltage to wind speed */
   else
-    windSpeed *= 0.5;
+    windSpeed *= 0.1714;
 
   return windSpeed;
 }
