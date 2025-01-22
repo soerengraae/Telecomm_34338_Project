@@ -1,0 +1,296 @@
+\doxysection{Tele-\/website/node\+\_\+modules/d3-\/delaunay Directory Reference}
+\hypertarget{dir_57101526577e7152c6e4be57f4e6792a}{}\label{dir_57101526577e7152c6e4be57f4e6792a}\index{Tele-\/website/node\_modules/d3-\/delaunay Directory Reference@{Tele-\/website/node\_modules/d3-\/delaunay Directory Reference}}
+
+
+\doxysubsection{Detailed Description}
+
+
+ 
+
+Georgy “\+The Voronator” Voronoy
+
+This is a fast library for computing the \href{https://en.wikipedia.org/wiki/Voronoi_diagram}{\texttt{ Voronoi diagram}} of a set of two-\/dimensional points. It is based on \href{https://github.com/mapbox/delaunator}{\texttt{ Delaunator}}, a fast library for computing the \href{https://en.wikipedia.org/wiki/Delaunay_triangulation}{\texttt{ Delaunay triangulation}} using \href{https://github.com/mapbox/delaunator/blob/master/README.md\#papers}{\texttt{ sweep algorithms}}. The Voronoi diagram is constructed by connecting the circumcenters of adjacent triangles in the Delaunay triangulation.
+
+For an interactive explanation of how this library works, see \href{https://observablehq.com/@mbostock/the-delaunays-dual}{\texttt{ The Delaunay’s Dual}}.\hypertarget{README.md_autotoc_md3245}{}\doxysubsection{\texorpdfstring{Installing}{Installing}}\label{README.md_autotoc_md3245}
+If you use npm, {\ttfamily npm install d3-\/delaunay}. You can also download the \href{https://github.com/d3/d3-delaunay/releases/latest}{\texttt{ latest release on Git\+Hub}}. For vanilla HTML in modern browsers, import d3-\/delaunay from Skypack\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<script\ type="{}module"{}>}
+\DoxyCodeLine{}
+\DoxyCodeLine{import\ \{Delaunay\}\ from\ "{}https://cdn.skypack.dev/d3-\/delaunay@6"{};}
+\DoxyCodeLine{}
+\DoxyCodeLine{const\ points\ =\ [[0,\ 0],\ [0,\ 1],\ [1,\ 0],\ [1,\ 1]];}
+\DoxyCodeLine{const\ delaunay\ =\ Delaunay.from(points);}
+\DoxyCodeLine{const\ voronoi\ =\ delaunay.voronoi([0,\ 0,\ 960,\ 500]);}
+\DoxyCodeLine{}
+\DoxyCodeLine{</script>}
+
+\end{DoxyCode}
+
+
+For legacy environments, you can load d3-\/delaunay’s UMD bundle from an npm-\/based CDN such as js\+Delivr; a {\ttfamily d3} global is exported\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<script\ src="{}https://cdn.jsdelivr.net/npm/d3-\/delaunay@6"{}></script>}
+\DoxyCodeLine{<script>}
+\DoxyCodeLine{}
+\DoxyCodeLine{const\ delaunay\ =\ d3.Delaunay.from(points);}
+\DoxyCodeLine{}
+\DoxyCodeLine{</script>}
+
+\end{DoxyCode}
+\hypertarget{README.md_autotoc_md3246}{}\doxysubsection{\texorpdfstring{API Reference}{API Reference}}\label{README.md_autotoc_md3246}
+\hypertarget{README.md_autotoc_md3247}{}\doxysubsubsection{\texorpdfstring{Delaunay}{Delaunay}}\label{README.md_autotoc_md3247}
+\label{README.md_new_Delaunay}%
+\Hypertarget{README.md_new_Delaunay}%
+\# new {\bfseries{Delaunay}}({\itshape points}) \href{https://github.com/d3/d3-delaunay/blob/master/src/delaunay.js}{\texttt{ \texorpdfstring{$<$}{<}\texorpdfstring{$>$}{>}}}
+
+Returns the Delaunay triangulation for the given flat array \mbox{[}{\itshape x0}, {\itshape y0}, {\itshape x1}, {\itshape y1}, …\mbox{]} of {\itshape points}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{const\ delaunay\ =\ new\ Delaunay(Float64Array.of(0,\ 0,\ 0,\ 1,\ 1,\ 0,\ 1,\ 1));}
+
+\end{DoxyCode}
+
+
+\label{README.md_delaunay_from}%
+\Hypertarget{README.md_delaunay_from}%
+\# Delaunay.{\bfseries{from}}({\itshape points}\mbox{[}, {\itshape fx}\mbox{[}, {\itshape fy}\mbox{[}, {\itshape that}\mbox{]}\mbox{]}\mbox{]}) \href{https://github.com/d3/d3-delaunay/blob/master/src/delaunay.js}{\texttt{ \texorpdfstring{$<$}{<}\texorpdfstring{$>$}{>}}}
+
+Returns the Delaunay triangulation for the given array or iterable of {\itshape points}. If {\itshape fx} and {\itshape fy} are not specified, then {\itshape points} is assumed to be an array of two-\/element arrays of numbers\+: \mbox{[}\mbox{[}{\itshape x0}, {\itshape y0}\mbox{]}, \mbox{[}{\itshape x1}, {\itshape y1}\mbox{]}, …\mbox{]}. Otherwise, {\itshape fx} and {\itshape fy} are functions that are invoked for each element in the {\itshape points} array in order, and must return the respective {\itshape x}-\/ and {\itshape y}-\/coordinate for each point. If {\itshape that} is specified, the functions {\itshape fx} and {\itshape fy} are invoked with {\itshape that} as {\itshape this}. (See \href{https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/from}{\texttt{ Array.\+from}} for reference.)
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{const\ delaunay\ =\ Delaunay.from([[0,\ 0],\ [0,\ 1],\ [1,\ 0],\ [1,\ 1]]);}
+
+\end{DoxyCode}
+
+
+\label{README.md_delaunay_points}%
+\Hypertarget{README.md_delaunay_points}%
+\# {\itshape delaunay}.{\bfseries{points}}
+
+The coordinates of the points as an array \mbox{[}{\itshape x0}, {\itshape y0}, {\itshape x1}, {\itshape y1}, …\mbox{]}. Typically, this is a Float64\+Array, however you can use any array-\/like type in the \doxylink{README.md_new_Delaunay}{constructor}.
+
+\label{README.md_delaunay_halfedges}%
+\Hypertarget{README.md_delaunay_halfedges}%
+\# {\itshape delaunay}.{\bfseries{halfedges}}
+
+The halfedge indexes as an Int32\+Array \mbox{[}{\itshape j0}, {\itshape j1}, …\mbox{]}. For each index 0 ≤ {\itshape i} \texorpdfstring{$<$}{<} {\itshape halfedges}.length, there is a halfedge from triangle vertex {\itshape j} = {\itshape halfedges}\mbox{[}{\itshape i}\mbox{]} to triangle vertex {\itshape i}. Equivalently, this means that triangle ⌊\texorpdfstring{$\ast$}{*}i\texorpdfstring{$\ast$}{*} / 3⌋ is adjacent to triangle ⌊\texorpdfstring{$\ast$}{*}j\texorpdfstring{$\ast$}{*} / 3⌋. If {\itshape j} is negative, then triangle ⌊\texorpdfstring{$\ast$}{*}i\texorpdfstring{$\ast$}{*} / 3⌋ is an exterior triangle on the \doxylink{README.md_delaunay_hull}{convex hull}. For example, to render the internal edges of the Delaunay triangulation\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{const\ \{points,\ halfedges,\ triangles\}\ =\ delaunay;}
+\DoxyCodeLine{for\ (let\ i\ =\ 0,\ n\ =\ halfedges.length;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{\ \ const\ j\ =\ halfedges[i];}
+\DoxyCodeLine{\ \ if\ (j\ <\ i)\ continue;}
+\DoxyCodeLine{\ \ const\ ti\ =\ triangles[i];}
+\DoxyCodeLine{\ \ const\ tj\ =\ triangles[j];}
+\DoxyCodeLine{\ \ context.moveTo(points[ti\ *\ 2],\ points[ti\ *\ 2\ +\ 1]);}
+\DoxyCodeLine{\ \ context.lineTo(points[tj\ *\ 2],\ points[tj\ *\ 2\ +\ 1]);}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+See also \doxylink{README.md_delaunay_render}{\texorpdfstring{$\ast$}{*}delaunay\texorpdfstring{$\ast$}{*}.render}.
+
+\label{README.md_delaunay_hull}%
+\Hypertarget{README.md_delaunay_hull}%
+\# {\itshape delaunay}.{\bfseries{hull}}
+
+An Int32\+Array of point indexes that form the convex hull in counterclockwise order. If the points are collinear, returns them ordered.
+
+See also \doxylink{README.md_delaunay_renderHull}{\texorpdfstring{$\ast$}{*}delaunay\texorpdfstring{$\ast$}{*}.render\+Hull}.
+
+\label{README.md_delaunay_triangles}%
+\Hypertarget{README.md_delaunay_triangles}%
+\# {\itshape delaunay}.{\bfseries{triangles}}
+
+The triangle vertex indexes as an Uint32\+Array \mbox{[}{\itshape i0}, {\itshape j0}, {\itshape k0}, {\itshape i1}, {\itshape j1}, {\itshape k1}, …\mbox{]}. Each contiguous triplet of indexes {\itshape i}, {\itshape j}, {\itshape k} forms a counterclockwise triangle. The coordinates of the triangle’s points can be found by going through \doxylink{README.md_delaunay_points}{\texorpdfstring{$\ast$}{*}delaunay\texorpdfstring{$\ast$}{*}.points}. For example, to render triangle {\itshape i}\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{const\ \{points,\ triangles\}\ =\ delaunay;}
+\DoxyCodeLine{const\ t0\ =\ triangles[i\ *\ 3\ +\ 0];}
+\DoxyCodeLine{const\ t1\ =\ triangles[i\ *\ 3\ +\ 1];}
+\DoxyCodeLine{const\ t2\ =\ triangles[i\ *\ 3\ +\ 2];}
+\DoxyCodeLine{context.moveTo(points[t0\ *\ 2],\ points[t0\ *\ 2\ +\ 1]);}
+\DoxyCodeLine{context.lineTo(points[t1\ *\ 2],\ points[t1\ *\ 2\ +\ 1]);}
+\DoxyCodeLine{context.lineTo(points[t2\ *\ 2],\ points[t2\ *\ 2\ +\ 1]);}
+\DoxyCodeLine{context.closePath();}
+
+\end{DoxyCode}
+
+
+See also \doxylink{README.md_delaunay_renderTriangle}{\texorpdfstring{$\ast$}{*}delaunay\texorpdfstring{$\ast$}{*}.render\+Triangle}.
+
+\label{README.md_delaunay_inedges}%
+\Hypertarget{README.md_delaunay_inedges}%
+\# {\itshape delaunay}.{\bfseries{inedges}}
+
+The incoming halfedge indexes as a Int32\+Array \mbox{[}{\itshape e0}, {\itshape e1}, {\itshape e2}, …\mbox{]}. For each point {\itshape i}, {\itshape inedges}\mbox{[}{\itshape i}\mbox{]} is the halfedge index {\itshape e} of an incoming halfedge. For coincident points, the halfedge index is -\/1; for points on the convex hull, the incoming halfedge is on the convex hull; for other points, the choice of incoming halfedge is arbitrary. The {\itshape inedges} table can be used to traverse the Delaunay triangulation; see also \doxylink{README.md_delaunay_neighbors}{\texorpdfstring{$\ast$}{*}delaunay\texorpdfstring{$\ast$}{*}.neighbors}.
+
+\label{README.md_delaunay_find}%
+\Hypertarget{README.md_delaunay_find}%
+\# {\itshape delaunay}.{\bfseries{find}}({\itshape x}, {\itshape y}\mbox{[}, {\itshape i}\mbox{]}) \href{https://github.com/d3/d3-delaunay/blob/master/src/delaunay.js}{\texttt{ \texorpdfstring{$<$}{<}\texorpdfstring{$>$}{>}}}
+
+Returns the index of the input point that is closest to the specified point ⟨\texorpdfstring{$\ast$}{*}x\texorpdfstring{$\ast$}{*}, {\itshape y\texorpdfstring{$\ast$}{*}⟩. The search is started at the specified point \texorpdfstring{$\ast$}{*}i}. If {\itshape i} is not specified, it defaults to zero.
+
+\label{README.md_delaunay_neighbors}%
+\Hypertarget{README.md_delaunay_neighbors}%
+\# {\itshape delaunay}.{\bfseries{neighbors}}({\itshape i}) \href{https://github.com/d3/d3-delaunay/blob/master/src/delaunay.js}{\texttt{ \texorpdfstring{$<$}{<}\texorpdfstring{$>$}{>}}}
+
+Returns an iterable over the indexes of the neighboring points to the specified point {\itshape i}. The iterable is empty if {\itshape i} is a coincident point.
+
+\label{README.md_delaunay_render}%
+\Hypertarget{README.md_delaunay_render}%
+\# {\itshape delaunay}.{\bfseries{render}}(\mbox{[}{\itshape context}\mbox{]}) \href{https://github.com/d3/d3-delaunay/blob/master/src/delaunay.js}{\texttt{ \texorpdfstring{$<$}{<}\texorpdfstring{$>$}{>}}}
+
+
+
+Renders the edges of the Delaunay triangulation to the specified {\itshape context}. The specified {\itshape context} must implement the {\itshape context}.move\+To and {\itshape context}.line\+To methods from the \href{https://www.w3.org/TR/2dcontext/\#canvaspathmethods}{\texttt{ Canvas\+Path\+Methods API}}. If a {\itshape context} is not specified, an SVG path string is returned instead.
+
+\label{README.md_delaunay_renderHull}%
+\Hypertarget{README.md_delaunay_renderHull}%
+\# {\itshape delaunay}.{\bfseries{render\+Hull}}(\mbox{[}{\itshape context}\mbox{]}) \href{https://github.com/d3/d3-delaunay/blob/master/src/delaunay.js}{\texttt{ \texorpdfstring{$<$}{<}\texorpdfstring{$>$}{>}}}
+
+
+
+Renders the convex hull of the Delaunay triangulation to the specified {\itshape context}. The specified {\itshape context} must implement the {\itshape context}.move\+To and {\itshape context}.line\+To methods from the \href{https://www.w3.org/TR/2dcontext/\#canvaspathmethods}{\texttt{ Canvas\+Path\+Methods API}}. If a {\itshape context} is not specified, an SVG path string is returned instead.
+
+\label{README.md_delaunay_renderTriangle}%
+\Hypertarget{README.md_delaunay_renderTriangle}%
+\# {\itshape delaunay}.{\bfseries{render\+Triangle}}({\itshape i}\mbox{[}, {\itshape context}\mbox{]}) \href{https://github.com/d3/d3-delaunay/blob/master/src/delaunay.js}{\texttt{ \texorpdfstring{$<$}{<}\texorpdfstring{$>$}{>}}}
+
+
+
+Renders triangle {\itshape i} of the Delaunay triangulation to the specified {\itshape context}. The specified {\itshape context} must implement the {\itshape context}.move\+To, {\itshape context}.line\+To and {\itshape context}.close\+Path methods from the \href{https://www.w3.org/TR/2dcontext/\#canvaspathmethods}{\texttt{ Canvas\+Path\+Methods API}}. If a {\itshape context} is not specified, an SVG path string is returned instead.
+
+\label{README.md_delaunay_renderPoints}%
+\Hypertarget{README.md_delaunay_renderPoints}%
+\# {\itshape delaunay}.{\bfseries{render\+Points}}(\mbox{[}{\itshape context}\mbox{]}\mbox{[}, {\itshape radius}\mbox{]}) \href{https://github.com/d3/d3-delaunay/blob/master/src/delaunay.js}{\texttt{ \texorpdfstring{$<$}{<}\texorpdfstring{$>$}{>}}}
+
+Renders the input points of the Delaunay triangulation to the specified {\itshape context} as circles with the specified {\itshape radius}. If {\itshape radius} is not specified, it defaults to 2. The specified {\itshape context} must implement the {\itshape context}.move\+To and {\itshape context}.arc methods from the \href{https://www.w3.org/TR/2dcontext/\#canvaspathmethods}{\texttt{ Canvas\+Path\+Methods API}}. If a {\itshape context} is not specified, an SVG path string is returned instead.
+
+\label{README.md_delaunay_hullPolygon}%
+\Hypertarget{README.md_delaunay_hullPolygon}%
+\# {\itshape delaunay}.{\bfseries{hull\+Polygon()}} \href{https://github.com/d3/d3-delaunay/blob/master/src/delaunay.js}{\texttt{ \texorpdfstring{$<$}{<}\texorpdfstring{$>$}{>}}}
+
+Returns the closed polygon \mbox{[}\mbox{[}{\itshape x0}, {\itshape y0}\mbox{]}, \mbox{[}{\itshape x1}, {\itshape y1}\mbox{]}, …, \mbox{[}{\itshape x0}, {\itshape y0}\mbox{]}\mbox{]} representing the convex hull.
+
+\label{README.md_delaunay_trianglePolygons}%
+\Hypertarget{README.md_delaunay_trianglePolygons}%
+\# {\itshape delaunay}.{\bfseries{triangle\+Polygons()}} \href{https://github.com/d3/d3-delaunay/blob/master/src/delaunay.js}{\texttt{ \texorpdfstring{$<$}{<}\texorpdfstring{$>$}{>}}}
+
+Returns an iterable over the \doxylink{README.md_delaunay_trianglePolygon}{polygons for each triangle}, in order.
+
+\label{README.md_delaunay_trianglePolygon}%
+\Hypertarget{README.md_delaunay_trianglePolygon}%
+\# {\itshape delaunay}.{\bfseries{triangle\+Polygon({\itshape i})}} \href{https://github.com/d3/d3-delaunay/blob/master/src/delaunay.js}{\texttt{ \texorpdfstring{$<$}{<}\texorpdfstring{$>$}{>}}}
+
+Returns the closed polygon \mbox{[}\mbox{[}{\itshape x0}, {\itshape y0}\mbox{]}, \mbox{[}{\itshape x1}, {\itshape y1}\mbox{]}, \mbox{[}{\itshape x2}, {\itshape y2}\mbox{]}, \mbox{[}{\itshape x0}, {\itshape y0}\mbox{]}\mbox{]} representing the triangle {\itshape i}.
+
+\label{README.md_delaunay_update}%
+\Hypertarget{README.md_delaunay_update}%
+\# {\itshape delaunay}.{\bfseries{update}}() \href{https://github.com/d3/d3-delaunay/blob/master/src/delaunay.js}{\texttt{ \texorpdfstring{$<$}{<}\texorpdfstring{$>$}{>}}}
+
+Updates the triangulation after the points have been modified in-\/place.
+
+\label{README.md_delaunay_voronoi}%
+\Hypertarget{README.md_delaunay_voronoi}%
+\# {\itshape delaunay}.{\bfseries{voronoi}}(\mbox{[}{\itshape bounds}\mbox{]}) \href{https://github.com/d3/d3-delaunay/blob/master/src/delaunay.js}{\texttt{ \texorpdfstring{$<$}{<}\texorpdfstring{$>$}{>}}}
+
+Returns the Voronoi diagram for the associated \doxylink{README.md_delaunay_points}{points}. When rendering, the diagram will be clipped to the specified {\itshape bounds} = \mbox{[}{\itshape xmin}, {\itshape ymin}, {\itshape xmax}, {\itshape ymax}\mbox{]}. If {\itshape bounds} is not specified, it defaults to \mbox{[}0, 0, 960, 500\mbox{]}. See \href{https://observablehq.com/@mbostock/to-infinity-and-back-again}{\texttt{ To Infinity and Back Again}} for an interactive explanation of Voronoi cell clipping.
+
+The Voronoi diagram is returned even in degenerate cases where no triangulation exists — namely 0, 1 or 2 points, and collinear points.\hypertarget{README.md_autotoc_md3248}{}\doxysubsubsection{\texorpdfstring{Voronoi}{Voronoi}}\label{README.md_autotoc_md3248}
+\label{README.md_voronoi_delaunay}%
+\Hypertarget{README.md_voronoi_delaunay}%
+\# {\itshape voronoi}.{\bfseries{delaunay}}
+
+The Voronoi diagram’s associated Delaunay triangulation.
+
+\label{README.md_voronoi_circumcenters}%
+\Hypertarget{README.md_voronoi_circumcenters}%
+\# {\itshape voronoi}.{\bfseries{circumcenters}}
+
+The \href{http://mathworld.wolfram.com/Circumcenter.html}{\texttt{ circumcenters}} of the Delaunay triangles as a Float64\+Array \mbox{[}{\itshape cx0}, {\itshape cy0}, {\itshape cx1}, {\itshape cy1}, …\mbox{]}. Each contiguous pair of coordinates {\itshape cx}, {\itshape cy} is the circumcenter for the corresponding triangle. These circumcenters form the coordinates of the Voronoi cell polygons.
+
+\label{README.md_voronoi_vectors}%
+\Hypertarget{README.md_voronoi_vectors}%
+\# {\itshape voronoi}.{\bfseries{vectors}}
+
+A Float64\+Array \mbox{[}{\itshape vx0}, {\itshape vy0}, {\itshape wx0}, {\itshape wy0}, …\mbox{]} where each non-\/zero quadruple describes an open (infinite) cell on the outer hull, giving the directions of two open half-\/lines.
+
+\label{README.md_voronoi_xmin}%
+\Hypertarget{README.md_voronoi_xmin}%
+\# {\itshape voronoi}.{\bfseries{xmin}}~\newline
+ \label{README.md_voronoi_ymin}%
+\Hypertarget{README.md_voronoi_ymin}%
+\# {\itshape voronoi}.{\bfseries{ymin}}~\newline
+ \label{README.md_voronoi_xmax}%
+\Hypertarget{README.md_voronoi_xmax}%
+\# {\itshape voronoi}.{\bfseries{xmax}}~\newline
+ \label{README.md_voronoi_ymax}%
+\Hypertarget{README.md_voronoi_ymax}%
+\# {\itshape voronoi}.{\bfseries{ymax}}~\newline
+
+
+The bounds of the viewport \mbox{[}{\itshape xmin}, {\itshape ymin}, {\itshape xmax}, {\itshape ymax}\mbox{]} for rendering the Voronoi diagram. These values only affect the rendering methods (\doxylink{README.md_voronoi_render}{\texorpdfstring{$\ast$}{*}voronoi\texorpdfstring{$\ast$}{*}.render}, \doxylink{README.md_voronoi_renderBounds}{\texorpdfstring{$\ast$}{*}voronoi\texorpdfstring{$\ast$}{*}.render\+Bounds}, \texorpdfstring{$\ast$}{*}cell\texorpdfstring{$\ast$}{*}.render).
+
+\label{README.md_voronoi_contains}%
+\Hypertarget{README.md_voronoi_contains}%
+\# {\itshape voronoi}.{\bfseries{contains}}({\itshape i}, {\itshape x}, {\itshape y}) \href{https://github.com/d3/d3-delaunay/blob/master/src/cell.js}{\texttt{ \texorpdfstring{$<$}{<}\texorpdfstring{$>$}{>}}}
+
+Returns true if the cell with the specified index {\itshape i} contains the specified point ⟨\texorpdfstring{$\ast$}{*}x\texorpdfstring{$\ast$}{*}, \texorpdfstring{$\ast$}{*}y\texorpdfstring{$\ast$}{*}⟩. (This method is not affected by the associated Voronoi diagram’s viewport \doxylink{README.md_voronoi_xmin}{bounds}.)
+
+\label{README.md_voronoi_neighbors}%
+\Hypertarget{README.md_voronoi_neighbors}%
+\# {\itshape voronoi}.{\bfseries{neighbors}}({\itshape i}) \href{https://github.com/d3/d3-delaunay/blob/master/src/voronoi.js}{\texttt{ \texorpdfstring{$<$}{<}\texorpdfstring{$>$}{>}}}
+
+Returns an iterable over the indexes of the cells that share a common edge with the specified cell {\itshape i}. Voronoi neighbors are always neighbors on the Delaunay graph, but the converse is false when the common edge has been clipped out by the Voronoi diagram’s viewport.
+
+\label{README.md_voronoi_render}%
+\Hypertarget{README.md_voronoi_render}%
+\# {\itshape voronoi}.{\bfseries{render}}(\mbox{[}{\itshape context}\mbox{]}) \href{https://github.com/d3/d3-delaunay/blob/master/src/voronoi.js}{\texttt{ \texorpdfstring{$<$}{<}\texorpdfstring{$>$}{>}}}
+
+
+
+Renders the mesh of Voronoi cells to the specified {\itshape context}. The specified {\itshape context} must implement the {\itshape context}.move\+To and {\itshape context}.line\+To methods from the \href{https://www.w3.org/TR/2dcontext/\#canvaspathmethods}{\texttt{ Canvas\+Path\+Methods API}}. If a {\itshape context} is not specified, an SVG path string is returned instead.
+
+\label{README.md_voronoi_renderBounds}%
+\Hypertarget{README.md_voronoi_renderBounds}%
+\# {\itshape voronoi}.{\bfseries{render\+Bounds}}(\mbox{[}{\itshape context}\mbox{]}) \href{https://github.com/d3/d3-delaunay/blob/master/src/voronoi.js}{\texttt{ \texorpdfstring{$<$}{<}\texorpdfstring{$>$}{>}}}
+
+
+
+Renders the viewport extent to the specified {\itshape context}. The specified {\itshape context} must implement the {\itshape context}.rect method from the \href{https://www.w3.org/TR/2dcontext/\#canvaspathmethods}{\texttt{ Canvas\+Path\+Methods API}}. Equivalent to {\itshape context}.rect({\itshape voronoi}.xmin, {\itshape voronoi}.ymin, {\itshape voronoi}.xmax -\/ {\itshape voronoi}.xmin, {\itshape voronoi}.ymax -\/ {\itshape voronoi}.ymin). If a {\itshape context} is not specified, an SVG path string is returned instead.
+
+\label{README.md_voronoi_renderCell}%
+\Hypertarget{README.md_voronoi_renderCell}%
+\# {\itshape voronoi}.{\bfseries{render\+Cell}}({\itshape i}\mbox{[}, {\itshape context}\mbox{]}) \href{https://github.com/d3/d3-delaunay/blob/master/src/voronoi.js}{\texttt{ \texorpdfstring{$<$}{<}\texorpdfstring{$>$}{>}}}
+
+
+
+Renders the cell with the specified index {\itshape i} to the specified {\itshape context}. The specified {\itshape context} must implement the {\itshape context}.move\+To , {\itshape context}.line\+To and {\itshape context}.close\+Path methods from the \href{https://www.w3.org/TR/2dcontext/\#canvaspathmethods}{\texttt{ Canvas\+Path\+Methods API}}. If a {\itshape context} is not specified, an SVG path string is returned instead.
+
+\label{README.md_voronoi_cellPolygons}%
+\Hypertarget{README.md_voronoi_cellPolygons}%
+\# {\itshape voronoi}.{\bfseries{cell\+Polygons}}() \href{https://github.com/d3/d3-delaunay/blob/master/src/voronoi.js}{\texttt{ \texorpdfstring{$<$}{<}\texorpdfstring{$>$}{>}}}
+
+Returns an iterable over the non-\/empty \doxylink{README.md_voronoi_cellPolygon}{polygons for each cell}, with the cell index as property.
+
+\label{README.md_voronoi_cellPolygon}%
+\Hypertarget{README.md_voronoi_cellPolygon}%
+\# {\itshape voronoi}.{\bfseries{cell\+Polygon}}({\itshape i}) \href{https://github.com/d3/d3-delaunay/blob/master/src/voronoi.js}{\texttt{ \texorpdfstring{$<$}{<}\texorpdfstring{$>$}{>}}}
+
+Returns the convex, closed polygon \mbox{[}\mbox{[}{\itshape x0}, {\itshape y0}\mbox{]}, \mbox{[}{\itshape x1}, {\itshape y1}\mbox{]}, …, \mbox{[}{\itshape x0}, {\itshape y0}\mbox{]}\mbox{]} representing the cell for the specified point {\itshape i}.
+
+\label{README.md_voronoi_update}%
+\Hypertarget{README.md_voronoi_update}%
+\# {\itshape voronoi}.{\bfseries{update}}() \href{https://github.com/d3/d3-delaunay/blob/master/src/voronoi.js}{\texttt{ \texorpdfstring{$<$}{<}\texorpdfstring{$>$}{>}}}
+
+Updates the Voronoi diagram and underlying triangulation after the points have been modified in-\/place — useful for Lloyd’s relaxation. 

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['collectrealweather_0',['collectRealWeather',['../outdoorunit_8ino.html#a66e3fe8bc97521ff09c211001a38a488',1,'outdoorunit.ino']]],
-  ['controlfan_1',['controlFan',['../_indoor_station_v1_8ino.html#a39b569e6e71bfcef57b0ab1d0a6eff94',1,'controlFan():&#160;IndoorStationV1.ino'],['../_indoor_station_v1_8ino_8ino.html#a39b569e6e71bfcef57b0ab1d0a6eff94',1,'controlFan():&#160;IndoorStationV1.ino.ino']]]
+  ['averagewindspeed_0',['averageWindSpeed',['../outdoorunit_8ino.html#aa7fb0631e0b6759d8791aae6c9f1e486',1,'averageWindSpeed():&#160;outdoorunit.ino'],['../sensor__testing_8ino.html#ae3fbc2eccb983b56241d44b6e4b23b27',1,'averageWindSpeed():&#160;sensor_testing.ino']]]
 ];

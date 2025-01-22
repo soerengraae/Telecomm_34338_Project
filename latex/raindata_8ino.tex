@@ -13,7 +13,7 @@ Code to fetch rain forecast from Open\+Weather\+Map and upload the results to Th
 \doxysubsubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
-\#define \mbox{\hyperlink{raindata_8ino_a4a0a4aa5db390e405fce9272877d4704}{forecast\+Weather\+URL}}~"{}http\+://api.\+openweathermap.\+org/\mbox{\hyperlink{_indoor___e_s_p_8ino_a173b91873a3fc4f50a95416a6204d963}{data}}/2.\+5/forecast?lat=5.\+671401156455272\&lon=101.\+41105533517317\&units=metric\&appid=APIKEYHERE"{}
+\#define \mbox{\hyperlink{raindata_8ino_a4a0a4aa5db390e405fce9272877d4704}{forecast\+Weather\+URL}}~"{}http\+://api.\+openweathermap.\+org/data/2.\+5/forecast?lat=5.\+671401156455272\&lon=101.\+41105533517317\&units=metric\&appid=APIKEYHERE"{}
 \begin{DoxyCompactList}\small\item\em Contains SSID and PASS for Wi\+Fi (plus any other private credentials). \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
@@ -40,14 +40,14 @@ int \mbox{\hyperlink{raindata_8ino_a52bddf5133639c3291f9ae21be2788a0}{rain\+Stat
 \doxysubsection{Detailed Description}
 Code to fetch rain forecast from Open\+Weather\+Map and upload the results to Thing\+Speak. 
 
-This program connects to Wi\+Fi, fetches a forecast from Open\+Weather\+Map, checks the first two forecast intervals for rain, categorizes the status, and then uploads this info to Thing\+Speak. 
+This program connects to Wi\+Fi, fetches a forecast from Open\+Weather\+Map, checks the first two forecast intervals for rain, categorizes the status, and then uploads this info to thing\+Speak. 
 
 \doxysubsection{Macro Definition Documentation}
 \Hypertarget{raindata_8ino_a4a0a4aa5db390e405fce9272877d4704}\index{raindata.ino@{raindata.ino}!forecastWeatherURL@{forecastWeatherURL}}
 \index{forecastWeatherURL@{forecastWeatherURL}!raindata.ino@{raindata.ino}}
 \doxysubsubsection{\texorpdfstring{forecastWeatherURL}{forecastWeatherURL}}
 {\footnotesize\ttfamily \label{raindata_8ino_a4a0a4aa5db390e405fce9272877d4704} 
-\#define forecast\+Weather\+URL~"{}http\+://api.\+openweathermap.\+org/\mbox{\hyperlink{_indoor___e_s_p_8ino_a173b91873a3fc4f50a95416a6204d963}{data}}/2.\+5/forecast?lat=5.\+671401156455272\&lon=101.\+41105533517317\&units=metric\&appid=APIKEYHERE"{}}
+\#define forecast\+Weather\+URL~"{}http\+://api.\+openweathermap.\+org/data/2.\+5/forecast?lat=5.\+671401156455272\&lon=101.\+41105533517317\&units=metric\&appid=APIKEYHERE"{}}
 
 
 
@@ -73,7 +73,7 @@ Main Arduino loop function.
 \item If Wi\+Fi is connected, fetch the forecast from the Open\+Weather\+Map API.
 \item Parse the JSON to check for rain in the first two forecast intervals.
 \item Update the Thing\+Speak channel with the determined rain\+Status.
-\item Wait 10 minutes (180,000 ms) before fetching again. 
+\item Wait 3 minutes (180,000 ms) before fetching again. 
 \end{DoxyItemize}\Hypertarget{raindata_8ino_a4fc01d736fe50cf5b977f755b675f11d}\index{raindata.ino@{raindata.ino}!setup@{setup}}
 \index{setup@{setup}!raindata.ino@{raindata.ino}}
 \doxysubsubsection{\texorpdfstring{setup()}{setup()}}

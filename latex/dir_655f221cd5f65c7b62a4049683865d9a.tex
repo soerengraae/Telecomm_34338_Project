@@ -1,0 +1,59 @@
+\doxysection{Tele-\/website/node\+\_\+modules/hoist-\/non-\/react-\/statics Directory Reference}
+\hypertarget{dir_655f221cd5f65c7b62a4049683865d9a}{}\label{dir_655f221cd5f65c7b62a4049683865d9a}\index{Tele-\/website/node\_modules/hoist-\/non-\/react-\/statics Directory Reference@{Tele-\/website/node\_modules/hoist-\/non-\/react-\/statics Directory Reference}}
+\doxysubsubsection*{Directories}
+\begin{DoxyCompactItemize}
+\item 
+directory \mbox{\hyperlink{dir_822181e5bff132b7d91ad27e98673c91}{node\+\_\+modules}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\href{http://badge.fury.io/js/hoist-non-react-statics}{\texttt{ }} \href{https://travis-ci.org/mridgway/hoist-non-react-statics}{\texttt{ }} \href{https://coveralls.io/r/mridgway/hoist-non-react-statics?branch=master}{\texttt{ }} \href{https://david-dm.org/mridgway/hoist-non-react-statics}{\texttt{ }} \href{https://david-dm.org/mridgway/hoist-non-react-statics\#info=devDependencies}{\texttt{ }}
+
+Copies non-\/react specific statics from a child component to a parent component. Similar to {\ttfamily Object.\+assign}, but with React static keywords blacklisted from being overridden.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\$\ npm\ install\ -\/-\/save\ hoist-\/non-\/react-\/statics}
+
+\end{DoxyCode}
+\hypertarget{README.md_autotoc_md3425}{}\doxysubsection{\texorpdfstring{Usage}{Usage}}\label{README.md_autotoc_md3425}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ hoistNonReactStatics\ from\ 'hoist-\/non-\/react-\/statics';}
+\DoxyCodeLine{}
+\DoxyCodeLine{hoistNonReactStatics(targetComponent,\ sourceComponent);}
+
+\end{DoxyCode}
+
+
+If you have specific statics that you don\textquotesingle{}t want to be hoisted, you can also pass a third parameter to exclude them\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{hoistNonReactStatics(targetComponent,\ sourceComponent,\ \{\ myStatic:\ true,\ myOtherStatic:\ true\ \});}
+
+\end{DoxyCode}
+\hypertarget{README.md_autotoc_md3426}{}\doxysubsection{\texorpdfstring{What does this module do?}{What does this module do?}}\label{README.md_autotoc_md3426}
+See this \href{https://facebook.github.io/react/docs/higher-order-components.html\#static-methods-must-be-copied-over}{\texttt{ explanation}} from the React docs.\hypertarget{README.md_autotoc_md3427}{}\doxysubsection{\texorpdfstring{Compatible React Versions}{Compatible React Versions}}\label{README.md_autotoc_md3427}
+Please use latest 3.\+x. Versions prior to 3.\+x will not support Forward\+Refs.
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ hoist-\/non-\/react-\/statics Version   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Compatible React Version    }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ hoist-\/non-\/react-\/statics Version   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Compatible React Version    }\\\cline{1-2}
+\endhead
+3.\+x   &0.\+13-\/16.\+x With Forward\+Ref Support    \\\cline{1-2}
+2.\+x   &0.\+13-\/16.\+x Without Forward\+Ref Support    \\\cline{1-2}
+1.\+x   &0.\+13-\/16.\+2   \\\cline{1-2}
+\end{longtabu}
+\hypertarget{README.md_autotoc_md3428}{}\doxysubsection{\texorpdfstring{Browser Support}{Browser Support}}\label{README.md_autotoc_md3428}
+This package uses {\ttfamily Object.\+define\+Property} which has a broken implementation in IE8. In order to use this package in IE8, you will need a polyfill that fixes this method.\hypertarget{README.md_autotoc_md3429}{}\doxysubsection{\texorpdfstring{License}{License}}\label{README.md_autotoc_md3429}
+This software is free to use under the Yahoo Inc. BSD license. See the \href{https://github.com/mridgway/hoist-non-react-statics/blob/master/LICENSE.md}{\texttt{ LICENSE file}} for license text and copyright information.
+
+Third-\/party open source code used are listed in our \href{https://github.com/mridgway/hoist-non-react-statics/blob/master/package.json}{\texttt{ package.\+json file}}. 

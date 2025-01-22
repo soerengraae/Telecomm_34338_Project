@@ -1,148 +1,44 @@
 \doxysection{Indoor\+\_\+\+ESP/\+Indoor\+\_\+\+ESP.ino File Reference}
 \hypertarget{_indoor___e_s_p_8ino}{}\label{_indoor___e_s_p_8ino}\index{Indoor\_ESP/Indoor\_ESP.ino@{Indoor\_ESP/Indoor\_ESP.ino}}
-{\ttfamily \#include $<$ESP8266\+Wi\+Fi.\+h$>$}\newline
-{\ttfamily \#include $<$Thing\+Speak.\+h$>$}\newline
-{\ttfamily \#include $<$Wire.\+h$>$}\newline
-{\ttfamily \#include $<$Liquid\+Crystal\+\_\+\+I2\+C.\+h$>$}\newline
-{\ttfamily \#include $<$esp\+\_\+now.\+h$>$}\newline
-{\ttfamily \#include "{}my\+\_\+bluetooth.\+h"{}}\newline
-\doxysubsubsection*{Classes}
-\begin{DoxyCompactItemize}
-\item 
-struct \mbox{\hyperlink{structstruct__message}{struct\+\_\+message}}
-\end{DoxyCompactItemize}
-\doxysubsubsection*{Macros}
-\begin{DoxyCompactItemize}
-\item 
-\#define \mbox{\hyperlink{_indoor___e_s_p_8ino_a6f41f7f0c2949c4f60eaa1e59a921610}{FIELD\+\_\+\+RAIN}}~1
-\item 
-\#define \mbox{\hyperlink{_indoor___e_s_p_8ino_a74ccf0c9e7f031494a0ee54e5452dae9}{FIELD\+\_\+\+TEMP}}~2
-\item 
-\#define \mbox{\hyperlink{_indoor___e_s_p_8ino_afa39917792b16f18593c46072ad10dfa}{FIELD\+\_\+\+HUMID}}~3
-\item 
-\#define \mbox{\hyperlink{_indoor___e_s_p_8ino_a33e7e701b694a3f4f28f9837e6a0da8b}{FIELD\+\_\+\+WIND}}~4
-\end{DoxyCompactItemize}
-\doxysubsubsection*{Typedefs}
-\begin{DoxyCompactItemize}
-\item 
-typedef struct struct\+\_\+message \mbox{\hyperlink{_indoor___e_s_p_8ino_add81b616c060a3c276b7dee4fcd54e9f}{struct\+\_\+message}}
-\end{DoxyCompactItemize}
+
+
+Handles Bluetooth communication between ESP32 devices, receiving JSON commands to control GPIO pins.  
+
+
+{\ttfamily \#include $<$Arduino.\+h$>$}\newline
+{\ttfamily \#include $<$Arduino\+Json.\+h$>$}\newline
+{\ttfamily \#include $<$Bluetooth\+Serial.\+h$>$}\newline
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-Liquid\+Crystal\+\_\+\+I2C \mbox{\hyperlink{_indoor___e_s_p_8ino_ae084e1bc8ccb35ea289ba0ca4972ea6d}{lcd}} (0x27, 16, 2)
-\item 
 void \mbox{\hyperlink{_indoor___e_s_p_8ino_a4fc01d736fe50cf5b977f755b675f11d}{setup}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Setup function to initialize serial communication, Bluetooth, and onboard LED. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{_indoor___e_s_p_8ino_afe461d27b9c48d5921c00d521181f12f}{loop}} ()
-\item 
-void \mbox{\hyperlink{_indoor___e_s_p_8ino_ad9b9bec066eafecde7248cc42813b9ac}{read\+\_\+\+Thingspeak}} ()
-\item 
-void \mbox{\hyperlink{_indoor___e_s_p_8ino_ad0c5186dfd7203f01f1a4fb6ad3b402d}{display\+\_\+data\+\_\+on\+\_\+lcd}} (int input)
-\item 
-void \mbox{\hyperlink{_indoor___e_s_p_8ino_ad6e972502e97eda80da46e228a521d30}{On\+Data\+Recv}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}mac, const uint8\+\_\+t \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{_indoor_station_v1_8ino_a8831714e8947e0d760e6bc42feee9d11}{incoming\+Data}}, int len)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Main loop function to handle incoming JSON commands via Bluetooth. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{structstruct__message}{struct\+\_\+message}} \mbox{\hyperlink{_indoor___e_s_p_8ino_aa9699336028d3fe5cc63b01988426fac}{my\+Data}}
-\item 
-const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_indoor___e_s_p_8ino_a587ba0cb07f02913598610049a3bbb79}{ssid}} = "{}i\+Phone (5)"{}
-\item 
-const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_indoor___e_s_p_8ino_a3bef28806edf8f4c8cb82584b7e8c3cb}{pass}} = "{}carl1234"{}
-\item 
-Wi\+Fi\+Client \mbox{\hyperlink{_indoor___e_s_p_8ino_a323dfc205549b3c13f0a25c1b670708a}{client}}
-\item 
-unsigned long \mbox{\hyperlink{_indoor___e_s_p_8ino_ac45cf487b7a438e2176288955a338f25}{channel\+ID}} = 2810374
-\item 
-const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_indoor___e_s_p_8ino_a3fe2d87e95035781883990bf38554c9f}{APIKey}} = "{}MZUH6\+YO66\+N4\+RRRP6"{}
-\item 
-const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_indoor___e_s_p_8ino_ab68b888c3d204a4403af6d1b22f6d07c}{server}} = "{}api.\+thingspeak.\+com"{}
-\item 
-const int \mbox{\hyperlink{_indoor___e_s_p_8ino_a00ec26ab986577077a8b60ba18b0da52}{post\+Delay}} = 2 \texorpdfstring{$\ast$}{*} 1000
-\item 
-int \mbox{\hyperlink{_indoor___e_s_p_8ino_a0ac2a299549fcca3cd14e4c1ac2087d2}{temperature}}
-\item 
-int \mbox{\hyperlink{_indoor___e_s_p_8ino_ae32e70eeb90b3e79e09833c002c2e6d7}{rain\+\_\+level}}
-\item 
-int \mbox{\hyperlink{_indoor___e_s_p_8ino_a405f237eaa8a513a9682fbb6e44c4860}{humidity}}
-\item 
-int \mbox{\hyperlink{_indoor___e_s_p_8ino_ab0e3651d93eb9e9a8ba76d4ff925c7f9}{wind\+\_\+speed}}
-\item 
-int \mbox{\hyperlink{_indoor___e_s_p_8ino_a617a47c70795bcff659815ad0efd2266}{counter}} = 0
-\item 
-float \mbox{\hyperlink{_indoor___e_s_p_8ino_a173b91873a3fc4f50a95416a6204d963}{data}}
+Bluetooth\+Serial \mbox{\hyperlink{_indoor___e_s_p_8ino_a1ea47e148eab76ef3fc8dc36ba58a9b1}{Serial\+BT}}
 \end{DoxyCompactItemize}
 
 
-\doxysubsection{Macro Definition Documentation}
-\Hypertarget{_indoor___e_s_p_8ino_afa39917792b16f18593c46072ad10dfa}\index{Indoor\_ESP.ino@{Indoor\_ESP.ino}!FIELD\_HUMID@{FIELD\_HUMID}}
-\index{FIELD\_HUMID@{FIELD\_HUMID}!Indoor\_ESP.ino@{Indoor\_ESP.ino}}
-\doxysubsubsection{\texorpdfstring{FIELD\_HUMID}{FIELD\_HUMID}}
-{\footnotesize\ttfamily \label{_indoor___e_s_p_8ino_afa39917792b16f18593c46072ad10dfa} 
-\#define FIELD\+\_\+\+HUMID~3}
+\doxysubsection{Detailed Description}
+Handles Bluetooth communication between ESP32 devices, receiving JSON commands to control GPIO pins. 
 
-\Hypertarget{_indoor___e_s_p_8ino_a6f41f7f0c2949c4f60eaa1e59a921610}\index{Indoor\_ESP.ino@{Indoor\_ESP.ino}!FIELD\_RAIN@{FIELD\_RAIN}}
-\index{FIELD\_RAIN@{FIELD\_RAIN}!Indoor\_ESP.ino@{Indoor\_ESP.ino}}
-\doxysubsubsection{\texorpdfstring{FIELD\_RAIN}{FIELD\_RAIN}}
-{\footnotesize\ttfamily \label{_indoor___e_s_p_8ino_a6f41f7f0c2949c4f60eaa1e59a921610} 
-\#define FIELD\+\_\+\+RAIN~1}
-
-\Hypertarget{_indoor___e_s_p_8ino_a74ccf0c9e7f031494a0ee54e5452dae9}\index{Indoor\_ESP.ino@{Indoor\_ESP.ino}!FIELD\_TEMP@{FIELD\_TEMP}}
-\index{FIELD\_TEMP@{FIELD\_TEMP}!Indoor\_ESP.ino@{Indoor\_ESP.ino}}
-\doxysubsubsection{\texorpdfstring{FIELD\_TEMP}{FIELD\_TEMP}}
-{\footnotesize\ttfamily \label{_indoor___e_s_p_8ino_a74ccf0c9e7f031494a0ee54e5452dae9} 
-\#define FIELD\+\_\+\+TEMP~2}
-
-\Hypertarget{_indoor___e_s_p_8ino_a33e7e701b694a3f4f28f9837e6a0da8b}\index{Indoor\_ESP.ino@{Indoor\_ESP.ino}!FIELD\_WIND@{FIELD\_WIND}}
-\index{FIELD\_WIND@{FIELD\_WIND}!Indoor\_ESP.ino@{Indoor\_ESP.ino}}
-\doxysubsubsection{\texorpdfstring{FIELD\_WIND}{FIELD\_WIND}}
-{\footnotesize\ttfamily \label{_indoor___e_s_p_8ino_a33e7e701b694a3f4f28f9837e6a0da8b} 
-\#define FIELD\+\_\+\+WIND~4}
-
-
-
-\doxysubsection{Typedef Documentation}
-\Hypertarget{_indoor___e_s_p_8ino_add81b616c060a3c276b7dee4fcd54e9f}\index{Indoor\_ESP.ino@{Indoor\_ESP.ino}!struct\_message@{struct\_message}}
-\index{struct\_message@{struct\_message}!Indoor\_ESP.ino@{Indoor\_ESP.ino}}
-\doxysubsubsection{\texorpdfstring{struct\_message}{struct\_message}}
-{\footnotesize\ttfamily \label{_indoor___e_s_p_8ino_add81b616c060a3c276b7dee4fcd54e9f} 
-typedef struct struct\+\_\+message struct\+\_\+message}
-
-
+This program sets up the ESP32 as a slave device, waiting for a master ESP32 device to connect via Bluetooth. Once connected, it receives JSON data to control specific GPIO pins and sends back acknowledgments. 
 
 \doxysubsection{Function Documentation}
-\Hypertarget{_indoor___e_s_p_8ino_ad0c5186dfd7203f01f1a4fb6ad3b402d}\index{Indoor\_ESP.ino@{Indoor\_ESP.ino}!display\_data\_on\_lcd@{display\_data\_on\_lcd}}
-\index{display\_data\_on\_lcd@{display\_data\_on\_lcd}!Indoor\_ESP.ino@{Indoor\_ESP.ino}}
-\doxysubsubsection{\texorpdfstring{display\_data\_on\_lcd()}{display\_data\_on\_lcd()}}
-{\footnotesize\ttfamily \label{_indoor___e_s_p_8ino_ad0c5186dfd7203f01f1a4fb6ad3b402d} 
-void display\+\_\+data\+\_\+on\+\_\+lcd (\begin{DoxyParamCaption}\item[{int}]{input}{}\end{DoxyParamCaption})}
-
-\Hypertarget{_indoor___e_s_p_8ino_ae084e1bc8ccb35ea289ba0ca4972ea6d}\index{Indoor\_ESP.ino@{Indoor\_ESP.ino}!lcd@{lcd}}
-\index{lcd@{lcd}!Indoor\_ESP.ino@{Indoor\_ESP.ino}}
-\doxysubsubsection{\texorpdfstring{lcd()}{lcd()}}
-{\footnotesize\ttfamily \label{_indoor___e_s_p_8ino_ae084e1bc8ccb35ea289ba0ca4972ea6d} 
-Liquid\+Crystal\+\_\+\+I2C lcd (\begin{DoxyParamCaption}\item[{0x27}]{}{, }\item[{16}]{}{, }\item[{2}]{}{}\end{DoxyParamCaption})}
-
 \Hypertarget{_indoor___e_s_p_8ino_afe461d27b9c48d5921c00d521181f12f}\index{Indoor\_ESP.ino@{Indoor\_ESP.ino}!loop@{loop}}
 \index{loop@{loop}!Indoor\_ESP.ino@{Indoor\_ESP.ino}}
 \doxysubsubsection{\texorpdfstring{loop()}{loop()}}
 {\footnotesize\ttfamily \label{_indoor___e_s_p_8ino_afe461d27b9c48d5921c00d521181f12f} 
 void loop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
-\Hypertarget{_indoor___e_s_p_8ino_ad6e972502e97eda80da46e228a521d30}\index{Indoor\_ESP.ino@{Indoor\_ESP.ino}!OnDataRecv@{OnDataRecv}}
-\index{OnDataRecv@{OnDataRecv}!Indoor\_ESP.ino@{Indoor\_ESP.ino}}
-\doxysubsubsection{\texorpdfstring{OnDataRecv()}{OnDataRecv()}}
-{\footnotesize\ttfamily \label{_indoor___e_s_p_8ino_ad6e972502e97eda80da46e228a521d30} 
-void On\+Data\+Recv (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{mac}{, }\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{incoming\+Data}{, }\item[{int}]{len}{}\end{DoxyParamCaption})}
 
-\Hypertarget{_indoor___e_s_p_8ino_ad9b9bec066eafecde7248cc42813b9ac}\index{Indoor\_ESP.ino@{Indoor\_ESP.ino}!read\_Thingspeak@{read\_Thingspeak}}
-\index{read\_Thingspeak@{read\_Thingspeak}!Indoor\_ESP.ino@{Indoor\_ESP.ino}}
-\doxysubsubsection{\texorpdfstring{read\_Thingspeak()}{read\_Thingspeak()}}
-{\footnotesize\ttfamily \label{_indoor___e_s_p_8ino_ad9b9bec066eafecde7248cc42813b9ac} 
-void read\+\_\+\+Thingspeak (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
-\Hypertarget{_indoor___e_s_p_8ino_a4fc01d736fe50cf5b977f755b675f11d}\index{Indoor\_ESP.ino@{Indoor\_ESP.ino}!setup@{setup}}
+Main loop function to handle incoming JSON commands via Bluetooth. 
+
+This function checks for incoming Bluetooth data, parses it as JSON, extracts GPIO pin and status information, and executes the specified command. It also sends an acknowledgment back to the master device. \Hypertarget{_indoor___e_s_p_8ino_a4fc01d736fe50cf5b977f755b675f11d}\index{Indoor\_ESP.ino@{Indoor\_ESP.ino}!setup@{setup}}
 \index{setup@{setup}!Indoor\_ESP.ino@{Indoor\_ESP.ino}}
 \doxysubsubsection{\texorpdfstring{setup()}{setup()}}
 {\footnotesize\ttfamily \label{_indoor___e_s_p_8ino_a4fc01d736fe50cf5b977f755b675f11d} 
@@ -150,88 +46,14 @@ void setup (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
 
 
+Setup function to initialize serial communication, Bluetooth, and onboard LED. 
+
+This function sets up the serial communication for debugging, initializes Bluetooth communication with the name "{}\+ESP32\+\_\+\+Slave"{}, and sets up the onboard LED to indicate connection status. 
+
 \doxysubsection{Variable Documentation}
-\Hypertarget{_indoor___e_s_p_8ino_a3fe2d87e95035781883990bf38554c9f}\index{Indoor\_ESP.ino@{Indoor\_ESP.ino}!APIKey@{APIKey}}
-\index{APIKey@{APIKey}!Indoor\_ESP.ino@{Indoor\_ESP.ino}}
-\doxysubsubsection{\texorpdfstring{APIKey}{APIKey}}
-{\footnotesize\ttfamily \label{_indoor___e_s_p_8ino_a3fe2d87e95035781883990bf38554c9f} 
-const char\texorpdfstring{$\ast$}{*} APIKey = "{}MZUH6\+YO66\+N4\+RRRP6"{}}
-
-\Hypertarget{_indoor___e_s_p_8ino_ac45cf487b7a438e2176288955a338f25}\index{Indoor\_ESP.ino@{Indoor\_ESP.ino}!channelID@{channelID}}
-\index{channelID@{channelID}!Indoor\_ESP.ino@{Indoor\_ESP.ino}}
-\doxysubsubsection{\texorpdfstring{channelID}{channelID}}
-{\footnotesize\ttfamily \label{_indoor___e_s_p_8ino_ac45cf487b7a438e2176288955a338f25} 
-unsigned long channel\+ID = 2810374}
-
-\Hypertarget{_indoor___e_s_p_8ino_a323dfc205549b3c13f0a25c1b670708a}\index{Indoor\_ESP.ino@{Indoor\_ESP.ino}!client@{client}}
-\index{client@{client}!Indoor\_ESP.ino@{Indoor\_ESP.ino}}
-\doxysubsubsection{\texorpdfstring{client}{client}}
-{\footnotesize\ttfamily \label{_indoor___e_s_p_8ino_a323dfc205549b3c13f0a25c1b670708a} 
-Wi\+Fi\+Client client}
-
-\Hypertarget{_indoor___e_s_p_8ino_a617a47c70795bcff659815ad0efd2266}\index{Indoor\_ESP.ino@{Indoor\_ESP.ino}!counter@{counter}}
-\index{counter@{counter}!Indoor\_ESP.ino@{Indoor\_ESP.ino}}
-\doxysubsubsection{\texorpdfstring{counter}{counter}}
-{\footnotesize\ttfamily \label{_indoor___e_s_p_8ino_a617a47c70795bcff659815ad0efd2266} 
-int counter = 0}
-
-\Hypertarget{_indoor___e_s_p_8ino_a173b91873a3fc4f50a95416a6204d963}\index{Indoor\_ESP.ino@{Indoor\_ESP.ino}!data@{data}}
-\index{data@{data}!Indoor\_ESP.ino@{Indoor\_ESP.ino}}
-\doxysubsubsection{\texorpdfstring{data}{data}}
-{\footnotesize\ttfamily \label{_indoor___e_s_p_8ino_a173b91873a3fc4f50a95416a6204d963} 
-float data}
-
-\Hypertarget{_indoor___e_s_p_8ino_a405f237eaa8a513a9682fbb6e44c4860}\index{Indoor\_ESP.ino@{Indoor\_ESP.ino}!humidity@{humidity}}
-\index{humidity@{humidity}!Indoor\_ESP.ino@{Indoor\_ESP.ino}}
-\doxysubsubsection{\texorpdfstring{humidity}{humidity}}
-{\footnotesize\ttfamily \label{_indoor___e_s_p_8ino_a405f237eaa8a513a9682fbb6e44c4860} 
-int humidity}
-
-\Hypertarget{_indoor___e_s_p_8ino_aa9699336028d3fe5cc63b01988426fac}\index{Indoor\_ESP.ino@{Indoor\_ESP.ino}!myData@{myData}}
-\index{myData@{myData}!Indoor\_ESP.ino@{Indoor\_ESP.ino}}
-\doxysubsubsection{\texorpdfstring{myData}{myData}}
-{\footnotesize\ttfamily \label{_indoor___e_s_p_8ino_aa9699336028d3fe5cc63b01988426fac} 
-\mbox{\hyperlink{structstruct__message}{struct\+\_\+message}} my\+Data}
-
-\Hypertarget{_indoor___e_s_p_8ino_a3bef28806edf8f4c8cb82584b7e8c3cb}\index{Indoor\_ESP.ino@{Indoor\_ESP.ino}!pass@{pass}}
-\index{pass@{pass}!Indoor\_ESP.ino@{Indoor\_ESP.ino}}
-\doxysubsubsection{\texorpdfstring{pass}{pass}}
-{\footnotesize\ttfamily \label{_indoor___e_s_p_8ino_a3bef28806edf8f4c8cb82584b7e8c3cb} 
-const char\texorpdfstring{$\ast$}{*} pass = "{}carl1234"{}}
-
-\Hypertarget{_indoor___e_s_p_8ino_a00ec26ab986577077a8b60ba18b0da52}\index{Indoor\_ESP.ino@{Indoor\_ESP.ino}!postDelay@{postDelay}}
-\index{postDelay@{postDelay}!Indoor\_ESP.ino@{Indoor\_ESP.ino}}
-\doxysubsubsection{\texorpdfstring{postDelay}{postDelay}}
-{\footnotesize\ttfamily \label{_indoor___e_s_p_8ino_a00ec26ab986577077a8b60ba18b0da52} 
-const int post\+Delay = 2 \texorpdfstring{$\ast$}{*} 1000}
-
-\Hypertarget{_indoor___e_s_p_8ino_ae32e70eeb90b3e79e09833c002c2e6d7}\index{Indoor\_ESP.ino@{Indoor\_ESP.ino}!rain\_level@{rain\_level}}
-\index{rain\_level@{rain\_level}!Indoor\_ESP.ino@{Indoor\_ESP.ino}}
-\doxysubsubsection{\texorpdfstring{rain\_level}{rain\_level}}
-{\footnotesize\ttfamily \label{_indoor___e_s_p_8ino_ae32e70eeb90b3e79e09833c002c2e6d7} 
-int rain\+\_\+level}
-
-\Hypertarget{_indoor___e_s_p_8ino_ab68b888c3d204a4403af6d1b22f6d07c}\index{Indoor\_ESP.ino@{Indoor\_ESP.ino}!server@{server}}
-\index{server@{server}!Indoor\_ESP.ino@{Indoor\_ESP.ino}}
-\doxysubsubsection{\texorpdfstring{server}{server}}
-{\footnotesize\ttfamily \label{_indoor___e_s_p_8ino_ab68b888c3d204a4403af6d1b22f6d07c} 
-const char\texorpdfstring{$\ast$}{*} server = "{}api.\+thingspeak.\+com"{}}
-
-\Hypertarget{_indoor___e_s_p_8ino_a587ba0cb07f02913598610049a3bbb79}\index{Indoor\_ESP.ino@{Indoor\_ESP.ino}!ssid@{ssid}}
-\index{ssid@{ssid}!Indoor\_ESP.ino@{Indoor\_ESP.ino}}
-\doxysubsubsection{\texorpdfstring{ssid}{ssid}}
-{\footnotesize\ttfamily \label{_indoor___e_s_p_8ino_a587ba0cb07f02913598610049a3bbb79} 
-const char\texorpdfstring{$\ast$}{*} ssid = "{}i\+Phone (5)"{}}
-
-\Hypertarget{_indoor___e_s_p_8ino_a0ac2a299549fcca3cd14e4c1ac2087d2}\index{Indoor\_ESP.ino@{Indoor\_ESP.ino}!temperature@{temperature}}
-\index{temperature@{temperature}!Indoor\_ESP.ino@{Indoor\_ESP.ino}}
-\doxysubsubsection{\texorpdfstring{temperature}{temperature}}
-{\footnotesize\ttfamily \label{_indoor___e_s_p_8ino_a0ac2a299549fcca3cd14e4c1ac2087d2} 
-int temperature}
-
-\Hypertarget{_indoor___e_s_p_8ino_ab0e3651d93eb9e9a8ba76d4ff925c7f9}\index{Indoor\_ESP.ino@{Indoor\_ESP.ino}!wind\_speed@{wind\_speed}}
-\index{wind\_speed@{wind\_speed}!Indoor\_ESP.ino@{Indoor\_ESP.ino}}
-\doxysubsubsection{\texorpdfstring{wind\_speed}{wind\_speed}}
-{\footnotesize\ttfamily \label{_indoor___e_s_p_8ino_ab0e3651d93eb9e9a8ba76d4ff925c7f9} 
-int wind\+\_\+speed}
+\Hypertarget{_indoor___e_s_p_8ino_a1ea47e148eab76ef3fc8dc36ba58a9b1}\index{Indoor\_ESP.ino@{Indoor\_ESP.ino}!SerialBT@{SerialBT}}
+\index{SerialBT@{SerialBT}!Indoor\_ESP.ino@{Indoor\_ESP.ino}}
+\doxysubsubsection{\texorpdfstring{SerialBT}{SerialBT}}
+{\footnotesize\ttfamily \label{_indoor___e_s_p_8ino_a1ea47e148eab76ef3fc8dc36ba58a9b1} 
+Bluetooth\+Serial Serial\+BT}
 

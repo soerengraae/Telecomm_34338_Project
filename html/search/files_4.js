@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['raindata_2eino_0',['raindata.ino',['../raindata_8ino.html',1,'']]],
-  ['readme_2emd_1',['README.md',['../_r_e_a_d_m_e_8md.html',1,'']]]
+  ['license_2emd_0',['LICENSE.md',['../_0dpopperjs_2core_2_l_i_c_e_n_s_e_8md.html',1,'(Global Namespace)'],['../find-root_2_l_i_c_e_n_s_e_8md.html',1,'(Global Namespace)'],['../hoist-non-react-statics_2_l_i_c_e_n_s_e_8md.html',1,'(Global Namespace)'],['../json-parse-even-better-errors_2_l_i_c_e_n_s_e_8md.html',1,'(Global Namespace)']]],
+  ['license_2emd_1',['license.md',['../ms_2_l_i_c_e_n_s_e_8md.html',1,'']]]
 ];

@@ -1,0 +1,47 @@
+\doxysection{Tele-\/website/node\+\_\+modules/object-\/assign Directory Reference}
+\hypertarget{dir_b551d1cd9799218c0a0d13786be7ebfd}{}\label{dir_b551d1cd9799218c0a0d13786be7ebfd}\index{Tele-\/website/node\_modules/object-\/assign Directory Reference@{Tele-\/website/node\_modules/object-\/assign Directory Reference}}
+
+
+\doxysubsection{Detailed Description}
+\begin{quote}
+ES2015 \href{http://www.2ality.com/2014/01/object-assign.html}{\texttt{ {\ttfamily Object.\+assign()}}} \href{https://ponyfill.com}{\texttt{ ponyfill}} \end{quote}
+\hypertarget{readme.md_autotoc_md3578}{}\doxysubsection{\texorpdfstring{Use the built-\/in}{Use the built-\/in}}\label{readme.md_autotoc_md3578}
+Node.\+js 4 and up, as well as every evergreen browser (Chrome, Edge, Firefox, Opera, Safari), support {\ttfamily Object.\+assign()} \+:tada\+:. If you target only those environments, then by all means, use {\ttfamily Object.\+assign()} instead of this package.\hypertarget{readme.md_autotoc_md3579}{}\doxysubsection{\texorpdfstring{Install}{Install}}\label{readme.md_autotoc_md3579}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\$\ npm\ install\ -\/-\/save\ object-\/assign}
+
+\end{DoxyCode}
+\hypertarget{readme.md_autotoc_md3580}{}\doxysubsection{\texorpdfstring{Usage}{Usage}}\label{readme.md_autotoc_md3580}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{const\ objectAssign\ =\ require('object-\/assign');}
+\DoxyCodeLine{}
+\DoxyCodeLine{objectAssign(\{foo:\ 0\},\ \{bar:\ 1\});}
+\DoxyCodeLine{//=>\ \{foo:\ 0,\ bar:\ 1\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{//\ multiple\ sources}
+\DoxyCodeLine{objectAssign(\{foo:\ 0\},\ \{bar:\ 1\},\ \{baz:\ 2\});}
+\DoxyCodeLine{//=>\ \{foo:\ 0,\ bar:\ 1,\ baz:\ 2\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{//\ overwrites\ equal\ keys}
+\DoxyCodeLine{objectAssign(\{foo:\ 0\},\ \{foo:\ 1\},\ \{foo:\ 2\});}
+\DoxyCodeLine{//=>\ \{foo:\ 2\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{//\ ignores\ null\ and\ undefined\ sources}
+\DoxyCodeLine{objectAssign(\{foo:\ 0\},\ null,\ \{bar:\ 1\},\ undefined);}
+\DoxyCodeLine{//=>\ \{foo:\ 0,\ bar:\ 1\}}
+
+\end{DoxyCode}
+\hypertarget{readme.md_autotoc_md3581}{}\doxysubsection{\texorpdfstring{API}{API}}\label{readme.md_autotoc_md3581}
+\hypertarget{readme.md_autotoc_md3582}{}\doxysubsubsection{\texorpdfstring{object\+Assign(target, \mbox{[}source, ...\mbox{]})}{object\+Assign(target, \mbox{[}source, ...\mbox{]})}}\label{readme.md_autotoc_md3582}
+Assigns enumerable own properties of {\ttfamily source} objects to the {\ttfamily target} object and returns the {\ttfamily target} object. Additional {\ttfamily source} objects will overwrite previous ones.\hypertarget{readme.md_autotoc_md3583}{}\doxysubsection{\texorpdfstring{Resources}{Resources}}\label{readme.md_autotoc_md3583}
+
+\begin{DoxyItemize}
+\item \href{https://people.mozilla.org/~jorendorff/es6-draft.html\#sec-object.assign}{\texttt{ ES2015 spec -\/ Object.\+assign}}
+\end{DoxyItemize}\hypertarget{readme.md_autotoc_md3584}{}\doxysubsection{\texorpdfstring{Related}{Related}}\label{readme.md_autotoc_md3584}
+
+\begin{DoxyItemize}
+\item \href{https://github.com/sindresorhus/deep-assign}{\texttt{ deep-\/assign}} -\/ Recursive {\ttfamily Object.\+assign()}
+\end{DoxyItemize}\hypertarget{readme.md_autotoc_md3585}{}\doxysubsection{\texorpdfstring{License}{License}}\label{readme.md_autotoc_md3585}
+MIT © \href{https://sindresorhus.com}{\texttt{ Sindre Sorhus}} 

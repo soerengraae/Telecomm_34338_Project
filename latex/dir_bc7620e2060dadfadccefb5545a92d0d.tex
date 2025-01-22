@@ -1,0 +1,51 @@
+\doxysection{Tele-\/website/node\+\_\+modules/import-\/fresh Directory Reference}
+\hypertarget{dir_bc7620e2060dadfadccefb5545a92d0d}{}\label{dir_bc7620e2060dadfadccefb5545a92d0d}\index{Tele-\/website/node\_modules/import-\/fresh Directory Reference@{Tele-\/website/node\_modules/import-\/fresh Directory Reference}}
+
+
+\doxysubsection{Detailed Description}
+\begin{quote}
+Import a module while bypassing the \href{https://nodejs.org/api/modules.html\#modules_caching}{\texttt{ cache}} \end{quote}
+Useful for testing purposes when you need to freshly import a module.\hypertarget{readme.md_autotoc_md3431}{}\doxysubsection{\texorpdfstring{Install}{Install}}\label{readme.md_autotoc_md3431}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\$\ npm\ install\ import-\/fresh}
+
+\end{DoxyCode}
+\hypertarget{readme.md_autotoc_md3432}{}\doxysubsection{\texorpdfstring{Usage}{Usage}}\label{readme.md_autotoc_md3432}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{//\ foo.js}
+\DoxyCodeLine{let\ i\ =\ 0;}
+\DoxyCodeLine{module.exports\ =\ ()\ =>\ ++i;}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{const\ importFresh\ =\ require('import-\/fresh');}
+\DoxyCodeLine{}
+\DoxyCodeLine{require('./foo')();}
+\DoxyCodeLine{//=>\ 1}
+\DoxyCodeLine{}
+\DoxyCodeLine{require('./foo')();}
+\DoxyCodeLine{//=>\ 2}
+\DoxyCodeLine{}
+\DoxyCodeLine{importFresh('./foo')();}
+\DoxyCodeLine{//=>\ 1}
+\DoxyCodeLine{}
+\DoxyCodeLine{importFresh('./foo')();}
+\DoxyCodeLine{//=>\ 1}
+
+\end{DoxyCode}
+\hypertarget{readme.md_autotoc_md3433}{}\doxysubsection{\texorpdfstring{import-\/fresh for enterprise}{import-\/fresh for enterprise}}\label{readme.md_autotoc_md3433}
+Available as part of the Tidelift Subscription.
+
+The maintainers of import-\/fresh and thousands of other packages are working with Tidelift to deliver commercial support and maintenance for the open source dependencies you use to build your applications. Save time, reduce risk, and improve code health, while paying the maintainers of the exact dependencies you use. \href{https://tidelift.com/subscription/pkg/npm-import-fresh?utm_source=npm-import-fresh&utm_medium=referral&utm_campaign=enterprise&utm_term=repo}{\texttt{ Learn more.}}\hypertarget{readme.md_autotoc_md3434}{}\doxysubsection{\texorpdfstring{Related}{Related}}\label{readme.md_autotoc_md3434}
+
+\begin{DoxyItemize}
+\item \href{https://github.com/sindresorhus/clear-module}{\texttt{ clear-\/module}} -\/ Clear a module from the import cache
+\item \href{https://github.com/sindresorhus/import-from}{\texttt{ import-\/from}} -\/ Import a module from a given path
+\item \href{https://github.com/sindresorhus/import-cwd}{\texttt{ import-\/cwd}} -\/ Import a module from the current working directory
+\item \href{https://github.com/sindresorhus/import-lazy}{\texttt{ import-\/lazy}} -\/ Import modules lazily 
+\end{DoxyItemize}

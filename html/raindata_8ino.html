@@ -120,7 +120,7 @@ $(function(){initNavTree('raindata_8ino.html',''); initResizable(true); });
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a4a0a4aa5db390e405fce9272877d4704" id="r_a4a0a4aa5db390e405fce9272877d4704"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4a0a4aa5db390e405fce9272877d4704">forecastWeatherURL</a>&#160;&#160;&#160;&quot;http://api.openweathermap.org/<a class="el" href="_indoor___e_s_p_8ino.html#a173b91873a3fc4f50a95416a6204d963">data</a>/2.5/forecast?lat=5.671401156455272&amp;lon=101.41105533517317&amp;units=metric&amp;appid=APIKEYHERE&quot;</td></tr>
+<tr class="memitem:a4a0a4aa5db390e405fce9272877d4704" id="r_a4a0a4aa5db390e405fce9272877d4704"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4a0a4aa5db390e405fce9272877d4704">forecastWeatherURL</a>&#160;&#160;&#160;&quot;http://api.openweathermap.org/data/2.5/forecast?lat=5.671401156455272&amp;lon=101.41105533517317&amp;units=metric&amp;appid=APIKEYHERE&quot;</td></tr>
 <tr class="memdesc:a4a0a4aa5db390e405fce9272877d4704"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains SSID and PASS for WiFi (plus any other private credentials).  <br /></td></tr>
 <tr class="separator:a4a0a4aa5db390e405fce9272877d4704"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -153,7 +153,7 @@ Variables</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Code to fetch rain forecast from OpenWeatherMap and upload the results to ThingSpeak. </p>
-<p>This program connects to WiFi, fetches a forecast from OpenWeatherMap, checks the first two forecast intervals for rain, categorizes the status, and then uploads this info to ThingSpeak. </p>
+<p>This program connects to WiFi, fetches a forecast from OpenWeatherMap, checks the first two forecast intervals for rain, categorizes the status, and then uploads this info to thingSpeak. </p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a4a0a4aa5db390e405fce9272877d4704" name="a4a0a4aa5db390e405fce9272877d4704"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4a0a4aa5db390e405fce9272877d4704">&#9670;&#160;</a></span>forecastWeatherURL</h2>
@@ -162,7 +162,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define forecastWeatherURL&#160;&#160;&#160;&quot;http://api.openweathermap.org/<a class="el" href="_indoor___e_s_p_8ino.html#a173b91873a3fc4f50a95416a6204d963">data</a>/2.5/forecast?lat=5.671401156455272&amp;lon=101.41105533517317&amp;units=metric&amp;appid=APIKEYHERE&quot;</td>
+          <td class="memname">#define forecastWeatherURL&#160;&#160;&#160;&quot;http://api.openweathermap.org/data/2.5/forecast?lat=5.671401156455272&amp;lon=101.41105533517317&amp;units=metric&amp;appid=APIKEYHERE&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -194,7 +194,7 @@ Variables</h2></td></tr>
 <li>If WiFi is connected, fetch the forecast from the OpenWeatherMap API.</li>
 <li>Parse the JSON to check for rain in the first two forecast intervals.</li>
 <li>Update the ThingSpeak channel with the determined rainStatus.</li>
-<li>Wait 10 minutes (180,000 ms) before fetching again. </li>
+<li>Wait 3 minutes (180,000 ms) before fetching again. </li>
 </ul>
 
 </div>

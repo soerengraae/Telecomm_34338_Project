@@ -1,0 +1,384 @@
+\doxysection{Tele-\/website/node\+\_\+modules/babel-\/plugin-\/macros Directory Reference}
+\hypertarget{dir_c24227a2870913485164b41bb601b3bb}{}\label{dir_c24227a2870913485164b41bb601b3bb}\index{Tele-\/website/node\_modules/babel-\/plugin-\/macros Directory Reference@{Tele-\/website/node\_modules/babel-\/plugin-\/macros Directory Reference}}
+
+
+\doxysubsection{Detailed Description}
+ \doxysubsection*{babel-\/plugin-\/macros 🎣}
+
+
+
+
+
+Allows you to build simple compile-\/time libraries
+
+ 
+
+\DoxyHorRuler{0}
+
+
+\href{https://github.com/kentcdodds/babel-plugin-macros/actions?query=workflow\%3Avalidate}{\texttt{ }} \href{https://codecov.io/github/kentcdodds/babel-plugin-macros}{\texttt{ }} \href{https://www.npmjs.com/package/babel-plugin-macros}{\texttt{ }} \href{http://www.npmtrends.com/babel-plugin-macros}{\texttt{ }} \href{https://github.com/kentcdodds/babel-plugin-macros/blob/main/LICENSE}{\texttt{ }} !\mbox{[}All Contributors\mbox{]}\mbox{[}all-\/contributors-\/badge\mbox{]} \href{http://makeapullrequest.com}{\texttt{ }} \href{https://github.com/kentcdodds/babel-plugin-macros/blob/main/CODE_OF_CONDUCT.md}{\texttt{ }}\hypertarget{README.md_autotoc_md3122}{}\doxysubsubsection{\texorpdfstring{The problem}{The problem}}\label{README.md_autotoc_md3122}
+Check out \href{https://babeljs.io/blog/2017/09/11/zero-config-with-babel-macros}{\texttt{ this guest post}} on the Babel.\+js blog for a complete write up on the problem, motivation, and solution.
+
+Currently, each babel plugin in the babel ecosystem requires that you configure it individually. This is fine for things like language features, but can be frustrating overhead for libraries that allow for compile-\/time code transformation as an optimization.\hypertarget{README.md_autotoc_md3123}{}\doxysubsubsection{\texorpdfstring{This solution}{This solution}}\label{README.md_autotoc_md3123}
+babel-\/plugin-\/macros defines a standard interface for libraries that want to use compile-\/time code transformation without requiring the user to add a babel plugin to their build system (other than {\ttfamily babel-\/plugin-\/macros}, which is ideally already in place).
+
+
+
+{\bfseries{Expand for more details on the motivation}}\begin{adjustwidth}{1em}{0em}
+
+
+
+
+For instance, many css-\/in-\/js libraries have a css tagged template string function\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{const\ styles\ =\ css`}
+\DoxyCodeLine{\ \ .red\ \{}
+\DoxyCodeLine{\ \ \ \ color:\ red;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\`{}}
+
+\end{DoxyCode}
+
+
+The function compiles your css into (for example) an object with generated class names for each of the classes you defined in your css\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{console.log(styles)\ //\ \{\ red:\ "{}1f-\/d34j8rn43y587t"{}\ \}}
+
+\end{DoxyCode}
+
+
+This class name can be generated at runtime (in the browser), but this has some disadvantages\+:
+
+
+\begin{DoxyItemize}
+\item There is cpu usage/time overhead; the client needs to run the code to generate these classes every time the page loads
+\item There is code bundle size overhead; the client needs to receive a CSS parser in order to generate these class names, and shipping this makes the amount of js the client needs to parse larger.
+\end{DoxyItemize}
+
+To help solve those issues, many css-\/in-\/js libraries write their own babel plugin that generates the class names at compile-\/time instead of runtime\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{//\ Before\ running\ through\ babel:}
+\DoxyCodeLine{const\ styles\ =\ css`}
+\DoxyCodeLine{\ \ .red\ \{}
+\DoxyCodeLine{\ \ \ \ color:\ red;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\`{}}
+\DoxyCodeLine{//\ After\ running\ through\ babel,\ with\ the\ library-\/specific\ plugin:}
+\DoxyCodeLine{const\ styles\ =\ \{red:\ '1f-\/d34j8rn43y587t'\}}
+
+\end{DoxyCode}
+
+
+If the css-\/in-\/js library supported babel-\/plugin-\/macros instead, then they wouldn\textquotesingle{}t need their own babel plugin to compile these out; they could instead rely on babel-\/plugin-\/macros to do it for them. So if a user already had {\ttfamily babel-\/plugin-\/macros} installed and configured with babel, then they wouldn\textquotesingle{}t need to change their babel configuration to get the compile-\/time benefits of the library. This would be most useful if the boilerplate they were using came with {\ttfamily babel-\/plugin-\/macros} out of the box, which is true for \href{https://github.com/facebook/create-react-app}{\texttt{ {\ttfamily create-\/react-\/app}}}.
+
+Although css-\/in-\/js is the most common example, there are lots of other things you could use {\ttfamily babel-\/plugin-\/macros} for, like\+:
+
+
+\begin{DoxyItemize}
+\item Compiling Graph\+QL fragments into objects so that the client doesn\textquotesingle{}t need a Graph\+QL parser
+\item Eval-\/ing out code at compile time that will be baked into the runtime code, for instance to get a list of directories in the filesystem (see \href{https://github.com/kentcdodds/babel-plugin-preval}{\texttt{ preval}})
+\end{DoxyItemize}
+
+\end{adjustwidth}
+\hypertarget{README.md_autotoc_md3124}{}\doxysubsubsection{\texorpdfstring{Table of Contents}{Table of Contents}}\label{README.md_autotoc_md3124}
+
+\begin{DoxyItemize}
+\item Installation
+\item Usage
+\begin{DoxyItemize}
+\item User docs
+\item Author docs
+\item Caveats
+\end{DoxyItemize}
+\item FAQ
+\begin{DoxyItemize}
+\item How do I find available macros?
+\item What\textquotesingle{}s the difference between babel plugins and macros?
+\item In what order are macros executed?
+\item Does it work with function calls only?
+\item How about implicit optimizations at compile time?
+\end{DoxyItemize}
+\item Inspiration
+\item Other Solutions
+\item Issues
+\begin{DoxyItemize}
+\item 🐛 Bugs
+\item 💡 Feature Requests
+\end{DoxyItemize}
+\item Contributors ✨
+\item LICENSE
+\end{DoxyItemize}\hypertarget{README.md_autotoc_md3125}{}\doxysubsubsection{\texorpdfstring{Installation}{Installation}}\label{README.md_autotoc_md3125}
+This module is distributed via \href{https://www.npmjs.com}{\texttt{ npm}} which is bundled with \href{https://nodejs.org}{\texttt{ node}} and should be installed as one of your project\textquotesingle{}s {\ttfamily dev\+Dependencies}\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{npm\ install\ -\/-\/save-\/dev\ babel-\/plugin-\/macros}
+
+\end{DoxyCode}
+\hypertarget{README.md_autotoc_md3126}{}\doxysubsubsection{\texorpdfstring{Usage}{Usage}}\label{README.md_autotoc_md3126}
+\begin{quote}
+You may like to watch \href{https://www.youtube.com/watch?v=1queadQ0048&list=PLV5CVI1eNcJgCrPH_e6d57KRUTiDZgs0u}{\texttt{ this You\+Tube video}} to get an idea of what macros is and how it can be used. \end{quote}
+\hypertarget{README.md_autotoc_md3127}{}\doxysubsubsubsection{\texorpdfstring{User docs}{User docs}}\label{README.md_autotoc_md3127}
+Are you trying to use {\ttfamily babel-\/plugin-\/macros}? Go to {\ttfamily other/docs/user.md}.\hypertarget{README.md_autotoc_md3128}{}\doxysubsubsubsection{\texorpdfstring{Author docs}{Author docs}}\label{README.md_autotoc_md3128}
+Are you trying to make your own macros that works with {\ttfamily babel-\/plugin-\/macros}? Go to {\ttfamily other/docs/author.md}. (you should probably read the user docs too).\hypertarget{README.md_autotoc_md3129}{}\doxysubsubsubsection{\texorpdfstring{Caveats}{Caveats}}\label{README.md_autotoc_md3129}
+\hypertarget{README.md_autotoc_md3130}{}\doxysubsubsubsubsection{\texorpdfstring{Babel cache problem}{Babel cache problem}}\label{README.md_autotoc_md3130}
+\begin{quote}
+{\bfseries{Note\+:}} This issue is not present when used in Create React App. \end{quote}
+Most of the time you\textquotesingle{}ll probably be using this with the babel cache enabled in webpack to rebuild faster. If your macro function is {\bfseries{not pure}} which gets different output with same code (e.\+g., IO side effects) it will cause recompile mechanism fail. Unfortunately you\textquotesingle{}ll also experience this problem while developing your macro as well. If there\textquotesingle{}s not a change to the source code that\textquotesingle{}s being transpiled, then babel will use the cache rather than running your macro again.
+
+For now, to force recompile the code you can simply add a cache busting comment in the file\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ macro\ from\ 'non-\/pure.macro';}
+\DoxyCodeLine{}
+\DoxyCodeLine{-\///\ Do\ some\ changes\ of\ your\ code\ or}
+\DoxyCodeLine{+//\ add\ a\ cache\ busting\ comment\ to\ force\ recompile.}
+\DoxyCodeLine{macro('parameters');}
+
+\end{DoxyCode}
+
+
+This problem is still being worked on and is not unique to {\ttfamily babel-\/plugin-\/macros}. For more details and workarounds, please check related issues below\+:
+
+
+\begin{DoxyItemize}
+\item babel-\/plugin-\/preval\+: \href{https://github.com/kentcdodds/babel-plugin-preval/issues/19}{\texttt{ How to force recompile? \#19}}
+\item graphql.\+macro\+: \href{https://github.com/evenchange4/graphql.macro/issues/6}{\texttt{ Recompile problem (babel cache) \#6}}
+\item twin.\+macro\+: \href{https://github.com/ben-rogerson/twin.macro/discussions/37}{\texttt{ Can\textquotesingle{}t change taliwind config \#37}}
+\end{DoxyItemize}\hypertarget{README.md_autotoc_md3131}{}\doxysubsubsection{\texorpdfstring{FAQ}{FAQ}}\label{README.md_autotoc_md3131}
+\hypertarget{README.md_autotoc_md3132}{}\doxysubsubsubsection{\texorpdfstring{How do I find available macros?}{How do I find available macros?}}\label{README.md_autotoc_md3132}
+You can write your own without publishing them to {\ttfamily npm}, but if you\textquotesingle{}d like to see existing macros you can add to your project, then take a look at the \href{https://github.com/jgierer12/awesome-babel-macros}{\texttt{ Awesome babel macros}} repository.
+
+Please add any you don\textquotesingle{}t see listed!\hypertarget{README.md_autotoc_md3133}{}\doxysubsubsubsection{\texorpdfstring{What\textquotesingle{}s the difference between babel plugins and macros?}{What\textquotesingle{}s the difference between babel plugins and macros?}}\label{README.md_autotoc_md3133}
+Let\textquotesingle{}s use \href{https://www.npmjs.com/package/babel-plugin-console}{\texttt{ {\ttfamily babel-\/plugin-\/console}}} as an example.
+
+If we used {\ttfamily babel-\/plugin-\/console}, it would look like this\+:
+
+
+\begin{DoxyEnumerate}
+\item Add {\ttfamily babel-\/plugin-\/console} to {\ttfamily .babelrc}
+\item Use it in a code\+:
+\end{DoxyEnumerate}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{function\ add100(a)\ \{}
+\DoxyCodeLine{\ \ const\ oneHundred\ =\ 100}
+\DoxyCodeLine{\ \ console.scope('Add\ 100\ to\ another\ number')}
+\DoxyCodeLine{\ \ return\ add(a,\ oneHundred)}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{function\ add(a,\ b)\ \{}
+\DoxyCodeLine{\ \ return\ a\ +\ b}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+When that code is run, the {\ttfamily scope} function does some pretty nifty things\+:
+
+{\bfseries{Browser\+:}}
+
+
+
+{\bfseries{Node\+:}}
+
+
+
+Instead, let\textquotesingle{}s use the macro it\textquotesingle{}s shipped with like this\+:
+
+
+\begin{DoxyEnumerate}
+\item Add {\ttfamily babel-\/plugin-\/macros} to {\ttfamily .babelrc} (only once for all macros)
+\item Use it in a code\+:
+\end{DoxyEnumerate}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ scope\ from\ 'babel-\/plugin-\/console/scope.macro'}
+\DoxyCodeLine{function\ add100(a)\ \{}
+\DoxyCodeLine{\ \ const\ oneHundred\ =\ 100}
+\DoxyCodeLine{\ \ scope('Add\ 100\ to\ another\ number')}
+\DoxyCodeLine{\ \ return\ add(a,\ oneHundred)}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{function\ add(a,\ b)\ \{}
+\DoxyCodeLine{\ \ return\ a\ +\ b}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+The result is exactly the same, but this approach has a few advantages\+:
+
+{\bfseries{Advantages\+:}}
+
+
+\begin{DoxyItemize}
+\item requires only one entry in {\ttfamily .babelrc} for all macros used in project. Add that once and you can use all the macros you want
+\item toolkits (like \href{https://github.com/facebook/create-react-app}{\texttt{ create-\/react-\/app}}) may already support {\ttfamily babel-\/plugin-\/macros}, so no configuration is needed at all
+\item it\textquotesingle{}s explicit. With {\ttfamily console.\+scope} people may be fooled that it\textquotesingle{}s just a normal {\ttfamily console} API when there\textquotesingle{}s really a babel transpilation going on. When you import {\ttfamily scope}, it\textquotesingle{}s obvious that it\textquotesingle{}s macro and does something with the code at compile time. Some ESLint rules may also have issues with plugins that look for "{}global"{} variables
+\item macros are safer and easier to write, because they receive exactly the AST node to process
+\item If you misconfigure {\ttfamily babel-\/plugin-\/console} you wont find out until you run the code. If you misconfigure {\ttfamily babel-\/plugin-\/macros} you\textquotesingle{}ll get a compile-\/time error.
+\end{DoxyItemize}
+
+{\bfseries{Drawbacks\+:}}
+
+
+\begin{DoxyItemize}
+\item Cannot (should not) be used for implicit transpilations (like syntax plugins)
+\item Explicitness is more verbose. Which some people might consider a drawback...
+\end{DoxyItemize}\hypertarget{README.md_autotoc_md3134}{}\doxysubsubsubsection{\texorpdfstring{In what order are macros executed?}{In what order are macros executed?}}\label{README.md_autotoc_md3134}
+This is another advantage of {\ttfamily babel-\/plugin-\/macros} over regular plugins. The user of the macro is in control of the ordering! The order of execution is the same order as imported. The order of execution is clear, explicit and in full control of the user\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ preval\ from\ 'preval.macro'}
+\DoxyCodeLine{import\ idx\ from\ 'idx.macro'}
+\DoxyCodeLine{}
+\DoxyCodeLine{//\ preval\ macro\ is\ evaluated\ first,\ then\ idx}
+
+\end{DoxyCode}
+
+
+This differs from the current situation with babel plugins where it\textquotesingle{}s prohibitively difficult to control the order plugins run in a particular file.\hypertarget{README.md_autotoc_md3135}{}\doxysubsubsubsection{\texorpdfstring{Does it work with function calls only?}{Does it work with function calls only?}}\label{README.md_autotoc_md3135}
+No! Any AST node type is supported.
+
+It can be tagged template literal\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ eval\ from\ 'eval.macro'}
+\DoxyCodeLine{const\ val\ =\ eval`7\ *\ 6`}
+
+\end{DoxyCode}
+
+
+A function\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ eval\ from\ 'eval.macro'}
+\DoxyCodeLine{const\ val\ =\ eval('7\ *\ 6')}
+
+\end{DoxyCode}
+
+
+JSX Element\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ Eval\ from\ 'eval.macro'}
+\DoxyCodeLine{const\ val\ =\ <Eval>7\ *\ 6</Eval>}
+
+\end{DoxyCode}
+
+
+Really, anything...
+
+See the \href{src/__tests__/__snapshots__/index.js.snap}{\texttt{ testing snapshot}} for more examples.\hypertarget{README.md_autotoc_md3136}{}\doxysubsubsubsection{\texorpdfstring{How about implicit optimizations at compile time?}{How about implicit optimizations at compile time?}}\label{README.md_autotoc_md3136}
+All examples above were {\itshape explicit} -\/ a macro was imported and then evaluated with a specific AST node.
+
+Completely different story are {\itshape implicit} babel plugins, like \href{https://babeljs.io/docs/plugins/transform-react-constant-elements/}{\texttt{ transform-\/react-\/constant-\/elements}}, which process whole AST tree.
+
+Explicit is often a better pattern than implicit because it requires others to understand how things are globally configured. This is in this spirit are {\ttfamily babel-\/plugin-\/macros} designed. However, some things {\itshape do} need to be implicit, and those kinds of babel plugins can\textquotesingle{}t be turned into macros.\hypertarget{README.md_autotoc_md3137}{}\doxysubsubsection{\texorpdfstring{Inspiration}{Inspiration}}\label{README.md_autotoc_md3137}
+
+\begin{DoxyItemize}
+\item \href{https://github.com/threepointone/babel-plugin-macros}{\texttt{ threepointone/babel-\/plugin-\/macros}}
+\item \href{https://github.com/facebook/create-react-app/issues/2730}{\texttt{ facebookincubator/create-\/react-\/app\#2730}}
+\end{DoxyItemize}
+
+Thank you to \href{https://github.com/phpnode}{\texttt{ @phpnode}} for donating the npm package {\ttfamily babel-\/plugin-\/macros}.\hypertarget{README.md_autotoc_md3138}{}\doxysubsubsection{\texorpdfstring{Other Solutions}{Other Solutions}}\label{README.md_autotoc_md3138}
+
+\begin{DoxyItemize}
+\item \href{http://sweetjs.org/}{\texttt{ sweetjs}}
+\end{DoxyItemize}\hypertarget{README.md_autotoc_md3139}{}\doxysubsubsection{\texorpdfstring{Issues}{Issues}}\label{README.md_autotoc_md3139}
+{\itshape Looking to contribute? Look for the \href{https://github.com/kentcdodds/babel-plugin-macros/issues?utf8=\%E2\%9C\%93&q=is\%3Aissue+is\%3Aopen+sort\%3Areactions-\%2B1-desc+label\%3Aenhancement+label\%3A\%22good+first+issue\%22}{\texttt{ Good First Issue}} label.}\hypertarget{README.md_autotoc_md3140}{}\doxysubsubsubsection{\texorpdfstring{🐛 Bugs}{🐛 Bugs}}\label{README.md_autotoc_md3140}
+Please file an issue for bugs, missing documentation, or unexpected behavior.
+
+\href{https://github.com/kentcdodds/babel-plugin-macros/issues?utf8=\%E2\%9C\%93&q=is\%3Aissue+is\%3Aopen+sort\%3Acreated-desc+label\%3Abug}{\texttt{ {\bfseries{See Bugs}}}}\hypertarget{README.md_autotoc_md3141}{}\doxysubsubsubsection{\texorpdfstring{💡 Feature Requests}{💡 Feature Requests}}\label{README.md_autotoc_md3141}
+Please file an issue to suggest new features. Vote on feature requests by adding a 👍. This helps maintainers prioritize what to work on.
+
+\href{https://github.com/kentcdodds/babel-plugin-macros/issues?utf8=\%E2\%9C\%93&q=is\%3Aissue+is\%3Aopen+sort\%3Areactions-\%2B1-desc+label\%3Aenhancement}{\texttt{ {\bfseries{See Feature Requests}}}}\hypertarget{README.md_autotoc_md3142}{}\doxysubsubsection{\texorpdfstring{Contributors ✨}{Contributors ✨}}\label{README.md_autotoc_md3142}
+Thanks goes to these people (\href{https://github.com/all-contributors/all-contributors\#emoji-key}{\texttt{ emoji key}})\+:
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{7}{|X[-1]}|}
+\hline
+\PBS\centering \href{https://kentcdodds.com}{\texttt{ ~\newline
+\textsubscript{{\bfseries{Kent C. Dodds}}}}}~\newline
+\href{https://github.com/kentcdodds/babel-plugin-macros/commits?author=kentcdodds}{\texttt{ 💻}} \href{https://github.com/kentcdodds/babel-plugin-macros/commits?author=kentcdodds}{\texttt{ 📖}} \href{\#infra-kentcdodds}{\texttt{ 🚇}} \href{https://github.com/kentcdodds/babel-plugin-macros/commits?author=kentcdodds}{\texttt{ ⚠️}} &\PBS\centering \href{https://github.com/threepointone}{\texttt{ ~\newline
+\textsubscript{{\bfseries{Sunil Pai}}}}}~\newline
+\href{\#ideas-threepointone}{\texttt{ 🤔}} &\PBS\centering \href{http://suchipi.com}{\texttt{ ~\newline
+\textsubscript{{\bfseries{Lily Scott}}}}}~\newline
+\href{\#question-suchipi}{\texttt{ 💬}} \href{https://github.com/kentcdodds/babel-plugin-macros/commits?author=suchipi}{\texttt{ 📖}} &\PBS\centering \href{http://twitter.com/dralletje}{\texttt{ ~\newline
+\textsubscript{{\bfseries{Michiel Dral}}}}}~\newline
+\href{\#ideas-dralletje}{\texttt{ 🤔}} &\PBS\centering \href{https://github.com/tkh44}{\texttt{ ~\newline
+\textsubscript{{\bfseries{Kye Hohenberger}}}}}~\newline
+\href{\#ideas-tkh44}{\texttt{ 🤔}} &\PBS\centering \href{https://hamil.town}{\texttt{ ~\newline
+\textsubscript{{\bfseries{Mitchell Hamilton}}}}}~\newline
+\href{https://github.com/kentcdodds/babel-plugin-macros/commits?author=mitchellhamilton}{\texttt{ 💻}} \href{https://github.com/kentcdodds/babel-plugin-macros/commits?author=mitchellhamilton}{\texttt{ ⚠️}} &\PBS\centering \href{https://github.com/wKovacs64}{\texttt{ ~\newline
+\textsubscript{{\bfseries{Justin Hall}}}}}~\newline
+\href{https://github.com/kentcdodds/babel-plugin-macros/commits?author=wKovacs64}{\texttt{ 📖}}  \\\cline{1-7}
+\PBS\centering \href{https://github.com/PiereDome}{\texttt{ ~\newline
+\textsubscript{{\bfseries{Brian Pedersen}}}}}~\newline
+\href{https://github.com/kentcdodds/babel-plugin-macros/commits?author=PiereDome}{\texttt{ 💻}} \href{https://github.com/kentcdodds/babel-plugin-macros/commits?author=PiereDome}{\texttt{ 📖}} &\PBS\centering \href{https://github.com/apalm}{\texttt{ ~\newline
+\textsubscript{{\bfseries{Andrew Palm}}}}}~\newline
+\href{https://github.com/kentcdodds/babel-plugin-macros/commits?author=apalm}{\texttt{ 💻}} &\PBS\centering \href{https://michaelhsu.tw/}{\texttt{ ~\newline
+\textsubscript{{\bfseries{Michael Hsu}}}}}~\newline
+\href{https://github.com/kentcdodds/babel-plugin-macros/commits?author=evenchange4}{\texttt{ 📖}} \href{\#plugin-evenchange4}{\texttt{ 🔌}} &\PBS\centering \href{https://github.com/citycide}{\texttt{ ~\newline
+\textsubscript{{\bfseries{Bo Lingen}}}}}~\newline
+\href{https://github.com/kentcdodds/babel-plugin-macros/commits?author=citycide}{\texttt{ 💻}} &\PBS\centering \href{https://github.com/tylerthehaas}{\texttt{ ~\newline
+\textsubscript{{\bfseries{Tyler Haas}}}}}~\newline
+\href{https://github.com/kentcdodds/babel-plugin-macros/commits?author=tylerthehaas}{\texttt{ 📖}} &\PBS\centering \href{https://github.com/FWeinb}{\texttt{ ~\newline
+\textsubscript{{\bfseries{FWeinb}}}}}~\newline
+\href{https://github.com/kentcdodds/babel-plugin-macros/commits?author=FWeinb}{\texttt{ 💻}} &\PBS\centering \href{http://www.tomasehrlich.cz}{\texttt{ ~\newline
+\textsubscript{{\bfseries{Tomáš Ehrlich}}}}}~\newline
+\href{https://github.com/kentcdodds/babel-plugin-macros/issues?q=author\%3Atricoder42}{\texttt{ 🐛}} \href{https://github.com/kentcdodds/babel-plugin-macros/commits?author=tricoder42}{\texttt{ 💻}}  \\\cline{1-7}
+\PBS\centering \href{https://github.com/jgierer12}{\texttt{ ~\newline
+\textsubscript{{\bfseries{Jonas Gierer}}}}}~\newline
+\href{https://github.com/kentcdodds/babel-plugin-macros/commits?author=jgierer12}{\texttt{ 📖}} &\PBS\centering \href{http://loicpadier.com}{\texttt{ ~\newline
+\textsubscript{{\bfseries{Loïc Padier}}}}}~\newline
+\href{https://github.com/kentcdodds/babel-plugin-macros/commits?author=lPadier}{\texttt{ 💻}} &\PBS\centering \href{https://www.pshrmn.com}{\texttt{ ~\newline
+\textsubscript{{\bfseries{Paul Sherman}}}}}~\newline
+\href{https://github.com/kentcdodds/babel-plugin-macros/commits?author=pshrmn}{\texttt{ 💻}} &\PBS\centering \href{http://burningpotato.com}{\texttt{ ~\newline
+\textsubscript{{\bfseries{Conrad Buck}}}}}~\newline
+\href{https://github.com/kentcdodds/babel-plugin-macros/commits?author=conartist6}{\texttt{ 💻}} \href{https://github.com/kentcdodds/babel-plugin-macros/commits?author=conartist6}{\texttt{ ⚠️}} \href{https://github.com/kentcdodds/babel-plugin-macros/commits?author=conartist6}{\texttt{ 📖}} &\PBS\centering \href{https://github.com/InvictusMB}{\texttt{ ~\newline
+\textsubscript{{\bfseries{Invictus\+MB}}}}}~\newline
+\href{https://github.com/kentcdodds/babel-plugin-macros/commits?author=InvictusMB}{\texttt{ ⚠️}} &\PBS\centering \href{https://codefund.io}{\texttt{ ~\newline
+\textsubscript{{\bfseries{Eric Berry}}}}}~\newline
+\href{\#fundingFinding-coderberry}{\texttt{ 🔍}} &\PBS\centering \href{http://futagoza.github.io/}{\texttt{ ~\newline
+\textsubscript{{\bfseries{Futago-\/za Ryuu}}}}}~\newline
+\href{https://github.com/kentcdodds/babel-plugin-macros/commits?author=futagoza}{\texttt{ 💻}} \href{https://github.com/kentcdodds/babel-plugin-macros/commits?author=futagoza}{\texttt{ ⚠️}}  \\\cline{1-7}
+\PBS\centering \href{https://luc.im}{\texttt{ ~\newline
+\textsubscript{{\bfseries{Luc}}}}}~\newline
+\href{https://github.com/kentcdodds/babel-plugin-macros/commits?author=lucleray}{\texttt{ 💻}} &\PBS\centering \href{http://wintercounter.me}{\texttt{ ~\newline
+\textsubscript{{\bfseries{Victor Vincent}}}}}~\newline
+\href{https://github.com/kentcdodds/babel-plugin-macros/commits?author=wintercounter}{\texttt{ 💻}} &\PBS\centering \href{http://mvasilkov.ovh}{\texttt{ ~\newline
+\textsubscript{{\bfseries{я котик пур-\/пур}}}}}~\newline
+\href{https://github.com/kentcdodds/babel-plugin-macros/commits?author=mvasilkov}{\texttt{ 📖}} &\PBS\centering \href{http://armandososa.com}{\texttt{ ~\newline
+\textsubscript{{\bfseries{Armando Sosa}}}}}~\newline
+\href{https://github.com/kentcdodds/babel-plugin-macros/commits?author=soska}{\texttt{ 📖}} &\PBS\centering \href{https://github.com/matvp91}{\texttt{ ~\newline
+\textsubscript{{\bfseries{Matthias}}}}}~\newline
+\href{https://github.com/kentcdodds/babel-plugin-macros/commits?author=matvp91}{\texttt{ 💻}} &\PBS\centering \href{https://www.jovidecroock.com/}{\texttt{ ~\newline
+\textsubscript{{\bfseries{Jovi De Croock}}}}}~\newline
+\href{https://github.com/kentcdodds/babel-plugin-macros/commits?author=JoviDeCroock}{\texttt{ 💻}} \href{https://github.com/kentcdodds/babel-plugin-macros/commits?author=JoviDeCroock}{\texttt{ ⚠️}} &\PBS\centering \href{http://victorarowo.com}{\texttt{ ~\newline
+\textsubscript{{\bfseries{Victor Arowo}}}}}~\newline
+\href{https://github.com/kentcdodds/babel-plugin-macros/commits?author=VictorArowo}{\texttt{ 📖}}  \\\cline{1-7}
+\PBS\centering \href{https://twitter.com/alexandermchan}{\texttt{ ~\newline
+\textsubscript{{\bfseries{Alex Chan}}}}}~\newline
+\href{https://github.com/kentcdodds/babel-plugin-macros/commits?author=alexanderchan}{\texttt{ 📖}} &\PBS\centering \href{https://probablyup.com}{\texttt{ ~\newline
+\textsubscript{{\bfseries{Evan Jacobs}}}}}~\newline
+\href{https://github.com/kentcdodds/babel-plugin-macros/commits?author=probablyup}{\texttt{ 💻}}  \\\cline{1-7}
+\end{longtabu}
+
+
+This project follows the \href{https://github.com/all-contributors/all-contributors}{\texttt{ all-\/contributors}} specification. Contributions of any kind welcome!\hypertarget{README.md_autotoc_md3143}{}\doxysubsubsection{\texorpdfstring{LICENSE}{LICENSE}}\label{README.md_autotoc_md3143}
+MIT 

@@ -103,77 +103,93 @@ $(function(){initNavTree('outdoorunit_8ino.html',''); initResizable(true); });
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">outdoorunit.ino File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Outdoor unit for weather monitoring and data transmission.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;DHT.h&quot;</code><br />
 <code>#include &quot;WiFi.h&quot;</code><br />
 <code>#include &quot;HTTPClient.h&quot;</code><br />
 <code>#include &quot;ArduinoJson.h&quot;</code><br />
 <code>#include &quot;ThingSpeak.h&quot;</code><br />
 <code>#include &quot;secrets.h&quot;</code><br />
+<code>#include &quot;esp_now.h&quot;</code><br />
 </div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpacket.html">packet</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure to hold weather data for transmission.  <a href="structpacket.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a1481e2e73ead95154830a58de486cb2e" id="r_a1481e2e73ead95154830a58de486cb2e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1481e2e73ead95154830a58de486cb2e">DHT11Pin</a>&#160;&#160;&#160;5</td></tr>
-<tr class="memdesc:a1481e2e73ead95154830a58de486cb2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pin to which the DHT11 sensor data line is connected.  <br /></td></tr>
 <tr class="separator:a1481e2e73ead95154830a58de486cb2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a710340e2388b9f9ad3eb87b6f979af42" id="r_a710340e2388b9f9ad3eb87b6f979af42"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a710340e2388b9f9ad3eb87b6f979af42">windPin</a>&#160;&#160;&#160;36</td></tr>
-<tr class="memdesc:a710340e2388b9f9ad3eb87b6f979af42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pin used for reading wind speed via analog input.  <br /></td></tr>
+<tr class="memitem:a710340e2388b9f9ad3eb87b6f979af42" id="r_a710340e2388b9f9ad3eb87b6f979af42"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a710340e2388b9f9ad3eb87b6f979af42">windPin</a>&#160;&#160;&#160;35</td></tr>
 <tr class="separator:a710340e2388b9f9ad3eb87b6f979af42"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4a0a4aa5db390e405fce9272877d4704" id="r_a4a0a4aa5db390e405fce9272877d4704"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4a0a4aa5db390e405fce9272877d4704">forecastWeatherURL</a>&#160;&#160;&#160;&quot;http://api.openweathermap.org/<a class="el" href="_indoor___e_s_p_8ino.html#a173b91873a3fc4f50a95416a6204d963">data</a>/2.5/forecast?lat=5.671401156455272&amp;lon=101.41105533517317&amp;units=metric&amp;appid=APIKEYHERE&quot;</td></tr>
-<tr class="memdesc:a4a0a4aa5db390e405fce9272877d4704"><td class="mdescLeft">&#160;</td><td class="mdescRight">URL for obtaining the 5-day/3-hour weather forecast from OpenWeatherMap. Replace "APIKEYHERE" with your actual API key.  <br /></td></tr>
+<tr class="memitem:ad00b753306ae72af33e1a360193ada86" id="r_ad00b753306ae72af33e1a360193ada86"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad00b753306ae72af33e1a360193ada86">lightPin</a>&#160;&#160;&#160;26</td></tr>
+<tr class="separator:ad00b753306ae72af33e1a360193ada86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a0a4aa5db390e405fce9272877d4704" id="r_a4a0a4aa5db390e405fce9272877d4704"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4a0a4aa5db390e405fce9272877d4704">forecastWeatherURL</a>&#160;&#160;&#160;&quot;http://api.openweathermap.org/data/2.5/forecast?lat=55.78598981728918&amp;lon=12.522723007973173&amp;units=metric&amp;appid=APIHERE&quot;</td></tr>
 <tr class="separator:a4a0a4aa5db390e405fce9272877d4704"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ae020b4c28bfae6d1b1550584075c7213" id="r_ae020b4c28bfae6d1b1550584075c7213"><td class="memItemLeft" align="right" valign="top">DHT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae020b4c28bfae6d1b1550584075c7213">dht11</a> (<a class="el" href="#a1481e2e73ead95154830a58de486cb2e">DHT11Pin</a>, DHT11)</td></tr>
-<tr class="memdesc:ae020b4c28bfae6d1b1550584075c7213"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instance of DHT sensor, configured for DHT11 type.  <br /></td></tr>
 <tr class="separator:ae020b4c28bfae6d1b1550584075c7213"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ec6b84c5d1247e1390758d6df12d0dc" id="r_a1ec6b84c5d1247e1390758d6df12d0dc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1ec6b84c5d1247e1390758d6df12d0dc">OnDataSent</a> (const uint8_t *mac_addr, esp_now_send_status_t status)</td></tr>
+<tr class="memdesc:a1ec6b84c5d1247e1390758d6df12d0dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback function called when data is sent via ESP-NOW.  <br /></td></tr>
+<tr class="separator:a1ec6b84c5d1247e1390758d6df12d0dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fc01d736fe50cf5b977f755b675f11d" id="r_a4fc01d736fe50cf5b977f755b675f11d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4fc01d736fe50cf5b977f755b675f11d">setup</a> ()</td></tr>
-<tr class="memdesc:a4fc01d736fe50cf5b977f755b675f11d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Arduino setup function. Initializes serial communication, DHT sensor, and connects to WiFi.  <br /></td></tr>
+<tr class="memdesc:a4fc01d736fe50cf5b977f755b675f11d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup function initializes serial communication, DHT11 sensor, and light sensor pin.  <br /></td></tr>
 <tr class="separator:a4fc01d736fe50cf5b977f755b675f11d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb4dc83e53bfebae6d753102470d94cc" id="r_acb4dc83e53bfebae6d753102470d94cc"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acb4dc83e53bfebae6d753102470d94cc">fetchRainStatus</a> ()</td></tr>
-<tr class="memdesc:acb4dc83e53bfebae6d753102470d94cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fetches and interprets the weather forecast to determine the rain status.  <br /></td></tr>
+<tr class="memdesc:acb4dc83e53bfebae6d753102470d94cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fetches the rain status from the OpenWeatherMap forecast API.  <br /></td></tr>
 <tr class="separator:acb4dc83e53bfebae6d753102470d94cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a66e3fe8bc97521ff09c211001a38a488" id="r_a66e3fe8bc97521ff09c211001a38a488"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a66e3fe8bc97521ff09c211001a38a488">collectRealWeather</a> ()</td></tr>
-<tr class="memdesc:a66e3fe8bc97521ff09c211001a38a488"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads temperature, humidity, and wind speed values, storing them in global variables.  <br /></td></tr>
+<tr class="memdesc:a66e3fe8bc97521ff09c211001a38a488"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collects real-time weather data from sensors.  <br /></td></tr>
 <tr class="separator:a66e3fe8bc97521ff09c211001a38a488"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7fb0631e0b6759d8791aae6c9f1e486" id="r_aa7fb0631e0b6759d8791aae6c9f1e486"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa7fb0631e0b6759d8791aae6c9f1e486">averageWindSpeed</a> ()</td></tr>
+<tr class="memdesc:aa7fb0631e0b6759d8791aae6c9f1e486"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the average wind speed over a sampling period.  <br /></td></tr>
+<tr class="separator:aa7fb0631e0b6759d8791aae6c9f1e486"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5fc4415d456afb7c4fb755642a131af" id="r_ab5fc4415d456afb7c4fb755642a131af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab5fc4415d456afb7c4fb755642a131af">fillPacket</a> (<a class="el" href="structpacket.html">packet</a> *pck)</td></tr>
+<tr class="memdesc:ab5fc4415d456afb7c4fb755642a131af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fills the packet structure with current weather data.  <br /></td></tr>
+<tr class="separator:ab5fc4415d456afb7c4fb755642a131af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d76cb22f9e5de30c2f19119123b3c49" id="r_a2d76cb22f9e5de30c2f19119123b3c49"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2d76cb22f9e5de30c2f19119123b3c49">sendPacket</a> (<a class="el" href="structpacket.html">packet</a> pck)</td></tr>
+<tr class="memdesc:a2d76cb22f9e5de30c2f19119123b3c49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends the weather data packet via ESP-NOW.  <br /></td></tr>
+<tr class="separator:a2d76cb22f9e5de30c2f19119123b3c49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe461d27b9c48d5921c00d521181f12f" id="r_afe461d27b9c48d5921c00d521181f12f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afe461d27b9c48d5921c00d521181f12f">loop</a> ()</td></tr>
-<tr class="memdesc:afe461d27b9c48d5921c00d521181f12f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Arduino main loop function. Reads sensor data, retrieves forecast, sends data to ThingSpeak, and waits 10 minutes.  <br /></td></tr>
+<tr class="memdesc:afe461d27b9c48d5921c00d521181f12f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main loop function.  <br /></td></tr>
 <tr class="separator:afe461d27b9c48d5921c00d521181f12f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a3cc119cb1a4beab046568bd21fcac3e5" id="r_a3cc119cb1a4beab046568bd21fcac3e5"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3cc119cb1a4beab046568bd21fcac3e5">temp</a> = 0</td></tr>
-<tr class="memdesc:a3cc119cb1a4beab046568bd21fcac3e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Holds the most recent temperature reading from the DHT11 sensor (in °C).  <br /></td></tr>
 <tr class="separator:a3cc119cb1a4beab046568bd21fcac3e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3cb62182097ceb535c2f31919c98a0b6" id="r_a3cb62182097ceb535c2f31919c98a0b6"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3cb62182097ceb535c2f31919c98a0b6">humidity</a> = 0</td></tr>
-<tr class="memdesc:a3cb62182097ceb535c2f31919c98a0b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Holds the most recent humidity reading from the DHT11 sensor (%).  <br /></td></tr>
 <tr class="separator:a3cb62182097ceb535c2f31919c98a0b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d97458b76e85fb7222cea3939288ac0" id="r_a0d97458b76e85fb7222cea3939288ac0"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0d97458b76e85fb7222cea3939288ac0">windSpeed</a> = 0</td></tr>
-<tr class="memdesc:a0d97458b76e85fb7222cea3939288ac0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Holds the most recent wind speed measurement from the analog pin in m/s.  <br /></td></tr>
 <tr class="separator:a0d97458b76e85fb7222cea3939288ac0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1374fe0572defa7d6c15413f96794ded" id="r_a1374fe0572defa7d6c15413f96794ded"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1374fe0572defa7d6c15413f96794ded">lightStatus</a> = 0</td></tr>
+<tr class="separator:a1374fe0572defa7d6c15413f96794ded"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a323dfc205549b3c13f0a25c1b670708a" id="r_a323dfc205549b3c13f0a25c1b670708a"><td class="memItemLeft" align="right" valign="top">WiFiClient&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a323dfc205549b3c13f0a25c1b670708a">client</a></td></tr>
-<tr class="memdesc:a323dfc205549b3c13f0a25c1b670708a"><td class="mdescLeft">&#160;</td><td class="mdescRight">WiFi client object for making HTTP requests and connecting to ThingSpeak.  <br /></td></tr>
 <tr class="separator:a323dfc205549b3c13f0a25c1b670708a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3fe2d87e95035781883990bf38554c9f" id="r_a3fe2d87e95035781883990bf38554c9f"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3fe2d87e95035781883990bf38554c9f">APIKey</a> = ThingSpeakWriteKey</td></tr>
-<tr class="memdesc:a3fe2d87e95035781883990bf38554c9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">ThingSpeak channel write API key.  <br /></td></tr>
-<tr class="separator:a3fe2d87e95035781883990bf38554c9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab68b888c3d204a4403af6d1b22f6d07c" id="r_ab68b888c3d204a4403af6d1b22f6d07c"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab68b888c3d204a4403af6d1b22f6d07c">server</a> = &quot;api.thingspeak.com&quot;</td></tr>
-<tr class="memdesc:ab68b888c3d204a4403af6d1b22f6d07c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hostname for the ThingSpeak API.  <br /></td></tr>
-<tr class="separator:ab68b888c3d204a4403af6d1b22f6d07c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac45cf487b7a438e2176288955a338f25" id="r_ac45cf487b7a438e2176288955a338f25"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac45cf487b7a438e2176288955a338f25">channelID</a> = ThingSpeakChannelID</td></tr>
-<tr class="memdesc:ac45cf487b7a438e2176288955a338f25"><td class="mdescLeft">&#160;</td><td class="mdescRight">The unique channel ID for the ThingSpeak channel.  <br /></td></tr>
-<tr class="separator:ac45cf487b7a438e2176288955a338f25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3725ad8cc4ac1b5881384ccd184fa249" id="r_a3725ad8cc4ac1b5881384ccd184fa249"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3725ad8cc4ac1b5881384ccd184fa249">broadcastAddress</a> [] = { 0x08, 0x3A, 0xF2, 0x8E, 0xEC, 0x58 }</td></tr>
+<tr class="separator:a3725ad8cc4ac1b5881384ccd184fa249"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a460dd048dadae7ce7815b6d61b7084f6" id="r_a460dd048dadae7ce7815b6d61b7084f6"><td class="memItemLeft" align="right" valign="top">esp_now_peer_info_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a460dd048dadae7ce7815b6d61b7084f6">peerInfo</a></td></tr>
+<tr class="separator:a460dd048dadae7ce7815b6d61b7084f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a58dd369d52256fa12a68256e014a210b" id="r_a58dd369d52256fa12a68256e014a210b"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a58dd369d52256fa12a68256e014a210b">rainStatus</a> = 0</td></tr>
-<tr class="memdesc:a58dd369d52256fa12a68256e014a210b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the computed rain status based on the forecast data.  <br /></td></tr>
 <tr class="separator:a58dd369d52256fa12a68256e014a210b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Outdoor unit for weather monitoring and data transmission. </p>
+<p>This file collects real-time weather data using sensors and fetches forecast data from OpenWeatherMap API. The collected data is then sent via ESP-NOW to a designated peer. </p>
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a1481e2e73ead95154830a58de486cb2e" name="a1481e2e73ead95154830a58de486cb2e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1481e2e73ead95154830a58de486cb2e">&#9670;&#160;</a></span>DHT11Pin</h2>
 
@@ -185,8 +201,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Pin to which the DHT11 sensor data line is connected. </p>
+<p>GPIO pin connected to DHT11 sensor </p>
 
 </div>
 </div>
@@ -197,12 +212,26 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define forecastWeatherURL&#160;&#160;&#160;&quot;http://api.openweathermap.org/<a class="el" href="_indoor___e_s_p_8ino.html#a173b91873a3fc4f50a95416a6204d963">data</a>/2.5/forecast?lat=5.671401156455272&amp;lon=101.41105533517317&amp;units=metric&amp;appid=APIKEYHERE&quot;</td>
+          <td class="memname">#define forecastWeatherURL&#160;&#160;&#160;&quot;http://api.openweathermap.org/data/2.5/forecast?lat=55.78598981728918&amp;lon=12.522723007973173&amp;units=metric&amp;appid=APIHERE&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>URL for fetching weather forecast </p>
 
-<p>URL for obtaining the 5-day/3-hour weather forecast from OpenWeatherMap. Replace "APIKEYHERE" with your actual API key. </p>
+</div>
+</div>
+<a id="ad00b753306ae72af33e1a360193ada86" name="ad00b753306ae72af33e1a360193ada86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad00b753306ae72af33e1a360193ada86">&#9670;&#160;</a></span>lightPin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define lightPin&#160;&#160;&#160;26</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>GPIO pin connected to light sensor </p>
 
 </div>
 </div>
@@ -213,16 +242,40 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define windPin&#160;&#160;&#160;36</td>
+          <td class="memname">#define windPin&#160;&#160;&#160;35</td>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Pin used for reading wind speed via analog input. </p>
+<p>GPIO pin connected to wind speed sensor </p>
 
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="aa7fb0631e0b6759d8791aae6c9f1e486" name="aa7fb0631e0b6759d8791aae6c9f1e486"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7fb0631e0b6759d8791aae6c9f1e486">&#9670;&#160;</a></span>averageWindSpeed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int averageWindSpeed </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculates the average wind speed over a sampling period. </p>
+<p>Samples the wind speed sensor at regular intervals and computes the average.</p>
+<dl class="section return"><dt>Returns</dt><dd>int Average wind speed. </dd></dl>
+<p>&lt; Sampling interval in milliseconds</p>
+<p>&lt; Number of samples</p>
+<p>Values calibrated from Arduino changed from 10 to 12 bit, equations updated accordingly</p>
+<p>&lt; Convert voltage to wind speed</p>
+
+</div>
+</div>
 <a id="a66e3fe8bc97521ff09c211001a38a488" name="a66e3fe8bc97521ff09c211001a38a488"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a66e3fe8bc97521ff09c211001a38a488">&#9670;&#160;</a></span>collectRealWeather()</h2>
 
@@ -238,13 +291,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Reads temperature, humidity, and wind speed values, storing them in global variables. </p>
-<ul>
-<li>Temperature is stored in <a class="el" href="#a3cc119cb1a4beab046568bd21fcac3e5">temp</a> (°C).</li>
-<li>Humidity is stored in <a class="el" href="_indoor___e_s_p_8ino.html#a405f237eaa8a513a9682fbb6e44c4860">humidity</a> (%).</li>
-<li>Wind speed is stored in <a class="el" href="#a0d97458b76e85fb7222cea3939288ac0">windSpeed</a>, based on an analog read from <a class="el" href="#a710340e2388b9f9ad3eb87b6f979af42">windPin</a>.</li>
-</ul>
-<dl class="section note"><dt>Note</dt><dd>The current implementation only stores the raw analog reading as the wind speed. A user-defined formula should be applied to convert this to a real speed in m/s. </dd></dl>
+<p>Collects real-time weather data from sensors. </p>
+<p>Reads temperature, humidity, and wind speed from respective sensors. </p>
 
 </div>
 </div>
@@ -266,8 +314,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Instance of DHT sensor, configured for DHT11 type. </p>
+<p>DHT11 sensor instance </p>
 
 </div>
 </div>
@@ -286,15 +333,40 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Fetches and interprets the weather forecast to determine the rain status. </p>
-<p>Uses the OpenWeatherMap API forecast data for the next two intervals (3-hour blocks). Checks if "Rain" or "Drizzle" is mentioned in the first or second forecast blocks, and assigns a status code accordingly.</p>
-<dl class="section return"><dt>Returns</dt><dd>An integer representing the success or failure of the operation.<ul>
-<li>0,1,2,3: Valid status for expected rain (see <a class="el" href="#a58dd369d52256fa12a68256e014a210b">rainStatus</a>).</li>
-<li>-1: WiFi not connected.</li>
-<li>-2: HTTP GET request failed.</li>
-<li>-3: JSON deserialization failed. </li>
+<p>Fetches the rain status from the OpenWeatherMap forecast API. </p>
+<p>Connects to WiFi, retrieves forecast data, parses JSON response, and determines rain status.</p>
+<dl class="section return"><dt>Returns</dt><dd>int8_t Rain status:<ul>
+<li>0: No rain</li>
+<li>1: Rain in the first interval</li>
+<li>2: Rain in the second interval</li>
+<li>3: Rain in both intervals </li>
 </ul>
 </dd></dl>
+
+</div>
+</div>
+<a id="ab5fc4415d456afb7c4fb755642a131af" name="ab5fc4415d456afb7c4fb755642a131af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5fc4415d456afb7c4fb755642a131af">&#9670;&#160;</a></span>fillPacket()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fillPacket </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structpacket.html">packet</a> *</td>          <td class="paramname"><span class="paramname"><em>pck</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fills the packet structure with current weather data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pck</td><td>Pointer to the packet structure to be filled. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -313,14 +385,67 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Arduino main loop function. Reads sensor data, retrieves forecast, sends data to ThingSpeak, and waits 10 minutes. </p>
-<p>The cycle is:</p><ol type="1">
-<li>Delay 3 seconds to ensure the DHT sensor refreshes data.</li>
-<li>Collect real-world weather data using <a class="el" href="#a66e3fe8bc97521ff09c211001a38a488" title="Reads temperature, humidity, and wind speed values, storing them in global variables.">collectRealWeather()</a>.</li>
-<li>Retrieve rain status from <a class="el" href="#acb4dc83e53bfebae6d753102470d94cc" title="Fetches and interprets the weather forecast to determine the rain status.">fetchRainStatus()</a>.</li>
-<li>Initialize ThingSpeak, connect, update fields, and disconnect.</li>
-<li>Delay 10 minutes before the next cycle. </li>
-</ol>
+<p>Main loop function. </p>
+<p>Periodically collects weather data, fetches rain status, fills the packet, and sends it. </p>
+<p>&lt; Wait before starting data collection</p>
+<p>&lt; Wait before sending data</p>
+<p>&lt; Wait before next loop iteration</p>
+
+</div>
+</div>
+<a id="a1ec6b84c5d1247e1390758d6df12d0dc" name="a1ec6b84c5d1247e1390758d6df12d0dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ec6b84c5d1247e1390758d6df12d0dc">&#9670;&#160;</a></span>OnDataSent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void OnDataSent </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *</td>          <td class="paramname"><span class="paramname"><em>mac_addr</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">esp_now_send_status_t</td>          <td class="paramname"><span class="paramname"><em>status</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Callback function called when data is sent via ESP-NOW. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mac_addr</td><td>MAC address of the receiver. </td></tr>
+    <tr><td class="paramname">status</td><td>Status of the send operation. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2d76cb22f9e5de30c2f19119123b3c49" name="a2d76cb22f9e5de30c2f19119123b3c49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d76cb22f9e5de30c2f19119123b3c49">&#9670;&#160;</a></span>sendPacket()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sendPacket </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structpacket.html">packet</a></td>          <td class="paramname"><span class="paramname"><em>pck</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sends the weather data packet via ESP-NOW. </p>
+<p>Initializes ESP-NOW, registers the send callback, adds the peer, and sends the packet.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pck</td><td>The packet structure containing weather data to be sent. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -339,41 +464,23 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Arduino setup function. Initializes serial communication, DHT sensor, and connects to WiFi. </p>
-<p>Sets up a baud rate of 9600 for the serial monitor. Waits until WiFi is successfully connected before proceeding. </p>
+<p>Setup function initializes serial communication, DHT11 sensor, and light sensor pin. </p>
 
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
-<a id="a3fe2d87e95035781883990bf38554c9f" name="a3fe2d87e95035781883990bf38554c9f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3fe2d87e95035781883990bf38554c9f">&#9670;&#160;</a></span>APIKey</h2>
+<a id="a3725ad8cc4ac1b5881384ccd184fa249" name="a3725ad8cc4ac1b5881384ccd184fa249"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3725ad8cc4ac1b5881384ccd184fa249">&#9670;&#160;</a></span>broadcastAddress</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const char* APIKey = ThingSpeakWriteKey</td>
+          <td class="memname">uint8_t broadcastAddress[] = { 0x08, 0x3A, 0xF2, 0x8E, 0xEC, 0x58 }</td>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>ThingSpeak channel write API key. </p>
-
-</div>
-</div>
-<a id="ac45cf487b7a438e2176288955a338f25" name="ac45cf487b7a438e2176288955a338f25"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac45cf487b7a438e2176288955a338f25">&#9670;&#160;</a></span>channelID</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">unsigned long channelID = ThingSpeakChannelID</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The unique channel ID for the ThingSpeak channel. </p>
+<p>Broadcast address for ESP-NOW communication </p>
 
 </div>
 </div>
@@ -388,8 +495,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>WiFi client object for making HTTP requests and connecting to ThingSpeak. </p>
+<p>WiFi client for HTTP requests </p>
 
 </div>
 </div>
@@ -404,8 +510,37 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Current humidity reading </p>
 
-<p>Holds the most recent humidity reading from the DHT11 sensor (%). </p>
+</div>
+</div>
+<a id="a1374fe0572defa7d6c15413f96794ded" name="a1374fe0572defa7d6c15413f96794ded"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1374fe0572defa7d6c15413f96794ded">&#9670;&#160;</a></span>lightStatus</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t lightStatus = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Current light status </p>
+
+</div>
+</div>
+<a id="a460dd048dadae7ce7815b6d61b7084f6" name="a460dd048dadae7ce7815b6d61b7084f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a460dd048dadae7ce7815b6d61b7084f6">&#9670;&#160;</a></span>peerInfo</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">esp_now_peer_info_t peerInfo</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>ESP-NOW peer information </p>
 
 </div>
 </div>
@@ -420,31 +555,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Stores the computed rain status based on the forecast data. </p>
-<p>The mapping used is:</p><ul>
-<li>0: No rain expected in the next two intervals (6 hours).</li>
-<li>1: Rain expected in the first interval (first 3 hours).</li>
-<li>2: Rain expected in the second interval (next 3 hours).</li>
-<li>3: Rain expected in both intervals (first and second).</li>
-<li>Negative values returned by <a class="el" href="#acb4dc83e53bfebae6d753102470d94cc" title="Fetches and interprets the weather forecast to determine the rain status.">fetchRainStatus()</a> indicate errors connecting or parsing data. </li>
-</ul>
-
-</div>
-</div>
-<a id="ab68b888c3d204a4403af6d1b22f6d07c" name="ab68b888c3d204a4403af6d1b22f6d07c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab68b888c3d204a4403af6d1b22f6d07c">&#9670;&#160;</a></span>server</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const char* server = &quot;api.thingspeak.com&quot;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Hostname for the ThingSpeak API. </p>
+<p>Current rain status </p>
 
 </div>
 </div>
@@ -459,8 +570,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Holds the most recent temperature reading from the DHT11 sensor (in °C). </p>
+<p>Current temperature reading </p>
 
 </div>
 </div>
@@ -475,9 +585,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Holds the most recent wind speed measurement from the analog pin in m/s. </p>
-<dl class="section note"><dt>Note</dt><dd>Currently just stores the raw analog reading. A user-defined conversion to an actual speed in m/s may be implemented in <a class="el" href="#a66e3fe8bc97521ff09c211001a38a488">collectRealWeather()</a>. </dd></dl>
+<p>Current wind speed reading </p>
 
 </div>
 </div>

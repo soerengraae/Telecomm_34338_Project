@@ -1,0 +1,22 @@
+\doxysection{Tele-\/website/node\+\_\+modules/supports-\/preserve-\/symlinks-\/flag Directory Reference}
+\hypertarget{dir_8240e9b68cadb658ffea0aca9a069ec2}{}\label{dir_8240e9b68cadb658ffea0aca9a069ec2}\index{Tele-\/website/node\_modules/supports-\/preserve-\/symlinks-\/flag Directory Reference@{Tele-\/website/node\_modules/supports-\/preserve-\/symlinks-\/flag Directory Reference}}
+
+
+\doxysubsection{Detailed Description}
+\href{https://github.com/inspect-js/node-supports-preserve-symlinks-flag/actions}{\texttt{ }} \href{https://app.codecov.io/gh/inspect-js/node-supports-preserve-symlinks-flag/}{\texttt{ }} \href{https://david-dm.org/inspect-js/node-supports-preserve-symlinks-flag}{\texttt{ }} \href{https://david-dm.org/inspect-js/node-supports-preserve-symlinks-flag\#info=devDependencies}{\texttt{ }} \mbox{[}\mbox{]}\mbox{[}license-\/url\mbox{]} \href{https://npm-stat.com/charts.html?package=node-supports-preserve-symlinks-flag}{\texttt{ }}
+
+\href{https://npmjs.org/package/node-supports-preserve-symlinks-flag}{\texttt{ }}
+
+Determine if the current node version supports the {\ttfamily -\/-\/preserve-\/symlinks} flag.\hypertarget{README.md_autotoc_md3821}{}\doxysubsection{\texorpdfstring{Example}{Example}}\label{README.md_autotoc_md3821}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{var\ supportsPreserveSymlinks\ =\ require('node-\/supports-\/preserve-\/symlinks-\/flag');}
+\DoxyCodeLine{var\ assert\ =\ require('assert');}
+\DoxyCodeLine{}
+\DoxyCodeLine{assert.equal(supportsPreserveSymlinks,\ null);\ //\ in\ a\ browser}
+\DoxyCodeLine{assert.equal(supportsPreserveSymlinks,\ false);\ //\ in\ node\ <\ v6.2}
+\DoxyCodeLine{assert.equal(supportsPreserveSymlinks,\ true);\ //\ in\ node\ v6.2+}
+
+\end{DoxyCode}
+\hypertarget{README.md_autotoc_md3822}{}\doxysubsection{\texorpdfstring{Tests}{Tests}}\label{README.md_autotoc_md3822}
+Simply clone the repo, {\ttfamily npm install}, and run {\ttfamily npm test} 

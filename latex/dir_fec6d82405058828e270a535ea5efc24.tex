@@ -1,0 +1,146 @@
+\doxysection{Tele-\/website/node\+\_\+modules/yaml Directory Reference}
+\hypertarget{dir_fec6d82405058828e270a535ea5efc24}{}\label{dir_fec6d82405058828e270a535ea5efc24}\index{Tele-\/website/node\_modules/yaml Directory Reference@{Tele-\/website/node\_modules/yaml Directory Reference}}
+
+
+\doxysubsection{Detailed Description}
+{\ttfamily yaml} is a Java\+Script parser and stringifier for \href{http://yaml.org/}{\texttt{ YAML}}, a human friendly data serialization standard. It supports both parsing and stringifying data using all versions of YAML, along with all common data schemas. As a particularly distinguishing feature, {\ttfamily yaml} fully supports reading and writing comments and blank lines in YAML documents.
+
+The library is released under the ISC open source license, and the code is \href{https://github.com/eemeli/yaml/}{\texttt{ available on Git\+Hub}}. It has no external dependencies and runs on Node.\+js 6 and later, and in browsers from IE 11 upwards.
+
+For the purposes of versioning, any changes that break any of the endpoints or APIs documented here will be considered semver-\/major breaking changes. Undocumented library internals may change between minor versions, and previous APIs may be deprecated (but not removed).
+
+For more information, see the project\textquotesingle{}s documentation site\+: \href{https://eemeli.org/yaml/v1/}{\texttt{ {\bfseries{eemeli.\+org/yaml/v1}}}}
+
+To install\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{npm\ install\ yaml}
+
+\end{DoxyCode}
+
+
+{\bfseries{Note\+:}} This is {\ttfamily yaml@1}. You may also be interested in the next version, currently available as \href{https://www.npmjs.com/package/yaml/v/next}{\texttt{ {\ttfamily yaml@next}}}.\hypertarget{README.md_autotoc_md3824}{}\doxysubsection{\texorpdfstring{API Overview}{API Overview}}\label{README.md_autotoc_md3824}
+The API provided by {\ttfamily yaml} has three layers, depending on how deep you need to go\+: \href{https://eemeli.org/yaml/v1/\#parse-amp-stringify}{\texttt{ Parse \& Stringify}}, \href{https://eemeli.org/yaml/\#documents}{\texttt{ Documents}}, and the \href{https://eemeli.org/yaml/\#cst-parser}{\texttt{ CST Parser}}. The first has the simplest API and "{}just works"{}, the second gets you all the bells and whistles supported by the library along with a decent \href{https://eemeli.org/yaml/\#content-nodes}{\texttt{ AST}}, and the third is the closest to YAML source, making it fast, raw, and crude.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ YAML\ from\ 'yaml'}
+\DoxyCodeLine{//\ or}
+\DoxyCodeLine{const\ YAML\ =\ require('yaml')}
+
+\end{DoxyCode}
+\hypertarget{README.md_autotoc_md3825}{}\doxysubsubsection{\texorpdfstring{Parse \& Stringify}{Parse \& Stringify}}\label{README.md_autotoc_md3825}
+
+\begin{DoxyItemize}
+\item \href{https://eemeli.org/yaml/v1/\#yaml-parse}{\texttt{ {\ttfamily YAML.\+parse(str, options)\+: value}}}
+\item \href{https://eemeli.org/yaml/v1/\#yaml-stringify}{\texttt{ {\ttfamily YAML.\+stringify(value, options)\+: string}}}
+\end{DoxyItemize}\hypertarget{README.md_autotoc_md3826}{}\doxysubsubsection{\texorpdfstring{YAML Documents}{YAML Documents}}\label{README.md_autotoc_md3826}
+
+\begin{DoxyItemize}
+\item \href{https://eemeli.org/yaml/v1/\#creating-nodes}{\texttt{ {\ttfamily YAML.\+create\+Node(value, wrap\+Scalars, tag)\+: Node}}}
+\item \href{https://eemeli.org/yaml/v1/\#options}{\texttt{ {\ttfamily YAML.\+default\+Options}}}
+\item \href{https://eemeli.org/yaml/v1/\#yaml-documents}{\texttt{ {\ttfamily YAML.\+Document}}}
+\begin{DoxyItemize}
+\item \href{https://eemeli.org/yaml/v1/\#creating-documents}{\texttt{ {\ttfamily constructor(options)}}}
+\item \href{https://eemeli.org/yaml/v1/\#options}{\texttt{ {\ttfamily defaults}}}
+\item \href{https://eemeli.org/yaml/v1/\#working-with-anchors}{\texttt{ {\ttfamily \#anchors}}}
+\item \href{https://eemeli.org/yaml/v1/\#content-nodes}{\texttt{ {\ttfamily \#contents}}}
+\item \href{https://eemeli.org/yaml/v1/\#errors}{\texttt{ {\ttfamily \#errors}}}
+\end{DoxyItemize}
+\item \href{https://eemeli.org/yaml/v1/\#parsing-documents}{\texttt{ {\ttfamily YAML.\+parse\+All\+Documents(str, options)\+: YAML.\+Document\mbox{[}\mbox{]}}}}
+\item \href{https://eemeli.org/yaml/v1/\#parsing-documents}{\texttt{ {\ttfamily YAML.\+parse\+Document(str, options)\+: YAML.\+Document}}}
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ \{\ Pair,\ YAMLMap,\ YAMLSeq\ \}\ from\ 'yaml/types'}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item \href{https://eemeli.org/yaml/v1/\#creating-nodes}{\texttt{ {\ttfamily new Pair(key, value)}}}
+\item \href{https://eemeli.org/yaml/v1/\#creating-nodes}{\texttt{ {\ttfamily new YAMLMap()}}}
+\item \href{https://eemeli.org/yaml/v1/\#creating-nodes}{\texttt{ {\ttfamily new YAMLSeq()}}}
+\end{DoxyItemize}\hypertarget{README.md_autotoc_md3827}{}\doxysubsubsection{\texorpdfstring{CST Parser}{CST Parser}}\label{README.md_autotoc_md3827}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ parseCST\ from\ 'yaml/parse-\/cst'}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item \href{https://eemeli.org/yaml/v1/\#parsecst}{\texttt{ {\ttfamily parse\+CST(str)\+: CSTDocument\mbox{[}\mbox{]}}}}
+\item \href{https://eemeli.org/yaml/v1/\#parsecst}{\texttt{ {\ttfamily YAML.\+parse\+CST(str)\+: CSTDocument\mbox{[}\mbox{]}}}}
+\end{DoxyItemize}\hypertarget{README.md_autotoc_md3828}{}\doxysubsection{\texorpdfstring{YAML.\+parse}{YAML.\+parse}}\label{README.md_autotoc_md3828}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ file.yml}
+\DoxyCodeLine{YAML:}
+\DoxyCodeLine{\ \ -\/\ A\ human-\/readable\ data\ serialization\ language}
+\DoxyCodeLine{\ \ -\/\ https://en.wikipedia.org/wiki/YAML}
+\DoxyCodeLine{yaml:}
+\DoxyCodeLine{\ \ -\/\ A\ complete\ JavaScript\ implementation}
+\DoxyCodeLine{\ \ -\/\ https://www.npmjs.com/package/yaml}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ fs\ from\ 'fs'}
+\DoxyCodeLine{import\ YAML\ from\ 'yaml'}
+\DoxyCodeLine{}
+\DoxyCodeLine{YAML.parse('3.14159')}
+\DoxyCodeLine{//\ 3.14159}
+\DoxyCodeLine{}
+\DoxyCodeLine{YAML.parse('[\ true,\ false,\ maybe,\ null\ ]\(\backslash\)n')}
+\DoxyCodeLine{//\ [\ true,\ false,\ 'maybe',\ null\ ]}
+\DoxyCodeLine{}
+\DoxyCodeLine{const\ file\ =\ fs.readFileSync('./file.yml',\ 'utf8')}
+\DoxyCodeLine{YAML.parse(file)}
+\DoxyCodeLine{//\ \{\ YAML:}
+\DoxyCodeLine{//\ \ \ [\ 'A\ human-\/readable\ data\ serialization\ language',}
+\DoxyCodeLine{//\ \ \ \ \ 'https://en.wikipedia.org/wiki/YAML'\ ],}
+\DoxyCodeLine{//\ \ \ yaml:}
+\DoxyCodeLine{//\ \ \ [\ 'A\ complete\ JavaScript\ implementation',}
+\DoxyCodeLine{//\ \ \ \ \ 'https://www.npmjs.com/package/yaml'\ ]\ \}}
+
+\end{DoxyCode}
+\hypertarget{README.md_autotoc_md3829}{}\doxysubsection{\texorpdfstring{YAML.\+stringify}{YAML.\+stringify}}\label{README.md_autotoc_md3829}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ YAML\ from\ 'yaml'}
+\DoxyCodeLine{}
+\DoxyCodeLine{YAML.stringify(3.14159)}
+\DoxyCodeLine{//\ '3.14159\(\backslash\)n'}
+\DoxyCodeLine{}
+\DoxyCodeLine{YAML.stringify([true,\ false,\ 'maybe',\ null])}
+\DoxyCodeLine{//\ \`{}-\/\ true}
+\DoxyCodeLine{//\ -\/\ false}
+\DoxyCodeLine{//\ -\/\ maybe}
+\DoxyCodeLine{//\ -\/\ null}
+\DoxyCodeLine{//\ \`{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{YAML.stringify(\{\ number:\ 3,\ plain:\ 'string',\ block:\ 'two\(\backslash\)nlines\(\backslash\)n'\ \})}
+\DoxyCodeLine{//\ \`{}number:\ 3}
+\DoxyCodeLine{//\ plain:\ string}
+\DoxyCodeLine{//\ block:\ >}
+\DoxyCodeLine{//\ \ \ two}
+\DoxyCodeLine{//}
+\DoxyCodeLine{//\ \ \ lines}
+\DoxyCodeLine{//\ \`{}}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+
+
+Browser testing provided by\+:
+
+\href{https://www.browserstack.com/open-source}{\texttt{  }} 

@@ -1,0 +1,40 @@
+\doxysection{Tele-\/website/node\+\_\+modules/@emotion/weak-\/memoize Directory Reference}
+\hypertarget{dir_2647d01dceaf09857b80a9e84578149d}{}\label{dir_2647d01dceaf09857b80a9e84578149d}\index{Tele-\/website/node\_modules/"@emotion/weak-\/memoize Directory Reference@{Tele-\/website/node\_modules/"@emotion/weak-\/memoize Directory Reference}}
+
+
+\doxysubsection{Detailed Description}
+\begin{quote}
+A memoization function that uses a Weak\+Map \end{quote}
+\hypertarget{README.md_autotoc_md185}{}\doxysubsection{\texorpdfstring{Install}{Install}}\label{README.md_autotoc_md185}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{yarn\ add\ @emotion/weak-\/memoize}
+
+\end{DoxyCode}
+\hypertarget{README.md_autotoc_md186}{}\doxysubsection{\texorpdfstring{Usage}{Usage}}\label{README.md_autotoc_md186}
+Because @emotion/weak-\/memoize uses a Weak\+Map the argument must be a non primitive type, e.\+g. objects, functions, arrays and etc. The function passed to {\ttfamily weak\+Memoize} must also only accept a single argument.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ weakMemoize\ from\ '@emotion/weak-\/memoize'}
+\DoxyCodeLine{}
+\DoxyCodeLine{let\ doThing\ =\ weakMemoize((\{\ someProperty\ \})\ =>\ \{}
+\DoxyCodeLine{\ \ return\ \{\ newName:\ someProperty\ \}}
+\DoxyCodeLine{\})}
+\DoxyCodeLine{}
+\DoxyCodeLine{let\ obj\ =\ \{\ someProperty:\ true\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{let\ firstResult\ =\ doThing(obj)}
+\DoxyCodeLine{}
+\DoxyCodeLine{let\ secondResult\ =\ doThing(obj)}
+\DoxyCodeLine{}
+\DoxyCodeLine{firstResult\ ===\ secondResult\ //\ true}
+\DoxyCodeLine{}
+\DoxyCodeLine{let\ newObj\ =\ \{\ someProperty:\ true\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{let\ thirdResult\ =\ doThing(newObj)}
+\DoxyCodeLine{}
+\DoxyCodeLine{thirdResult\ ===\ firstResult\ //\ false}
+
+\end{DoxyCode}
+ 

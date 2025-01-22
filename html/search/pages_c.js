@@ -1,0 +1,4 @@
+var searchData=
+[
+  ['mui_20com_20versions_20versions_20a_0',['mui com versions Versions a',['../md__tele-website_2node__modules_2_0dmui_2material_2_c_h_a_n_g_e_l_o_g.html',1,'&lt;a href=&quot;https://mui.com/versions/&quot; &gt;Versions&lt;/a&gt;'],['../md__tele-website_2node__modules_2_0dmui_2private-theming_2_c_h_a_n_g_e_l_o_g.html',1,'&lt;a href=&quot;https://mui.com/versions/&quot; &gt;Versions&lt;/a&gt;'],['../md__tele-website_2node__modules_2_0dmui_2styled-engine_2_c_h_a_n_g_e_l_o_g.html',1,'&lt;a href=&quot;https://mui.com/versions/&quot; &gt;Versions&lt;/a&gt;'],['../md__tele-website_2node__modules_2_0dmui_2system_2_c_h_a_n_g_e_l_o_g.html',1,'&lt;a href=&quot;https://mui.com/versions/&quot; &gt;Versions&lt;/a&gt;'],['../md__tele-website_2node__modules_2_0dmui_2utils_2_c_h_a_n_g_e_l_o_g.html',1,'&lt;a href=&quot;https://mui.com/versions/&quot; &gt;Versions&lt;/a&gt;']]]
+];

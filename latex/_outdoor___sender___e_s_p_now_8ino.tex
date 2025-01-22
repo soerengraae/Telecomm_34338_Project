@@ -1,0 +1,83 @@
+\doxysection{Outdoor\+\_\+\+Sender\+\_\+\+ESPNow/\+Outdoor\+\_\+\+Sender\+\_\+\+ESPNow.ino File Reference}
+\hypertarget{_outdoor___sender___e_s_p_now_8ino}{}\label{_outdoor___sender___e_s_p_now_8ino}\index{Outdoor\_Sender\_ESPNow/Outdoor\_Sender\_ESPNow.ino@{Outdoor\_Sender\_ESPNow/Outdoor\_Sender\_ESPNow.ino}}
+{\ttfamily \#include $<$esp\+\_\+now.\+h$>$}\newline
+{\ttfamily \#include $<$Wi\+Fi.\+h$>$}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structstruct__message}{struct\+\_\+message}}
+\begin{DoxyCompactList}\small\item\em Structure to hold sensor data received via ESP-\/\+NOW. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct struct\+\_\+message \mbox{\hyperlink{_outdoor___sender___e_s_p_now_8ino_add81b616c060a3c276b7dee4fcd54e9f}{struct\+\_\+message}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_outdoor___sender___e_s_p_now_8ino_a1ec6b84c5d1247e1390758d6df12d0dc}{On\+Data\+Sent}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}mac\+\_\+addr, esp\+\_\+now\+\_\+send\+\_\+status\+\_\+t status)
+\item 
+void \mbox{\hyperlink{_outdoor___sender___e_s_p_now_8ino_a4fc01d736fe50cf5b977f755b675f11d}{setup}} ()
+\item 
+void \mbox{\hyperlink{_outdoor___sender___e_s_p_now_8ino_afe461d27b9c48d5921c00d521181f12f}{loop}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{_outdoor___sender___e_s_p_now_8ino_a3725ad8cc4ac1b5881384ccd184fa249}{broadcast\+Address}} \mbox{[}$\,$\mbox{]} = \{ 0x08, 0x3A, 0x\+F2, 0x8E, 0x\+EC, 0x58 \}
+\item 
+\mbox{\hyperlink{structstruct__message}{struct\+\_\+message}} \mbox{\hyperlink{_outdoor___sender___e_s_p_now_8ino_aa9699336028d3fe5cc63b01988426fac}{my\+Data}}
+\item 
+esp\+\_\+now\+\_\+peer\+\_\+info\+\_\+t \mbox{\hyperlink{_outdoor___sender___e_s_p_now_8ino_a460dd048dadae7ce7815b6d61b7084f6}{peer\+Info}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\Hypertarget{_outdoor___sender___e_s_p_now_8ino_add81b616c060a3c276b7dee4fcd54e9f}\index{Outdoor\_Sender\_ESPNow.ino@{Outdoor\_Sender\_ESPNow.ino}!struct\_message@{struct\_message}}
+\index{struct\_message@{struct\_message}!Outdoor\_Sender\_ESPNow.ino@{Outdoor\_Sender\_ESPNow.ino}}
+\doxysubsubsection{\texorpdfstring{struct\_message}{struct\_message}}
+{\footnotesize\ttfamily \label{_outdoor___sender___e_s_p_now_8ino_add81b616c060a3c276b7dee4fcd54e9f} 
+typedef struct struct\+\_\+message struct\+\_\+message}
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{_outdoor___sender___e_s_p_now_8ino_afe461d27b9c48d5921c00d521181f12f}\index{Outdoor\_Sender\_ESPNow.ino@{Outdoor\_Sender\_ESPNow.ino}!loop@{loop}}
+\index{loop@{loop}!Outdoor\_Sender\_ESPNow.ino@{Outdoor\_Sender\_ESPNow.ino}}
+\doxysubsubsection{\texorpdfstring{loop()}{loop()}}
+{\footnotesize\ttfamily \label{_outdoor___sender___e_s_p_now_8ino_afe461d27b9c48d5921c00d521181f12f} 
+void loop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_outdoor___sender___e_s_p_now_8ino_a1ec6b84c5d1247e1390758d6df12d0dc}\index{Outdoor\_Sender\_ESPNow.ino@{Outdoor\_Sender\_ESPNow.ino}!OnDataSent@{OnDataSent}}
+\index{OnDataSent@{OnDataSent}!Outdoor\_Sender\_ESPNow.ino@{Outdoor\_Sender\_ESPNow.ino}}
+\doxysubsubsection{\texorpdfstring{OnDataSent()}{OnDataSent()}}
+{\footnotesize\ttfamily \label{_outdoor___sender___e_s_p_now_8ino_a1ec6b84c5d1247e1390758d6df12d0dc} 
+void On\+Data\+Sent (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{mac\+\_\+addr}{, }\item[{esp\+\_\+now\+\_\+send\+\_\+status\+\_\+t}]{status}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_outdoor___sender___e_s_p_now_8ino_a4fc01d736fe50cf5b977f755b675f11d}\index{Outdoor\_Sender\_ESPNow.ino@{Outdoor\_Sender\_ESPNow.ino}!setup@{setup}}
+\index{setup@{setup}!Outdoor\_Sender\_ESPNow.ino@{Outdoor\_Sender\_ESPNow.ino}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily \label{_outdoor___sender___e_s_p_now_8ino_a4fc01d736fe50cf5b977f755b675f11d} 
+void setup (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{_outdoor___sender___e_s_p_now_8ino_a3725ad8cc4ac1b5881384ccd184fa249}\index{Outdoor\_Sender\_ESPNow.ino@{Outdoor\_Sender\_ESPNow.ino}!broadcastAddress@{broadcastAddress}}
+\index{broadcastAddress@{broadcastAddress}!Outdoor\_Sender\_ESPNow.ino@{Outdoor\_Sender\_ESPNow.ino}}
+\doxysubsubsection{\texorpdfstring{broadcastAddress}{broadcastAddress}}
+{\footnotesize\ttfamily \label{_outdoor___sender___e_s_p_now_8ino_a3725ad8cc4ac1b5881384ccd184fa249} 
+uint8\+\_\+t broadcast\+Address\mbox{[}$\,$\mbox{]} = \{ 0x08, 0x3A, 0x\+F2, 0x8E, 0x\+EC, 0x58 \}}
+
+\Hypertarget{_outdoor___sender___e_s_p_now_8ino_aa9699336028d3fe5cc63b01988426fac}\index{Outdoor\_Sender\_ESPNow.ino@{Outdoor\_Sender\_ESPNow.ino}!myData@{myData}}
+\index{myData@{myData}!Outdoor\_Sender\_ESPNow.ino@{Outdoor\_Sender\_ESPNow.ino}}
+\doxysubsubsection{\texorpdfstring{myData}{myData}}
+{\footnotesize\ttfamily \label{_outdoor___sender___e_s_p_now_8ino_aa9699336028d3fe5cc63b01988426fac} 
+\mbox{\hyperlink{structstruct__message}{struct\+\_\+message}} my\+Data}
+
+\Hypertarget{_outdoor___sender___e_s_p_now_8ino_a460dd048dadae7ce7815b6d61b7084f6}\index{Outdoor\_Sender\_ESPNow.ino@{Outdoor\_Sender\_ESPNow.ino}!peerInfo@{peerInfo}}
+\index{peerInfo@{peerInfo}!Outdoor\_Sender\_ESPNow.ino@{Outdoor\_Sender\_ESPNow.ino}}
+\doxysubsubsection{\texorpdfstring{peerInfo}{peerInfo}}
+{\footnotesize\ttfamily \label{_outdoor___sender___e_s_p_now_8ino_a460dd048dadae7ce7815b6d61b7084f6} 
+esp\+\_\+now\+\_\+peer\+\_\+info\+\_\+t peer\+Info}
+

@@ -1,0 +1,64 @@
+\doxysection{Tele-\/website/node\+\_\+modules/robust-\/predicates Directory Reference}
+\hypertarget{dir_8b452ce435786e47e0204c4c1b7c2611}{}\label{dir_8b452ce435786e47e0204c4c1b7c2611}\index{Tele-\/website/node\_modules/robust-\/predicates Directory Reference@{Tele-\/website/node\_modules/robust-\/predicates Directory Reference}}
+
+
+\doxysubsection{Detailed Description}
+Fast robust predicates for computational geometry in Java\+Script. Provides reliable 2D and 3D point orientation tests ({\ttfamily orient2d}, {\ttfamily orient3d}, {\ttfamily incircle}, {\ttfamily insphere}) that are not susceptible to floating point errors (without sacrificing performance). A modern port of \href{https://www.cs.cmu.edu/~quake/robust.html}{\texttt{ Jonathan R Shewchuk\textquotesingle{}s C code}}, an industry standard since 1996.
+
+\href{https://observablehq.com/@mourner/non-robust-arithmetic-as-art}{\texttt{ }}
+
+\+\_\+\+Figure\+: non-\/robust vs robust {\ttfamily orient2d} test for points within a tiny range (2\textsuperscript{-\/42}).\+\_\+
+
+\href{https://github.com/mourner/robust-predicates/actions}{\texttt{ }} \href{https://github.com/mourner/projects}{\texttt{ }} \href{https://unpkg.com/robust-predicates}{\texttt{ }}\hypertarget{README.md_autotoc_md3701}{}\doxysubsection{\texorpdfstring{\href{https://observablehq.com/@mourner/non-robust-arithmetic-as-art}{\texttt{ Demo}}}{\href{https://observablehq.com/@mourner/non-robust-arithmetic-as-art}{\texttt{ Demo}}}}\label{README.md_autotoc_md3701}
+\hypertarget{README.md_autotoc_md3702}{}\doxysubsection{\texorpdfstring{API}{API}}\label{README.md_autotoc_md3702}
+Note\+: unlike J. Shewchuk\textquotesingle{}s original code, all the functions in this library assume {\ttfamily y} axis is oriented {\itshape downwards} {$\downarrow$}, so the semantics are different.\hypertarget{README.md_autotoc_md3703}{}\doxysubsubsection{\texorpdfstring{{\ttfamily orient2d(ax,ay, bx,by, cx,cy)}}{{\ttfamily orient2d(ax,ay, bx,by, cx,cy)}}}\label{README.md_autotoc_md3703}
+
+\begin{DoxyItemize}
+\item Returns a {\itshape positive} value if the points {\ttfamily a}, {\ttfamily b}, and {\ttfamily c} occur in {\itshape counterclockwise} order ({\ttfamily c} lies to the left of the directed line defined by points {\ttfamily a} and {\ttfamily b}).
+\item Returns a {\itshape negative} value if they occur in {\itshape clockwise} order ({\ttfamily c} lies to the right of the directed line {\ttfamily ab}).
+\item Returns {\itshape zero} if they are {\itshape collinear}.
+\end{DoxyItemize}
+
+The result is also an approximation of twice the signed area of the triangle defined by the three points.\hypertarget{README.md_autotoc_md3704}{}\doxysubsubsection{\texorpdfstring{{\ttfamily incircle(ax,ay, bx,by, cx,cy, dx,dy)}}{{\ttfamily incircle(ax,ay, bx,by, cx,cy, dx,dy)}}}\label{README.md_autotoc_md3704}
+
+\begin{DoxyItemize}
+\item Returns a {\itshape positive} value if the point {\ttfamily d} lies {\itshape outside} the circle passing through {\ttfamily a}, {\ttfamily b}, and {\ttfamily c}.
+\item Returns a {\itshape negative} value if it lies {\itshape inside}.
+\item Returns {\itshape zero} if the four points are {\itshape cocircular}.
+\end{DoxyItemize}
+
+The points {\ttfamily a}, {\ttfamily b}, and {\ttfamily c} must be in {\itshape counterclockwise} order, or the sign of the result will be reversed.\hypertarget{README.md_autotoc_md3705}{}\doxysubsubsection{\texorpdfstring{{\ttfamily orient3d(ax,ay,az, bx,by,bz, cx,cy,cz, dx,dy,dz)}}{{\ttfamily orient3d(ax,ay,az, bx,by,bz, cx,cy,cz, dx,dy,dz)}}}\label{README.md_autotoc_md3705}
+
+\begin{DoxyItemize}
+\item Returns a {\itshape positive} value if the point {\ttfamily d} lies {\itshape above} the plane passing through {\ttfamily a}, {\ttfamily b}, and {\ttfamily c}, meaning that {\ttfamily a}, {\ttfamily b}, and {\ttfamily c} appear in counterclockwise order when viewed from {\ttfamily d}.
+\item Returns a {\itshape negative} value if {\ttfamily d} lies {\itshape below} the plane.
+\item Returns {\itshape zero} if the points are {\itshape coplanar}.
+\end{DoxyItemize}
+
+The result is also an approximation of six times the signed volume of the tetrahedron defined by the four points.\hypertarget{README.md_autotoc_md3706}{}\doxysubsubsection{\texorpdfstring{{\ttfamily insphere(ax,ay,az, bx,by,bz, cx,cy,cz, dx,dy,dz, ex,ey,ez)}}{{\ttfamily insphere(ax,ay,az, bx,by,bz, cx,cy,cz, dx,dy,dz, ex,ey,ez)}}}\label{README.md_autotoc_md3706}
+
+\begin{DoxyItemize}
+\item Returns a {\itshape positive} value if the point {\ttfamily e} lies {\itshape outside} the sphere passing through {\ttfamily a}, {\ttfamily b}, {\ttfamily c}, and {\ttfamily d}.
+\item Returns a {\itshape negative} value if it lies {\itshape inside}.
+\item Returns {\itshape zero} if the five points are {\itshape cospherical}.
+\end{DoxyItemize}
+
+The points {\ttfamily a}, {\ttfamily b}, {\ttfamily c}, and {\ttfamily d} must be ordered so that they have a {\itshape positive orientation} (as defined by {\ttfamily orient3d}), or the sign of the result will be reversed.\hypertarget{README.md_autotoc_md3707}{}\doxysubsubsection{\texorpdfstring{{\ttfamily orient2dfast}, {\ttfamily orient3dfast}, {\ttfamily incirclefast}, {\ttfamily inspherefast}}{{\ttfamily orient2dfast}, {\ttfamily orient3dfast}, {\ttfamily incirclefast}, {\ttfamily inspherefast}}}\label{README.md_autotoc_md3707}
+Simple, approximate, non-\/robust versions of predicates above. Use when robustness isn\textquotesingle{}t needed.\hypertarget{README.md_autotoc_md3708}{}\doxysubsection{\texorpdfstring{Example}{Example}}\label{README.md_autotoc_md3708}
+\`{}\`{}`js import \{orient2d\} from \textquotesingle{}robust-\/predicates';
+
+const ccw = orient2d(ax, ay, bx, by, cx, cy) \texorpdfstring{$>$}{>} 0; \`{}\`{}\`{}\`{}\hypertarget{README.md_autotoc_md3709}{}\doxysubsection{\texorpdfstring{Install}{Install}}\label{README.md_autotoc_md3709}
+Install with {\ttfamily npm install robust-\/predicates} or {\ttfamily yarn add robust-\/predicates}, or use one of the browser builds\+:
+
+
+\begin{DoxyItemize}
+\item \href{https://unpkg.com/robust-predicates/umd/predicates.min.js}{\texttt{ predicates.\+min.\+js}} (all predicates)
+\item \href{https://unpkg.com/robust-predicates/umd/orient2d.min.js}{\texttt{ orient2d.\+min.\+js}} ({\ttfamily orient2d}, {\ttfamily orient2dfast})
+\item \href{https://unpkg.com/robust-predicates/umd/orient3d.min.js}{\texttt{ orient3d.\+min.\+js}} ({\ttfamily orient3d}, {\ttfamily orient3dfast})
+\item \href{https://unpkg.com/robust-predicates/umd/incircle.min.js}{\texttt{ incircle.\+min.\+js}} ({\ttfamily incircle}, {\ttfamily incirclefast})
+\item \href{https://unpkg.com/robust-predicates/umd/insphere.min.js}{\texttt{ insphere.\+min.\+js}} ({\ttfamily insphere}, {\ttfamily inspherefast})
+\end{DoxyItemize}\hypertarget{README.md_autotoc_md3710}{}\doxysubsection{\texorpdfstring{Thanks}{Thanks}}\label{README.md_autotoc_md3710}
+This project is just a port — all the brilliant, hard work was done by \href{https://people.eecs.berkeley.edu/~jrs/}{\texttt{ Jonathan Richard Shewchuk}}.
+
+The port was also inspired by \href{https://twitter.com/MikolaLysenko}{\texttt{ Mikola Lysenko}}\textquotesingle{}s excellent \href{https://github.com/mikolalysenko/robust-arithmetic-notes}{\texttt{ Robust Arithmetic Notes}} and related projects like \href{https://github.com/mikolalysenko/robust-orientation}{\texttt{ robust-\/orientation}} and \href{https://github.com/mikolalysenko/robust-in-sphere}{\texttt{ robust-\/in-\/sphere}}.\hypertarget{README.md_autotoc_md3711}{}\doxysubsection{\texorpdfstring{License}{License}}\label{README.md_autotoc_md3711}
+Since the original code is in the public domain, this project follows the same choice. See \href{https://unlicense.org}{\texttt{ Unlicense}}. 

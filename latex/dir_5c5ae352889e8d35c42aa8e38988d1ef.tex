@@ -1,0 +1,151 @@
+\doxysection{Tele-\/website/node\+\_\+modules/stylis Directory Reference}
+\hypertarget{dir_5c5ae352889e8d35c42aa8e38988d1ef}{}\label{dir_5c5ae352889e8d35c42aa8e38988d1ef}\index{Tele-\/website/node\_modules/stylis Directory Reference@{Tele-\/website/node\_modules/stylis Directory Reference}}
+
+
+\doxysubsection{Detailed Description}
+\href{https://github.com/thysultan/stylis.js}{\texttt{ }}
+
+A Light–weight CSS Preprocessor.
+
+\href{https://coveralls.io/github/thysultan/stylis.js}{\texttt{ }} \href{https://bundlephobia.com/result?p=stylis}{\texttt{ }} \href{https://github.com/thysultan/stylis.js/blob/master/LICENSE}{\texttt{ }} \href{https://www.npmjs.com/package/stylis}{\texttt{ }}\hypertarget{README.md_autotoc_md3802}{}\doxysubsection{\texorpdfstring{Installation}{Installation}}\label{README.md_autotoc_md3802}
+
+\begin{DoxyItemize}
+\item Use a Direct Download\+: {\ttfamily \texorpdfstring{$<$}{<}script src=stylis.\+js\texorpdfstring{$>$}{>}\texorpdfstring{$<$}{<}/script\texorpdfstring{$>$}{>}}
+\item Use a CDN\+: {\ttfamily \texorpdfstring{$<$}{<}script src=unpkg.\+com/stylis\texorpdfstring{$>$}{>}\texorpdfstring{$<$}{<}/script\texorpdfstring{$>$}{>}}
+\item Use NPM\+: {\ttfamily npm install stylis -\/-\/save}
+\end{DoxyItemize}\hypertarget{README.md_autotoc_md3803}{}\doxysubsection{\texorpdfstring{Features}{Features}}\label{README.md_autotoc_md3803}
+
+\begin{DoxyItemize}
+\item nesting {\ttfamily a \{ \&\+:hover \{\} \}}
+\item selector namespacing
+\item vendor prefixing (flex-\/box, etc...)
+\item minification
+\item esm module compatible
+\item tree-\/shaking-\/able
+\end{DoxyItemize}\hypertarget{README.md_autotoc_md3804}{}\doxysubsection{\texorpdfstring{Abstract Syntax Structure}{Abstract Syntax Structure}}\label{README.md_autotoc_md3804}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{const\ declaration\ =\ \{}
+\DoxyCodeLine{\ \ \ \ value:\ 'color:red;',}
+\DoxyCodeLine{\ \ \ \ type:\ 'decl',}
+\DoxyCodeLine{\ \ \ \ props:\ 'color',}
+\DoxyCodeLine{\ \ \ \ children:\ 'red',}
+\DoxyCodeLine{\ \ \ \ line:\ 1,\ column:\ 1}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{const\ comment\ =\ \{}
+\DoxyCodeLine{\ \ \ \ value:\ '/*@noflip*/',}
+\DoxyCodeLine{\ \ \ \ type:\ 'comm',}
+\DoxyCodeLine{\ \ \ \ props:\ '/',}
+\DoxyCodeLine{\ \ \ \ children:\ '@noflip',}
+\DoxyCodeLine{\ \ \ \ line:\ 1,\ column:\ 1}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{const\ ruleset\ =\ \{}
+\DoxyCodeLine{\ \ \ \ value:\ 'h1,h2',}
+\DoxyCodeLine{\ \ \ \ type:\ 'rule',}
+\DoxyCodeLine{\ \ \ \ props:\ ['h1',\ 'h2'],}
+\DoxyCodeLine{\ \ \ \ children:\ [/*\ ...\ */],}
+\DoxyCodeLine{\ \ \ \ line:\ 1,\ column:\ 1}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{const\ atruleset\ =\ \{}
+\DoxyCodeLine{\ \ \ \ value:\ '@media\ (max-\/width:100),\ (min-\/width:100)',}
+\DoxyCodeLine{\ \ \ \ type:\ '@media',}
+\DoxyCodeLine{\ \ \ \ props:\ ['(max-\/width:100)',\ '(min-\/width:100)'],}
+\DoxyCodeLine{\ \ \ \ children:\ [/*\ ...\ */],}
+\DoxyCodeLine{\ \ \ \ line:\ 1,\ column:\ 1}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{README.md_autotoc_md3805}{}\doxysubsection{\texorpdfstring{Example\+:}{Example\+:}}\label{README.md_autotoc_md3805}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ \{compile,\ serialize,\ stringify\}\ from\ 'stylis'}
+\DoxyCodeLine{}
+\DoxyCodeLine{serialize(compile(`h1\{all:unset\}`),\ stringify)}
+
+\end{DoxyCode}
+\hypertarget{README.md_autotoc_md3806}{}\doxysubsubsection{\texorpdfstring{Compile}{Compile}}\label{README.md_autotoc_md3806}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{compile('h1\{all:unset\}')\ ===\ [\{value:\ 'h1',\ type:\ 'rule',\ props:\ ['h1'],\ children:\ [/*\ ...\ */]\}]}
+\DoxyCodeLine{compile('-\/-\/foo:unset;')\ ===\ [\{value:\ '-\/-\/foo:unset;',\ type:\ 'decl',\ props:\ '-\/-\/foo',\ children:\ 'unset'\}]}
+
+\end{DoxyCode}
+\hypertarget{README.md_autotoc_md3807}{}\doxysubsubsection{\texorpdfstring{Tokenize}{Tokenize}}\label{README.md_autotoc_md3807}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{tokenize('h1\ h2\ h3\ [h4\ h5]\ fn(args)\ "{}a\ b\ c"{}')\ ===\ ['h1',\ 'h2',\ 'h3',\ '[h4\ h5]',\ 'fn',\ '(args)',\ '"{}a\ b\ c"{}']}
+
+\end{DoxyCode}
+\hypertarget{README.md_autotoc_md3808}{}\doxysubsubsection{\texorpdfstring{Serialize}{Serialize}}\label{README.md_autotoc_md3808}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{serialize(compile('h1\{all:unset\}'),\ stringify)}
+
+\end{DoxyCode}
+\hypertarget{README.md_autotoc_md3809}{}\doxysubsubsection{\texorpdfstring{Vendor Prefixing}{Vendor Prefixing}}\label{README.md_autotoc_md3809}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ \{compile,\ serialize,\ stringify,\ middleware,\ prefixer\ \}\ from\ 'stylis';}
+\DoxyCodeLine{}
+\DoxyCodeLine{serialize(compile('div\{display:flex;\}'),\ middleware([prefixer,\ stringify]))}
+
+\end{DoxyCode}
+\hypertarget{README.md_autotoc_md3810}{}\doxysubsection{\texorpdfstring{Middleware}{Middleware}}\label{README.md_autotoc_md3810}
+The middleware helper is a convenient helper utility, that for all intents and purposes you can do without if you intend to implement your own traversal logic. The {\ttfamily stringify} middleware is one such middleware that can be used in conjunction with it.
+
+Elements passed to middlewares have a {\ttfamily root} property that is the immediate root/parent of the current element {\bfseries{in the compiled output}}, so it references the parent in the already expanded CSS-\/like structure. Elements have also {\ttfamily parent} property that is the immediate parent of the current element {\bfseries{from the input structure}} (structure representing the input string).\hypertarget{README.md_autotoc_md3811}{}\doxysubsubsection{\texorpdfstring{Traversal}{Traversal}}\label{README.md_autotoc_md3811}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{serialize(compile('h1\{all:unset\}'),\ middleware([(element,\ index,\ children)\ =>\ \{}
+\DoxyCodeLine{\ \ \ \ assert(children\ ===\ element.root.children\ \&\&\ children[index]\ ===\ element.children)}
+\DoxyCodeLine{\},\ stringify]))\ ===\ 'h1\{all:unset;\}'}
+
+\end{DoxyCode}
+
+
+The abstract syntax tree also includes an additional {\ttfamily return} property for more niche uses.\hypertarget{README.md_autotoc_md3812}{}\doxysubsubsection{\texorpdfstring{Prefixing}{Prefixing}}\label{README.md_autotoc_md3812}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{serialize(compile('h1\{all:unset\}'),\ middleware([(element,\ index,\ children,\ callback)\ =>\ \{}
+\DoxyCodeLine{\ \ \ \ if\ (element.type\ ===\ 'decl'\ \&\&\ element.props\ ===\ 'all'\ \&\&\ element.children\ ===\ 'unset')}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ element.return\ =\ 'color:red;'\ +\ element.value}
+\DoxyCodeLine{\},\ stringify]))\ ===\ 'h1\{color:red;all:unset;\}'}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{serialize(compile('h1\{all:unset\}'),\ middleware([(element,\ index,\ children,\ callback)\ =>\ \{}
+\DoxyCodeLine{\ \ \ \ if\ (element.type\ ===\ 'rule'\ \&\&\ element.props.indexOf('h1')\ >\ -\/1)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ return\ serialize([\{...element,\ props:\ ['h2',\ 'h3']\}],\ callback)}
+\DoxyCodeLine{\},\ stringify]))\ ===\ 'h2,h3\{all:unset;\}h1\{all:unset;\}'}
+
+\end{DoxyCode}
+\hypertarget{README.md_autotoc_md3813}{}\doxysubsubsection{\texorpdfstring{Reading}{Reading}}\label{README.md_autotoc_md3813}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{serialize(compile('h1\{all:unset\}'),\ middleware([stringify,\ (element,\ index,\ children)\ =>\ \{}
+\DoxyCodeLine{\ \ \ \ assert(element.return\ ===\ 'h1\{all:unset;\}')}
+\DoxyCodeLine{\}]))\ ===\ 'h1\{all:unset;color:red;\}'}
+
+\end{DoxyCode}
+
+
+The middlewares in \href{src/Middleware.js}{\texttt{ src/\+Middleware.\+js}} dive into tangible examples of how you might implement a middleware, alternatively you could also create your own middleware system as {\ttfamily compile} returns all the nessessary structure to fork from.\hypertarget{README.md_autotoc_md3814}{}\doxysubsection{\texorpdfstring{Variables}{Variables}}\label{README.md_autotoc_md3814}
+CSS variables are supported but a note should be made about the exotic use of css variables. The css spec mentions the following
+
+\texorpdfstring{$>$}{>}The allowed syntax for custom properties is extremely permissive. The \texorpdfstring{$<$}{<}declaration-\/value\texorpdfstring{$>$}{>} production matches any sequence of one or more tokens, so long as the sequence does not contain \texorpdfstring{$<$}{<}bad-\/string-\/token\texorpdfstring{$>$}{>}, \texorpdfstring{$<$}{<}bad-\/url-\/token\texorpdfstring{$>$}{>}, unmatched \texorpdfstring{$<$}{<})-\/token\texorpdfstring{$>$}{>}, \texorpdfstring{$<$}{<}\mbox{]}-\/token\texorpdfstring{$>$}{>}, or \texorpdfstring{$<$}{<}\}-\/token\texorpdfstring{$>$}{>}, or top-\/level \texorpdfstring{$<$}{<}semicolon-\/token\texorpdfstring{$>$}{>} tokens or \texorpdfstring{$<$}{<}delim-\/token\texorpdfstring{$>$}{>} tokens with a value of "{}!"{}.
+
+That is to say css variables according to the spec allows\+: {\ttfamily -\/-\/foo\+: if(x \texorpdfstring{$>$}{>} 5) this.\+width = 10;} and while this value is obviously useless as a variable, and would be invalid in any normal property, it still might be read and acted on by Java\+Script and this is supported by Stylis, however things become slightly undefined when we start to include the {\ttfamily \{} and {\ttfamily \}} productions in our use of exotic css variables.
+
+For example consider the following\+: {\ttfamily -\/-\/foo\+: \{\};}
+
+While this is valid CSS and supported. It is unclear what should happen when the rule collides with the implicit block termination rule that allows i.\+e {\ttfamily h1\{color\+:red\}}(notice the omitted semicolon) to also be a valid CSS production. This results in the following contradiction in\+: {\ttfamily h1\{-\/-\/example\+: \{\}} is it to be treated as {\ttfamily h1\{-\/-\/foo\+:\{;\}} or {\ttfamily h1\{-\/-\/foo\+:\{\}} the later of which is an unterminated block or in the following\+: {\ttfamily h1\{-\/-\/foo\+:\{\} h1\{color\+:red;\}} should it be {\ttfamily h1 \{-\/-\/foo\+:\{\}h1\{color\+:red;\};} where {\ttfamily \{\}h1\{color\+:red;} is part of the css variable {\ttfamily -\/-\/foo} and not a new rule or should it be something else?
+
+Nevertheless Stylis still supports the exotic forms highlighted in the spec, however you should consider it as a general rule to delimit such exotic uses of variables in strings or parentheses i.\+e\+: `h1\{-\/-\/foo\+:'\{\textquotesingle{}\}{\ttfamily or}h1\{--foo\+:(\{)\}\`{}.\hypertarget{README.md_autotoc_md3815}{}\doxysubsection{\texorpdfstring{Benchmark}{Benchmark}}\label{README.md_autotoc_md3815}
+Stylis is at-\/least 2X faster than its predecesor.\hypertarget{README.md_autotoc_md3816}{}\doxysubsubsection{\texorpdfstring{License}{License}}\label{README.md_autotoc_md3816}
+Stylis is \href{./LICENSE}{\texttt{ MIT licensed}}. 

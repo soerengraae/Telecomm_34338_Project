@@ -1,0 +1,171 @@
+\doxysection{Indoor\+\_\+\+UART\+\_\+\+ESP8266/\+Indoor\+\_\+\+UART\+\_\+\+ESP8266.ino File Reference}
+\hypertarget{_indoor___u_a_r_t___e_s_p8266_8ino}{}\label{_indoor___u_a_r_t___e_s_p8266_8ino}\index{Indoor\_UART\_ESP8266/Indoor\_UART\_ESP8266.ino@{Indoor\_UART\_ESP8266/Indoor\_UART\_ESP8266.ino}}
+
+
+Code for receiving weather data from outdoor for monitoring and displaying on the indoor unit.  
+
+
+{\ttfamily \#include $<$ESP8266\+Wi\+Fi.\+h$>$}\newline
+{\ttfamily \#include $<$Thing\+Speak.\+h$>$}\newline
+{\ttfamily \#include $<$Wire.\+h$>$}\newline
+{\ttfamily \#include $<$Liquid\+Crystal\+\_\+\+I2\+C.\+h$>$}\newline
+{\ttfamily \#include "{}secrets.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_indoor___u_a_r_t___e_s_p8266_8ino_a8e1ee46448a9d6fd89208aa48e0b1e58}{MOTOR\+\_\+\+PIN}}~D0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Liquid\+Crystal\+\_\+\+I2C \mbox{\hyperlink{_indoor___u_a_r_t___e_s_p8266_8ino_ae084e1bc8ccb35ea289ba0ca4972ea6d}{lcd}} (0x27, 16, 2)
+\item 
+void \mbox{\hyperlink{_indoor___u_a_r_t___e_s_p8266_8ino_a4fc01d736fe50cf5b977f755b675f11d}{setup}} ()
+\begin{DoxyCompactList}\small\item\em Initializes the weather station components. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_indoor___u_a_r_t___e_s_p8266_8ino_afe461d27b9c48d5921c00d521181f12f}{loop}} ()
+\begin{DoxyCompactList}\small\item\em Main loop for processing weather data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_indoor___u_a_r_t___e_s_p8266_8ino_a134206294a475726066dc6b120207501}{write\+\_\+\+Thing\+Speak}} ()
+\begin{DoxyCompactList}\small\item\em Sends weather data to Thing\+Speak. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_indoor___u_a_r_t___e_s_p8266_8ino_afeb94ad0f7ce8117f434baaad69b1f60}{write\+\_\+lcd}} ()
+\begin{DoxyCompactList}\small\item\em Updates the LCD display with weather data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+Wi\+Fi\+Client \mbox{\hyperlink{_indoor___u_a_r_t___e_s_p8266_8ino_a323dfc205549b3c13f0a25c1b670708a}{client}}
+\item 
+const int \mbox{\hyperlink{_indoor___u_a_r_t___e_s_p8266_8ino_a0a8849103548eccd14d5039c9a409c1b}{read\+Data\+Delay}} = 10 \texorpdfstring{$\ast$}{*} 1000
+\begin{DoxyCompactList}\small\item\em Every 10 seconds switch data on lcd and read data if possible. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{_indoor___u_a_r_t___e_s_p8266_8ino_a405f237eaa8a513a9682fbb6e44c4860}{humidity}} = 0
+\begin{DoxyCompactList}\small\item\em Humidity is initialized to 0. It is between 0\% and 100\%. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{_indoor___u_a_r_t___e_s_p8266_8ino_a0ac2a299549fcca3cd14e4c1ac2087d2}{temperature}} = 20
+\item 
+int \mbox{\hyperlink{_indoor___u_a_r_t___e_s_p8266_8ino_ab0e3651d93eb9e9a8ba76d4ff925c7f9}{wind\+\_\+speed}} = 0
+\item 
+int \mbox{\hyperlink{_indoor___u_a_r_t___e_s_p8266_8ino_ae32e70eeb90b3e79e09833c002c2e6d7}{rain\+\_\+level}} = 0
+\item 
+int \mbox{\hyperlink{_indoor___u_a_r_t___e_s_p8266_8ino_abd502f0d2dda925266dab11c157189fd}{sun\+\_\+up}} = 0
+\item 
+int \mbox{\hyperlink{_indoor___u_a_r_t___e_s_p8266_8ino_ab12a460175803c6d7c05a51ba87842b6}{lcd\+\_\+controller}} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Code for receiving weather data from outdoor for monitoring and displaying on the indoor unit. 
+
+This program reads transmitted weather data (humidity, temperature, wind speed, and rain level) via serial input, sends the data to Thing\+Speak, and displays it on an LCD. It also controls a motor based on temperature. 
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_indoor___u_a_r_t___e_s_p8266_8ino_a8e1ee46448a9d6fd89208aa48e0b1e58}\index{Indoor\_UART\_ESP8266.ino@{Indoor\_UART\_ESP8266.ino}!MOTOR\_PIN@{MOTOR\_PIN}}
+\index{MOTOR\_PIN@{MOTOR\_PIN}!Indoor\_UART\_ESP8266.ino@{Indoor\_UART\_ESP8266.ino}}
+\doxysubsubsection{\texorpdfstring{MOTOR\_PIN}{MOTOR\_PIN}}
+{\footnotesize\ttfamily \label{_indoor___u_a_r_t___e_s_p8266_8ino_a8e1ee46448a9d6fd89208aa48e0b1e58} 
+\#define MOTOR\+\_\+\+PIN~D0}
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{_indoor___u_a_r_t___e_s_p8266_8ino_ae084e1bc8ccb35ea289ba0ca4972ea6d}\index{Indoor\_UART\_ESP8266.ino@{Indoor\_UART\_ESP8266.ino}!lcd@{lcd}}
+\index{lcd@{lcd}!Indoor\_UART\_ESP8266.ino@{Indoor\_UART\_ESP8266.ino}}
+\doxysubsubsection{\texorpdfstring{lcd()}{lcd()}}
+{\footnotesize\ttfamily \label{_indoor___u_a_r_t___e_s_p8266_8ino_ae084e1bc8ccb35ea289ba0ca4972ea6d} 
+Liquid\+Crystal\+\_\+\+I2C lcd (\begin{DoxyParamCaption}\item[{0x27}]{}{, }\item[{16}]{}{, }\item[{2}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_indoor___u_a_r_t___e_s_p8266_8ino_afe461d27b9c48d5921c00d521181f12f}\index{Indoor\_UART\_ESP8266.ino@{Indoor\_UART\_ESP8266.ino}!loop@{loop}}
+\index{loop@{loop}!Indoor\_UART\_ESP8266.ino@{Indoor\_UART\_ESP8266.ino}}
+\doxysubsubsection{\texorpdfstring{loop()}{loop()}}
+{\footnotesize\ttfamily \label{_indoor___u_a_r_t___e_s_p8266_8ino_afe461d27b9c48d5921c00d521181f12f} 
+void loop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Main loop for processing weather data. 
+
+This function reads weather data via Serial, updates Thing\+Speak, controls the motor, and updates the LCD display based on the received data. \Hypertarget{_indoor___u_a_r_t___e_s_p8266_8ino_a4fc01d736fe50cf5b977f755b675f11d}\index{Indoor\_UART\_ESP8266.ino@{Indoor\_UART\_ESP8266.ino}!setup@{setup}}
+\index{setup@{setup}!Indoor\_UART\_ESP8266.ino@{Indoor\_UART\_ESP8266.ino}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily \label{_indoor___u_a_r_t___e_s_p8266_8ino_a4fc01d736fe50cf5b977f755b675f11d} 
+void setup (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Initializes the weather station components. 
+
+This function sets up the Serial communication, Wi-\/\+Fi connection, motor pin, and LCD display. \Hypertarget{_indoor___u_a_r_t___e_s_p8266_8ino_afeb94ad0f7ce8117f434baaad69b1f60}\index{Indoor\_UART\_ESP8266.ino@{Indoor\_UART\_ESP8266.ino}!write\_lcd@{write\_lcd}}
+\index{write\_lcd@{write\_lcd}!Indoor\_UART\_ESP8266.ino@{Indoor\_UART\_ESP8266.ino}}
+\doxysubsubsection{\texorpdfstring{write\_lcd()}{write\_lcd()}}
+{\footnotesize\ttfamily \label{_indoor___u_a_r_t___e_s_p8266_8ino_afeb94ad0f7ce8117f434baaad69b1f60} 
+void write\+\_\+lcd (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Updates the LCD display with weather data. 
+
+This function switches between different screens on the LCD to display temperature, humidity, wind speed, and rain level predictions. \Hypertarget{_indoor___u_a_r_t___e_s_p8266_8ino_a134206294a475726066dc6b120207501}\index{Indoor\_UART\_ESP8266.ino@{Indoor\_UART\_ESP8266.ino}!write\_ThingSpeak@{write\_ThingSpeak}}
+\index{write\_ThingSpeak@{write\_ThingSpeak}!Indoor\_UART\_ESP8266.ino@{Indoor\_UART\_ESP8266.ino}}
+\doxysubsubsection{\texorpdfstring{write\_ThingSpeak()}{write\_ThingSpeak()}}
+{\footnotesize\ttfamily \label{_indoor___u_a_r_t___e_s_p8266_8ino_a134206294a475726066dc6b120207501} 
+void write\+\_\+\+Thing\+Speak (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Sends weather data to Thing\+Speak. 
+
+This function initializes Thing\+Speak communication and updates its fields with humidity, temperature, wind speed, and rain level. 
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{_indoor___u_a_r_t___e_s_p8266_8ino_a323dfc205549b3c13f0a25c1b670708a}\index{Indoor\_UART\_ESP8266.ino@{Indoor\_UART\_ESP8266.ino}!client@{client}}
+\index{client@{client}!Indoor\_UART\_ESP8266.ino@{Indoor\_UART\_ESP8266.ino}}
+\doxysubsubsection{\texorpdfstring{client}{client}}
+{\footnotesize\ttfamily \label{_indoor___u_a_r_t___e_s_p8266_8ino_a323dfc205549b3c13f0a25c1b670708a} 
+Wi\+Fi\+Client client}
+
+\Hypertarget{_indoor___u_a_r_t___e_s_p8266_8ino_a405f237eaa8a513a9682fbb6e44c4860}\index{Indoor\_UART\_ESP8266.ino@{Indoor\_UART\_ESP8266.ino}!humidity@{humidity}}
+\index{humidity@{humidity}!Indoor\_UART\_ESP8266.ino@{Indoor\_UART\_ESP8266.ino}}
+\doxysubsubsection{\texorpdfstring{humidity}{humidity}}
+{\footnotesize\ttfamily \label{_indoor___u_a_r_t___e_s_p8266_8ino_a405f237eaa8a513a9682fbb6e44c4860} 
+int humidity = 0}
+
+
+
+Humidity is initialized to 0. It is between 0\% and 100\%. 
+
+\Hypertarget{_indoor___u_a_r_t___e_s_p8266_8ino_ab12a460175803c6d7c05a51ba87842b6}\index{Indoor\_UART\_ESP8266.ino@{Indoor\_UART\_ESP8266.ino}!lcd\_controller@{lcd\_controller}}
+\index{lcd\_controller@{lcd\_controller}!Indoor\_UART\_ESP8266.ino@{Indoor\_UART\_ESP8266.ino}}
+\doxysubsubsection{\texorpdfstring{lcd\_controller}{lcd\_controller}}
+{\footnotesize\ttfamily \label{_indoor___u_a_r_t___e_s_p8266_8ino_ab12a460175803c6d7c05a51ba87842b6} 
+int lcd\+\_\+controller = 0}
+
+\Hypertarget{_indoor___u_a_r_t___e_s_p8266_8ino_ae32e70eeb90b3e79e09833c002c2e6d7}\index{Indoor\_UART\_ESP8266.ino@{Indoor\_UART\_ESP8266.ino}!rain\_level@{rain\_level}}
+\index{rain\_level@{rain\_level}!Indoor\_UART\_ESP8266.ino@{Indoor\_UART\_ESP8266.ino}}
+\doxysubsubsection{\texorpdfstring{rain\_level}{rain\_level}}
+{\footnotesize\ttfamily \label{_indoor___u_a_r_t___e_s_p8266_8ino_ae32e70eeb90b3e79e09833c002c2e6d7} 
+int rain\+\_\+level = 0}
+
+\Hypertarget{_indoor___u_a_r_t___e_s_p8266_8ino_a0a8849103548eccd14d5039c9a409c1b}\index{Indoor\_UART\_ESP8266.ino@{Indoor\_UART\_ESP8266.ino}!readDataDelay@{readDataDelay}}
+\index{readDataDelay@{readDataDelay}!Indoor\_UART\_ESP8266.ino@{Indoor\_UART\_ESP8266.ino}}
+\doxysubsubsection{\texorpdfstring{readDataDelay}{readDataDelay}}
+{\footnotesize\ttfamily \label{_indoor___u_a_r_t___e_s_p8266_8ino_a0a8849103548eccd14d5039c9a409c1b} 
+const int read\+Data\+Delay = 10 \texorpdfstring{$\ast$}{*} 1000}
+
+
+
+Every 10 seconds switch data on lcd and read data if possible. 
+
+\Hypertarget{_indoor___u_a_r_t___e_s_p8266_8ino_abd502f0d2dda925266dab11c157189fd}\index{Indoor\_UART\_ESP8266.ino@{Indoor\_UART\_ESP8266.ino}!sun\_up@{sun\_up}}
+\index{sun\_up@{sun\_up}!Indoor\_UART\_ESP8266.ino@{Indoor\_UART\_ESP8266.ino}}
+\doxysubsubsection{\texorpdfstring{sun\_up}{sun\_up}}
+{\footnotesize\ttfamily \label{_indoor___u_a_r_t___e_s_p8266_8ino_abd502f0d2dda925266dab11c157189fd} 
+int sun\+\_\+up = 0}
+
+\Hypertarget{_indoor___u_a_r_t___e_s_p8266_8ino_a0ac2a299549fcca3cd14e4c1ac2087d2}\index{Indoor\_UART\_ESP8266.ino@{Indoor\_UART\_ESP8266.ino}!temperature@{temperature}}
+\index{temperature@{temperature}!Indoor\_UART\_ESP8266.ino@{Indoor\_UART\_ESP8266.ino}}
+\doxysubsubsection{\texorpdfstring{temperature}{temperature}}
+{\footnotesize\ttfamily \label{_indoor___u_a_r_t___e_s_p8266_8ino_a0ac2a299549fcca3cd14e4c1ac2087d2} 
+int temperature = 20}
+
+\Hypertarget{_indoor___u_a_r_t___e_s_p8266_8ino_ab0e3651d93eb9e9a8ba76d4ff925c7f9}\index{Indoor\_UART\_ESP8266.ino@{Indoor\_UART\_ESP8266.ino}!wind\_speed@{wind\_speed}}
+\index{wind\_speed@{wind\_speed}!Indoor\_UART\_ESP8266.ino@{Indoor\_UART\_ESP8266.ino}}
+\doxysubsubsection{\texorpdfstring{wind\_speed}{wind\_speed}}
+{\footnotesize\ttfamily \label{_indoor___u_a_r_t___e_s_p8266_8ino_ab0e3651d93eb9e9a8ba76d4ff925c7f9} 
+int wind\+\_\+speed = 0}
+
