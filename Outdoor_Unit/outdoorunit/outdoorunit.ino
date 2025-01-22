@@ -28,7 +28,7 @@ uint8_t lightStatus = 0; /**< Current light status */
 #include "ThingSpeak.h"
 #include "secrets.h"
 
-#define forecastWeatherURL "http://api.openweathermap.org/data/2.5/forecast?lat=55.78598981728918&lon=12.522723007973173&units=metric&appid=3054efa1820ce7f4df282635bd6e5d3c" /**< URL for fetching weather forecast */
+#define forecastWeatherURL "http://api.openweathermap.org/data/2.5/forecast?lat=55.78598981728918&lon=12.522723007973173&units=metric&appid=APIHERE" /**< URL for fetching weather forecast */
 
 WiFiClient client; /**< WiFi client for HTTP requests */
 
@@ -86,13 +86,20 @@ void setup() {
 int8_t fetchRainStatus() {
   WiFi.mode(WIFI_STA);
   WiFi.begin(SSID, PASS);
+  uint8_t wifiFlag = 0;
+  // Wait for WiFi connection and timeout after 25 seconds
+  for (size_t i = 0; i < 50; i++) { // Timeout after 25 seconds
+    wifiFlag = WiFi.status();
+    if (wifiFlag == WL_CONNECTED)
+      break;
 
-  // Wait for WiFi connection
-  while (WiFi.status() != WL_CONNECTED) {
     Serial.print(".");
     delay(500);
   }
-  Serial.println("");
+  if (wifiFlag = 0)
+    Serial.println("WiFi for Rain Data: Timeout");
+  else
+    Serial.println("WiFi for Rain Data: OK");
 
   HTTPClient http;
   http.begin(forecastWeatherURL);
