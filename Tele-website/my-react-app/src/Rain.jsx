@@ -1,8 +1,24 @@
 import React from 'react';
 
+/**
+ * @file Rain.jsx
+ * @brief React component to display the rain status.
+ * @details Displays whether it is currently raining or not, with a dynamic color and icon based on the status.
+ * @param {boolean} isRaining - Indicates if it is raining (`true`) or not (`false`).
+ * @author Janus Meier
+ */
+
+/**
+ * @function Rain
+ * @brief Renders a box displaying the rain status.
+ * @param {Object} props - The properties passed to the component.
+ * @param {boolean} props.isRaining - Indicates if it is raining (`true`) or not (`false`).
+ * @returns {JSX.Element} The rendered Rain component.
+ */
 function Rain({ isRaining }) {
   return (
-    <div className="box"
+    <div
+      className="box"
       style={{
         width: '250px',
         padding: '20px',
@@ -18,7 +34,7 @@ function Rain({ isRaining }) {
         style={{
           fontSize: '24px',
           fontWeight: 'bold',
-          color: isRaining ? 'blue' : 'gray',
+          color: isRaining ? 'blue' : 'gray', // Blue for rain, gray for no rain
         }}
       >
         {isRaining ? 'Det regner 🌧️' : 'Ingen regn ☀️'}

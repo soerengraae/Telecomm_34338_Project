@@ -3,14 +3,49 @@ import { Gauge, gaugeClasses } from '@mui/x-charts/Gauge';
 import '@mui/material/styles';
 import '@mui/x-charts/Gauge';
 
+/**
+ * @file HumidityGauge.jsx
+ * @brief React component to display a humidity gauge.
+ * @details The gauge visualizes the humidity as a percentage using a dynamic color arc.
+ * @param {number} humidity - The current humidity value to be displayed.
+ * @author Janus Meier
+ */
+
+/**
+ * @function HumidityGauge
+ * @brief Renders a gauge displaying the current humidity.
+ * @param {Object} props - The properties passed to the component.
+ * @param {number} props.humidity - The current humidity value (in percentage).
+ * @returns {JSX.Element} The rendered HumidityGauge component.
+ */
 function HumidityGauge({ humidity }) {
+  /**
+   * @var minHumidity
+   * @brief The minimum humidity value for the gauge.
+   * @type {number}
+   */
   const minHumidity = 0;
+
+  /**
+   * @var maxHumidity
+   * @brief The maximum humidity value for the gauge.
+   * @type {number}
+   */
   const maxHumidity = 100;
 
-  // Calculate percent value and clamp it between 0 and 100
+  /**
+   * @var percentValue
+   * @brief The normalized percentage value for the gauge based on the humidity.
+   * @type {number}
+   */
   const percentValue = Math.max(0, Math.min(100, (humidity / maxHumidity) * 100));
 
-  // Function to get a color from light blue to dark blue based on humidity
+  /**
+   * @function getGradientColor
+   * @brief Calculates the color of the gauge arc based on the humidity value.
+   * @param {number} hum - The current humidity value.
+   * @returns {string} The RGB color string representing the humidity level.
+   */
   const getGradientColor = (hum) => {
     const ratio = hum / maxHumidity; // Normalize to range [0, 1]
     const blue = Math.round(255 * ratio); // Darker blue when more humid
@@ -18,7 +53,8 @@ function HumidityGauge({ humidity }) {
   };
 
   return (
-    <div className="box"
+    <div
+      className="box"
       style={{
         width: '250px',
         padding: '20px',

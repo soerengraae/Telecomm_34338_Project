@@ -8,7 +8,7 @@ import '@mui/x-charts/Gauge';
  * @brief React component to display a temperature gauge.
  * @details The gauge visualizes the temperature in degrees Celsius using a dynamic color arc.
  * @param {number} temperature - The current temperature value to be displayed.
- * @author Your Name
+ * @author Janus Meier
  */
 
 /**

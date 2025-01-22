@@ -8,7 +8,7 @@ import '@mui/x-charts/Gauge';
  * @brief React component to display a wind speed gauge.
  * @details The gauge visualizes the wind speed in meters per second (m/s) using a dynamic color arc that transitions from green (calm) to red (strong wind).
  * @param {number} windSpeed - The current wind speed to be displayed in m/s.
- * @author Your Name
+ * @author Janus Meier
  */
 
 /**
