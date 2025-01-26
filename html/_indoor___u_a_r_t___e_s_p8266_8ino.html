@@ -109,9 +109,6 @@ $(function(){initNavTree('_indoor___u_a_r_t___e_s_p8266_8ino.html',''); initResi
   <div class="headertitle"><div class="title">Indoor_UART_ESP8266.ino File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p>Code for receiving weather data from outdoor for monitoring and displaying on the indoor unit.  
-<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;ESP8266WiFi.h&gt;</code><br />
 <code>#include &lt;ThingSpeak.h&gt;</code><br />
 <code>#include &lt;Wire.h&gt;</code><br />
@@ -121,34 +118,34 @@ $(function(){initNavTree('_indoor___u_a_r_t___e_s_p8266_8ino.html',''); initResi
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a8e1ee46448a9d6fd89208aa48e0b1e58" id="r_a8e1ee46448a9d6fd89208aa48e0b1e58"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8e1ee46448a9d6fd89208aa48e0b1e58">MOTOR_PIN</a>&#160;&#160;&#160;D0</td></tr>
+<tr class="memdesc:a8e1ee46448a9d6fd89208aa48e0b1e58"><td class="mdescLeft">&#160;</td><td class="mdescRight">The pin that should have been used for driving the fan.  <br /></td></tr>
 <tr class="separator:a8e1ee46448a9d6fd89208aa48e0b1e58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4248066830ebb53e9a93eb4dd285839a" id="r_a4248066830ebb53e9a93eb4dd285839a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4248066830ebb53e9a93eb4dd285839a">TEMPERATURE_THRESHOLD</a>&#160;&#160;&#160;20</td></tr>
+<tr class="separator:a4248066830ebb53e9a93eb4dd285839a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ae084e1bc8ccb35ea289ba0ca4972ea6d" id="r_ae084e1bc8ccb35ea289ba0ca4972ea6d"><td class="memItemLeft" align="right" valign="top">LiquidCrystal_I2C&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae084e1bc8ccb35ea289ba0ca4972ea6d">lcd</a> (0x27, 16, 2)</td></tr>
 <tr class="separator:ae084e1bc8ccb35ea289ba0ca4972ea6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fc01d736fe50cf5b977f755b675f11d" id="r_a4fc01d736fe50cf5b977f755b675f11d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4fc01d736fe50cf5b977f755b675f11d">setup</a> ()</td></tr>
-<tr class="memdesc:a4fc01d736fe50cf5b977f755b675f11d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the weather station components.  <br /></td></tr>
 <tr class="separator:a4fc01d736fe50cf5b977f755b675f11d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe461d27b9c48d5921c00d521181f12f" id="r_afe461d27b9c48d5921c00d521181f12f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afe461d27b9c48d5921c00d521181f12f">loop</a> ()</td></tr>
-<tr class="memdesc:afe461d27b9c48d5921c00d521181f12f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main loop for processing weather data.  <br /></td></tr>
+<tr class="memdesc:afe461d27b9c48d5921c00d521181f12f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loop function for displaying, fetching and uploading data.  <br /></td></tr>
 <tr class="separator:afe461d27b9c48d5921c00d521181f12f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a134206294a475726066dc6b120207501" id="r_a134206294a475726066dc6b120207501"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a134206294a475726066dc6b120207501">write_ThingSpeak</a> ()</td></tr>
-<tr class="memdesc:a134206294a475726066dc6b120207501"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends weather data to ThingSpeak.  <br /></td></tr>
+<tr class="memdesc:a134206294a475726066dc6b120207501"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for lcd.  <br /></td></tr>
 <tr class="separator:a134206294a475726066dc6b120207501"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afeb94ad0f7ce8117f434baaad69b1f60" id="r_afeb94ad0f7ce8117f434baaad69b1f60"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afeb94ad0f7ce8117f434baaad69b1f60">write_lcd</a> ()</td></tr>
-<tr class="memdesc:afeb94ad0f7ce8117f434baaad69b1f60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the LCD display with weather data.  <br /></td></tr>
 <tr class="separator:afeb94ad0f7ce8117f434baaad69b1f60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a323dfc205549b3c13f0a25c1b670708a" id="r_a323dfc205549b3c13f0a25c1b670708a"><td class="memItemLeft" align="right" valign="top">WiFiClient&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a323dfc205549b3c13f0a25c1b670708a">client</a></td></tr>
 <tr class="separator:a323dfc205549b3c13f0a25c1b670708a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a8849103548eccd14d5039c9a409c1b" id="r_a0a8849103548eccd14d5039c9a409c1b"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0a8849103548eccd14d5039c9a409c1b">readDataDelay</a> = 10 * 1000</td></tr>
+<tr class="memitem:a0a8849103548eccd14d5039c9a409c1b" id="r_a0a8849103548eccd14d5039c9a409c1b"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0a8849103548eccd14d5039c9a409c1b">readDataDelay</a> = 4000</td></tr>
 <tr class="memdesc:a0a8849103548eccd14d5039c9a409c1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Every 10 seconds switch data on lcd and read data if possible.  <br /></td></tr>
 <tr class="separator:a0a8849103548eccd14d5039c9a409c1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a405f237eaa8a513a9682fbb6e44c4860" id="r_a405f237eaa8a513a9682fbb6e44c4860"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a405f237eaa8a513a9682fbb6e44c4860">humidity</a> = 0</td></tr>
-<tr class="memdesc:a405f237eaa8a513a9682fbb6e44c4860"><td class="mdescLeft">&#160;</td><td class="mdescRight">Humidity is initialized to 0. It is between 0% and 100%.  <br /></td></tr>
 <tr class="separator:a405f237eaa8a513a9682fbb6e44c4860"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ac2a299549fcca3cd14e4c1ac2087d2" id="r_a0ac2a299549fcca3cd14e4c1ac2087d2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0ac2a299549fcca3cd14e4c1ac2087d2">temperature</a> = 20</td></tr>
 <tr class="separator:a0ac2a299549fcca3cd14e4c1ac2087d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -161,10 +158,7 @@ Variables</h2></td></tr>
 <tr class="memitem:ab12a460175803c6d7c05a51ba87842b6" id="r_ab12a460175803c6d7c05a51ba87842b6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab12a460175803c6d7c05a51ba87842b6">lcd_controller</a> = 0</td></tr>
 <tr class="separator:ab12a460175803c6d7c05a51ba87842b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Code for receiving weather data from outdoor for monitoring and displaying on the indoor unit. </p>
-<p>This program reads transmitted weather data (humidity, temperature, wind speed, and rain level) via serial input, sends the data to ThingSpeak, and displays it on an LCD. It also controls a motor based on temperature. </p>
-</div><h2 class="groupheader">Macro Definition Documentation</h2>
+<h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a8e1ee46448a9d6fd89208aa48e0b1e58" name="a8e1ee46448a9d6fd89208aa48e0b1e58"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8e1ee46448a9d6fd89208aa48e0b1e58">&#9670;&#160;</a></span>MOTOR_PIN</h2>
 
@@ -173,6 +167,23 @@ Variables</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define MOTOR_PIN&#160;&#160;&#160;D0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The pin that should have been used for driving the fan. </p>
+<p>We wanted to drive a fan when the temperature got to high, to try to cool of the room, where the indoor system is. We had problems with giving enough power to the fan with the esp, without getting noice, so for prrof of concept an LED lights up, when the temperature is above the threshold. </p>
+
+</div>
+</div>
+<a id="a4248066830ebb53e9a93eb4dd285839a" name="a4248066830ebb53e9a93eb4dd285839a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4248066830ebb53e9a93eb4dd285839a">&#9670;&#160;</a></span>TEMPERATURE_THRESHOLD</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TEMPERATURE_THRESHOLD&#160;&#160;&#160;20</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -221,8 +232,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Main loop for processing weather data. </p>
-<p>This function reads weather data via Serial, updates ThingSpeak, controls the motor, and updates the LCD display based on the received data. </p>
+<p>Loop function for displaying, fetching and uploading data. </p>
+<p>The loop function fetches data through the UART from a ESP 32, Uploads the data to ThingSpeak and displays it on the LCD. </p>
 
 </div>
 </div>
@@ -240,9 +251,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Initializes the weather station components. </p>
-<p>This function sets up the Serial communication, Wi-Fi connection, motor pin, and LCD display. </p>
+<p>Sets up wifi, the serialport and initializes the LCD. </p>
 
 </div>
 </div>
@@ -261,9 +270,6 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Updates the LCD display with weather data. </p>
-<p>This function switches between different screens on the LCD to display temperature, humidity, wind speed, and rain level predictions. </p>
-
 </div>
 </div>
 <a id="a134206294a475726066dc6b120207501" name="a134206294a475726066dc6b120207501"></a>
@@ -281,8 +287,10 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Sends weather data to ThingSpeak. </p>
-<p>This function initializes ThingSpeak communication and updates its fields with humidity, temperature, wind speed, and rain level. </p>
+<p>Function for lcd. </p>
+<p>This function has 4 states, that show the data from the weateher station: 1: temperature and humidity. 2: wind and light outside 3: Rain in 0-3 hrs</p><ol type="1">
+<li>Rain in 4-6 hrs </li>
+</ol>
 
 </div>
 </div>
@@ -312,8 +320,6 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Humidity is initialized to 0. It is between 0% and 100%. </p>
 
 </div>
 </div>
@@ -352,7 +358,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const int readDataDelay = 10 * 1000</td>
+          <td class="memname">const int readDataDelay = 4000</td>
         </tr>
       </table>
 </div><div class="memdoc">

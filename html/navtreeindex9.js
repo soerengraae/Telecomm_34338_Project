@@ -1,5 +1,6 @@
 var NAVTREEINDEX9 =
 {
+"md__tele-website_2node__modules_2_0dmui_2x-charts_2_c_h_a_n_g_e_l_o_g.html#autotoc_md2184":[7,55,0,3],
 "md__tele-website_2node__modules_2_0dmui_2x-charts_2_c_h_a_n_g_e_l_o_g.html#autotoc_md2185":[7,55,1],
 "md__tele-website_2node__modules_2_0dmui_2x-charts_2_c_h_a_n_g_e_l_o_g.html#autotoc_md2186":[7,55,1,0],
 "md__tele-website_2node__modules_2_0dmui_2x-charts_2_c_h_a_n_g_e_l_o_g.html#autotoc_md2187":[7,55,1,1],
@@ -248,6 +249,5 @@ var NAVTREEINDEX9 =
 "md__tele-website_2node__modules_2_0dmui_2x-internals_2_c_h_a_n_g_e_l_o_g.html#autotoc_md2433":[8,14,5],
 "md__tele-website_2node__modules_2_0dmui_2x-internals_2_c_h_a_n_g_e_l_o_g.html#autotoc_md2434":[8,15],
 "md__tele-website_2node__modules_2_0dmui_2x-internals_2_c_h_a_n_g_e_l_o_g.html#autotoc_md2435":[8,15,0],
-"md__tele-website_2node__modules_2_0dmui_2x-internals_2_c_h_a_n_g_e_l_o_g.html#autotoc_md2436":[8,15,0,0],
-"md__tele-website_2node__modules_2_0dmui_2x-internals_2_c_h_a_n_g_e_l_o_g.html#autotoc_md2437":[8,15,0,1]
+"md__tele-website_2node__modules_2_0dmui_2x-internals_2_c_h_a_n_g_e_l_o_g.html#autotoc_md2436":[8,15,0,0]
 };
